@@ -76,8 +76,6 @@ public class SolitaireView extends View {
   private boolean mTimePaused;
 
   private boolean mGameStarted;
-  private FrameStats mFrameStats;
-  private int mFrame;
 
   public SolitaireView(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -104,8 +102,6 @@ public class SolitaireView extends View {
     mContext = context;
     mTextViewDown = false;
     mRefreshThread.start();
-    mFrameStats = new FrameStats();
-    mFrame = 0;
   }
 
   public void InitGame(int gameType) {
