@@ -342,7 +342,8 @@ public class SolitaireView extends View {
 
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent msg) {
-    if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+    switch (keyCode) {
+    case KeyEvent.KEYCODE_DPAD_CENTER:
       if (mViewMode == MODE_TEXT) {
         ChangeViewMode(MODE_NORMAL);
       } else if (mViewMode == MODE_NORMAL) {
@@ -350,7 +351,10 @@ public class SolitaireView extends View {
         Refresh();
       }
       return true;
-    }
+      case KeyEvent.KEYCODE_BACK:
+        Undo();
+        return true;
+      }
     return super.onKeyDown(keyCode, msg);
   }
 
