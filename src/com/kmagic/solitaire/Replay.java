@@ -18,7 +18,7 @@ package com.kmagic.solitaire;
 import android.util.Log;
 import java.util.Stack;
 
-public class Replay {
+public class Replay implements Runnable {
   private Stack<Move> mMoveStack;
   private SolitaireView mView;
   private AnimateCard mAnimateCard;
@@ -27,6 +27,7 @@ public class Replay {
 
   private Card[] mSinkCard;
   private int mSinkCount;
+  private int mEventCount;
   private CardAnchor mSinkAnchor;
   private CardAnchor mSinkFrom;
   private boolean mSinkUnhide;
@@ -63,13 +64,14 @@ public class Replay {
   public void PlayNext() {
     if (!mIsPlaying || mMoveStack.empty()) {
       mIsPlaying = false;
-      mView.StopAnimate();
+      mView.StopAnimating();
       return;
     }
     Move move = mMoveStack.pop();
 
     if (move.GetToBegin() == move.GetToEnd()) {
       mSinkCount = move.GetCount();
+      mEventCount = 0;
       mSinkAnchor = mCardAnchor[move.GetToBegin()];
       mSinkUnhide = move.GetUnhide();
       mSinkFrom = mCardAnchor[move.GetFrom()];
@@ -83,18 +85,15 @@ public class Replay {
           mSinkCard[i] = mSinkFrom.PopCard();
         }
       }
-      mAnimateCard.MoveCards(mSinkCard, mSinkCount, mSinkAnchor.GetX(), mSinkAnchor.GetNewY());
+      mAnimateCard.MoveCards(mSinkCard, mSinkAnchor, mSinkCount, this);
     } else {
       Log.e("Replay.java", "Invalid move encountered, aborting.");
       mIsPlaying = false;
     }
   }
 
-  public void DoneAnimating() {
+  public void run() {
     if (mIsPlaying) {
-      for (int i = 0; i < mSinkCount; i++) {
-        mSinkAnchor.AddCard(mSinkCard[i]);
-      }
       if (mSinkUnhide) {
         mSinkFrom.UnhideTopCard();
       }

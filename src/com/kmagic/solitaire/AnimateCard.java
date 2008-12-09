@@ -29,41 +29,60 @@ public class AnimateCard {
 
   protected SolitaireView mView;
   private Card[] mCard;
+  private CardAnchor mCardAnchor;
   private int mCount;
   private int mFrames;
   private float mDx;
   private float mDy;
   private boolean mAnimate;
+  private Runnable mCallback;
 
   public AnimateCard(SolitaireView view) {
     mView = view;
     mAnimate = true;
     mCard = new Card[104];
+    mCallback = null;
   }
 
   public void SetAnimate(boolean animate) { mAnimate = animate; }
 
   public void Draw(DrawMaster drawMaster, Canvas canvas) {
-    for (int j = 0; j < mCount; j++) {
-      mCard[j].MovePosition(-mDx, -mDy);
-    }
-    for (int i = 0; i < mCount; i++) {
-      drawMaster.DrawCard(canvas, mCard[i]);
-    }
-    mFrames--;
-    if (mFrames <= 0) {
-      mView.StopAnimate();
+    if (mAnimate) {
+      for (int j = 0; j < mCount; j++) {
+        mCard[j].MovePosition(-mDx, -mDy);
+      }
+      for (int i = 0; i < mCount; i++) {
+        drawMaster.DrawCard(canvas, mCard[i]);
+      }
+      mFrames--;
+      if (mFrames <= 0) {
+        mAnimate = false;
+        Finish();
+      }
     }
   }
 
-  public void MoveCards(Card[] card, int count, float x, float y) {
+  public void MoveCards(Card[] card, CardAnchor anchor, int count, Runnable callback) {
+    float x = anchor.GetX();
+    float y = anchor.GetNewY();
+    mCardAnchor = anchor;
+    mCallback = callback;
+    mAnimate = true;
+
     for (int i = 0; i < count; i++) {
       mCard[i] = card[i];
     }
     mCount = count;
     Move(mCard[0], x, y);
   }
-  public void MoveCard(Card card, float x, float y) {
+
+  public void MoveCard(Card card, CardAnchor anchor) {
+    float x = anchor.GetX();
+    float y = anchor.GetNewY();
+    mCardAnchor = anchor;
+    mCallback = null;
+    mAnimate = true;
+
     mCard[0] = card;
     mCount = 1;
     Move(card, x, y);
@@ -80,10 +99,21 @@ public class AnimateCard {
     mDx = dx / mFrames;
     mDy = dy / mFrames;
 
-    mView.StartAnimate();
+    mView.StartAnimating();
     if (!mAnimate) {
-      mView.StopAnimate();
+      Finish();
     }
   }
 
+  private void Finish() {
+    for (int i = 0; i < mCount; i++) {
+      mCardAnchor.AddCard(mCard[i]);
+      mCard[i] = null;
+    }
+    mCardAnchor = null;
+    mView.DrawBoard();
+    if (mCallback != null) {
+      mCallback.run();
+    }
+  }
 }

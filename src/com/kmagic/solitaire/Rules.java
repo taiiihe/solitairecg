@@ -39,8 +39,6 @@ public abstract class Rules {
   protected SolitaireView mView;
   protected Stack<Move> mMoveHistory;
   protected AnimateCard mAnimateCard; 
-  protected Card mSinkCard;
-  protected CardAnchor mSinkAnchor;
   protected boolean mIgnoreEvents;
   protected EventPoster mEventPoster;
 
@@ -72,8 +70,6 @@ public abstract class Rules {
 
   public int CountFreeSpaces() { return 0; }
   protected void SignalWin() { mView.DisplayWin(); }
-  public void DoneAnimating() { }
-
 
   abstract public void Init(Bundle map);
   public void EventAlert(int event, CardAnchor anchor) { mEventPoster.PostEvent(mView, event, anchor); }
@@ -276,6 +272,40 @@ class NormalSolitaire extends Rules {
   }
 
   @Override
+  public void EventProcess(int event, CardAnchor anchor, Card card) {
+    if (mIgnoreEvents) {
+      anchor.AddCard(card);
+      return;
+    }
+    if (event == EVENT_FLING) {
+      if (!TryToSinkCard(anchor, card)) {
+        anchor.AddCard(card);
+      }
+    } else {
+      anchor.AddCard(card);
+    }
+  }
+
+  @Override
+  public void EventProcess(int event) {
+    if (mIgnoreEvents) {
+      return;
+    }
+    if (event == EVENT_SMART_MOVE) {
+      int i;
+      for (i = 0; i < 7; i++) {
+        if (mCardAnchor[i+6].GetCount() > 0 &&
+            TryToSink(mCardAnchor[i+6])) {
+          break;
+        }
+      }
+      if (i == 7) {
+        mView.StopAnimating();
+      }
+    }
+  }
+
+  @Override
   public boolean Fling(MoveCard moveCard) {
     if (moveCard.GetCount() == 1) {
       CardAnchor anchor = moveCard.GetAnchor();
@@ -293,26 +323,6 @@ class NormalSolitaire extends Rules {
     return false;
   }
 
-  @Override
-  public void EventProcess(int event, CardAnchor anchor, Card card) {
-    if (mIgnoreEvents) {
-      anchor.AddCard(card);
-      return;
-    }
-    if (event == EVENT_FLING) {
-      if (!TryToSinkCard(anchor, card)) {
-        anchor.AddCard(card);
-      }
-    } else {
-      anchor.AddCard(card);
-    }
-  }
-
-  @Override
-  public void DoneAnimating() {
-    mSinkAnchor.AddCard(mSinkCard);
-  }
-
   private boolean TryToSink(CardAnchor anchor) {
     Card card = anchor.PopCard();
     boolean ret = TryToSinkCard(anchor, card);
@@ -326,29 +336,12 @@ class NormalSolitaire extends Rules {
     for (int i = 0; i < 4; i++) {
       if (mCardAnchor[i+2].DropSingleCard(card)) {
         mMoveHistory.push(new Move(anchor.GetNumber(), i+2, 1, false, anchor.UnhideTopCard()));
-        mSinkCard = card;
-        mSinkAnchor = mCardAnchor[i+2];
-        mAnimateCard.MoveCard(card, mCardAnchor[i+2].GetX(), mCardAnchor[i+2].GetNewY());
+        mAnimateCard.MoveCard(card, mCardAnchor[i+2]);
         return true;
       }
     }
 
     return false;
-  }
-
-  @Override
-  public void EventProcess(int event) {
-    if (mIgnoreEvents) {
-      return;
-    }
-    if (event == EVENT_SMART_MOVE) {
-      for (int i = 0; i < 7; i++) {
-        if (mCardAnchor[i+6].GetCount() > 0 &&
-            TryToSink(mCardAnchor[i+6])) {
-          break;
-        }
-      }
-    }
   }
 
   @Override
@@ -549,27 +542,18 @@ class Spider extends Rules {
     } else if (event == EVENT_DEAL) {
       if (mCardAnchor[10].GetCount() > 0) {
         int count = mCardAnchor[10].GetCount() > 10 ? 10 : mCardAnchor[10].GetCount();
-        mSinkCard = mCardAnchor[10].PopCard();
-        mSinkAnchor = mCardAnchor[0];
-        mAnimateCard.MoveCard(mSinkCard, mSinkAnchor.GetX(), mSinkAnchor.GetNewY());
+        mAnimateCard.MoveCard(mCardAnchor[10].PopCard(), mCardAnchor[0]);
         mMoveHistory.push(new Move(10, 0, count-1, 1, false, false));
         mStillDealing = true;
       }
     } else if (event == EVENT_DEAL_NEXT) {
       if (mCardAnchor[10].GetCount() > 0 && anchor.GetNumber() < 10) {
-        mSinkCard = mCardAnchor[10].PopCard();
-        mSinkAnchor = anchor;
-        mAnimateCard.MoveCard(mSinkCard, mSinkAnchor.GetX(), mSinkAnchor.GetNewY());
+        mAnimateCard.MoveCard(mCardAnchor[10].PopCard(), anchor);
       } else {
+        mView.StopAnimating();
         mStillDealing = false;
       }
     }
-  }
-
-  @Override
-  public void DoneAnimating() {
-    mSinkAnchor.AddCard(mSinkCard);
-    mSinkCard = null;
   }
 
   @Override
@@ -722,11 +706,6 @@ class Freecell extends Rules {
     }
   }
 
-  @Override
-  public void DoneAnimating() {
-    mSinkAnchor.AddCard(mSinkCard);
-  }
-
   private boolean TryToSink(CardAnchor anchor) {
     Card card = anchor.PopCard();
     boolean ret = TryToSinkCard(anchor, card);
@@ -739,9 +718,7 @@ class Freecell extends Rules {
   private boolean TryToSinkCard(CardAnchor anchor, Card card) {
     for (int i = 0; i < 4; i++) {
       if (mCardAnchor[i+4].DropSingleCard(card)) {
-        mSinkCard = card;
-        mSinkAnchor = mCardAnchor[i+4];
-        mAnimateCard.MoveCard(card, mSinkAnchor.GetX(), mSinkAnchor.GetNewY());
+        mAnimateCard.MoveCard(card, mCardAnchor[i+4]);
         mMoveHistory.push(new Move(anchor.GetNumber(), i+4, 1, false, false));
         return true;
       }
@@ -768,6 +745,7 @@ class Freecell extends Rules {
           return;
         }
       }
+      mView.StopAnimating();
     }
   }
 

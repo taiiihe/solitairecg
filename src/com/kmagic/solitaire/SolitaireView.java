@@ -201,6 +201,7 @@ public class SolitaireView extends View {
         if (newMode != MODE_WIN_STOP) {
           mTextView.setVisibility(View.INVISIBLE);
         }
+        DrawBoard();
         mReplay.StopPlaying();
         break;
     }
@@ -297,7 +298,7 @@ public class SolitaireView extends View {
     Refresh();
   }
 
-  private void DrawBoard() {
+  public void DrawBoard() {
     Canvas boardCanvas = mDrawMaster.GetBoardCanvas();
     mDrawMaster.DrawBackground(boardCanvas);
     for (int i = 0; i < mCardAnchor.length; i++) {
@@ -590,23 +591,17 @@ public class SolitaireView extends View {
     mStartTime = SystemClock.uptimeMillis() - mElapsed;
   }
 
-  public void StartAnimate() {
-    if (mViewMode != MODE_WIN) {
+  public void StartAnimating() {
+    if (mViewMode != MODE_WIN && mViewMode != MODE_ANIMATE) {
       ChangeViewMode(MODE_ANIMATE);
     }
   }
 
-  public void StopAnimate() {
+  public void StopAnimating() {
     if (mViewMode == MODE_ANIMATE) {
-      mRules.DoneAnimating();
       ChangeViewMode(MODE_NORMAL);
     } else if (mViewMode == MODE_WIN) {
-      DrawBoard();
-      if (mReplay.IsPlaying()) {
-        mReplay.DoneAnimating();
-      } else {
-        ChangeViewMode(MODE_WIN_STOP);
-      }
+      ChangeViewMode(MODE_WIN_STOP);
     }
   }
 
