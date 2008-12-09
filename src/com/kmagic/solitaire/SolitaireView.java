@@ -606,6 +606,9 @@ public class SolitaireView extends View {
   }
 
   public void Undo() {
+    if (mViewMode != MODE_NORMAL) {
+      return;
+    }
     boolean oldIgnore = mRules.GetIgnoreEvents();
     mRules.SetIgnoreEvents(true);
 
