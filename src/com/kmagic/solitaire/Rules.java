@@ -72,8 +72,8 @@ public abstract class Rules {
   protected void SignalWin() { mView.DisplayWin(); }
 
   abstract public void Init(Bundle map);
-  public void EventAlert(int event, CardAnchor anchor) { mEventPoster.PostEvent(mView, event, anchor); }
-  public void EventAlert(int event, CardAnchor anchor, Card card) { mEventPoster.PostEvent(mView, event, anchor, card); }
+  public void EventAlert(int event, CardAnchor anchor) { if (!mIgnoreEvents) { mEventPoster.PostEvent(mView, event, anchor); } }
+  public void EventAlert(int event, CardAnchor anchor, Card card) { if (!mIgnoreEvents) { mEventPoster.PostEvent(mView, event, anchor, card); } }
   abstract public void EventProcess(int event, CardAnchor anchor);
   abstract public void EventProcess(int event, CardAnchor anchor, Card card);
   abstract public void EventProcess(int event);
