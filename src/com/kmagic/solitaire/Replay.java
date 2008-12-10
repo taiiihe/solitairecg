@@ -57,6 +57,7 @@ public class Replay implements Runnable {
       }
       mView.Undo();
     }
+    mView.DrawBoard();
     mIsPlaying = true;
     PlayNext();
   }
