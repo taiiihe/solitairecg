@@ -29,22 +29,23 @@ import android.widget.TextView;
 
 // Base activity class.
 public class Solitaire extends Activity {
-  private static String ICICLE_KEY = "solitaire-view";
-
   private static final int MENU_NEW_GAME  = 1;
   private static final int MENU_RESTART   = 2;
-  private static final int MENU_STATS     = 3;
-  private static final int MENU_OPTIONS   = 4;
-  private static final int MENU_HELP      = 5;
-  private static final int MENU_UNDO      = 6;
-  private static final int MENU_SOLITAIRE = 7;
-  private static final int MENU_SPIDER    = 8;
-  private static final int MENU_FREECELL  = 9;
+  private static final int MENU_OPTIONS   = 3;
+  private static final int MENU_SAVE_QUIT = 4;
+  private static final int MENU_QUIT      = 5;
+  private static final int MENU_SOLITAIRE = 6;
+  private static final int MENU_SPIDER    = 7;
+  private static final int MENU_FREECELL  = 8;
+  private static final int MENU_STATS     = 9;
+  private static final int MENU_HELP      = 10;
 
   // View extracted from main.xml.
   private View mMainView;
   private SolitaireView mSolitaireView;
   private SharedPreferences mSettings;
+
+  private boolean mDoSave;
   
   // Shared preferences are where the various user settings are stored.
   public SharedPreferences GetSettings() { return mSettings; }
@@ -52,6 +53,7 @@ public class Solitaire extends Activity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    mDoSave = true;
 
     // Force landscape and no title for extra room
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -59,21 +61,25 @@ public class Solitaire extends Activity {
 
     // If the user has never accepted the EULA show it again.
     mSettings = getSharedPreferences("SolitairePreferences", 0);
-    StartSolitaire(savedInstanceState);
-  }
-
-  // Entry point for starting the game.
-  public void StartSolitaire(Bundle savedInstanceState) {
     setContentView(R.layout.main);
     mMainView = findViewById(R.id.main_view);
     mSolitaireView = (SolitaireView) findViewById(R.id.solitaire);
     mSolitaireView.SetTextView((TextView) findViewById(R.id.text));
 
-    if (savedInstanceState != null) {
-      // We are being restored
-      Bundle map = savedInstanceState.getBundle(ICICLE_KEY);
-      if (map != null) {
-        mSolitaireView.RestoreState(map);
+    //StartSolitaire(savedInstanceState);
+  }
+
+  // Entry point for starting the game.
+  //public void StartSolitaire(Bundle savedInstanceState) {
+  @Override
+  public void onStart() {
+    super.onStart();
+    if (mSettings.getBoolean("SolitaireSaveValid", false)) {
+      SharedPreferences.Editor editor = GetSettings().edit();
+      editor.putBoolean("SolitaireSaveValid", false);
+      editor.commit();
+      // If save is corrupt, just start a new game.
+      if (mSolitaireView.LoadSave()) {
         HelpSplashScreen();
         return;
       }
@@ -101,10 +107,11 @@ public class Solitaire extends Activity {
     subMenu.add(0, MENU_FREECELL, 0, R.string.menu_freecell);
 
     menu.add(0, MENU_RESTART, 0, R.string.menu_restart);
-    menu.add(0, MENU_STATS, 0, R.string.menu_stats);
     menu.add(0, MENU_OPTIONS, 0, R.string.menu_options);
+    menu.add(0, MENU_SAVE_QUIT, 0, R.string.menu_save_quit);
+    menu.add(0, MENU_QUIT, 0, R.string.menu_quit);
+    menu.add(0, MENU_STATS, 0, R.string.menu_stats);
     menu.add(0, MENU_HELP, 0, R.string.menu_help);
-    menu.add(0, MENU_UNDO, 0, R.string.menu_undo);
     return true;
   }
 
@@ -132,8 +139,14 @@ public class Solitaire extends Activity {
       case MENU_HELP:
         mSolitaireView.DisplayHelp();
         break;
-      case MENU_UNDO:
-        mSolitaireView.Undo();
+      case MENU_SAVE_QUIT:
+        mSolitaireView.SaveGame();
+        mDoSave = false;
+        finish();
+        break;
+      case MENU_QUIT:
+        mDoSave = false;
+        finish();
         break;
     }
 
@@ -149,7 +162,9 @@ public class Solitaire extends Activity {
   @Override
   protected void onStop() {
     super.onStop();
-    mSolitaireView.onPause();
+    if (mDoSave) {
+      mSolitaireView.SaveGame();
+    }
   }
 
   @Override
@@ -161,8 +176,6 @@ public class Solitaire extends Activity {
   @Override
   public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    // Store the game state
-    outState.putBundle(ICICLE_KEY, mSolitaireView.SaveState());
   }
 
   public void DisplayOptions() {

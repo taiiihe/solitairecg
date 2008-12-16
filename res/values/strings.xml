@@ -24,7 +24,8 @@
     <string name="menu_stats">Stats</string>
     <string name="menu_options">Options</string>
     <string name="menu_help">Help</string>
-    <string name="menu_undo">Undo</string>
+    <string name="menu_save_quit">Save&amp;Quit</string>
+    <string name="menu_quit">Quit</string>
     <string name="solitaire_layout_text_text"></string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
@@ -43,17 +44,18 @@
     <string name="normal_cards">Normal Card Art</string>
     <string name="big_cards">Large Card Art</string>
     <string name="help_text">
-Welcome to Solitaire\n\n
 Moving:\n
 Single Card: Drag the card.\n
 Whole Stack: Drag the stack starting above the bottom card.\n
 Partial Stack: Tap the stack, scroll to adjust, then drag the top card.\n\n
-Auto Home:\n
+Auto Move:\n
 Fling a card to start a chain of moving cards to their home.\n\n
 Dealing:\n
 Tap the deck or click the trackball.\n\n
+Undo:\n
+Push the back button.\n\n
 Menu:\n
-Change the gametype, undo moves, and view this help.
+Change the gametype, save, options, and view this help.
 </string>
     <string name="win_text">You Win!\n\nUse the menu to start a new game.</string>
 </resources>

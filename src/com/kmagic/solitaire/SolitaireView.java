@@ -34,6 +34,14 @@ import java.lang.Math;
 import java.lang.Runnable;
 import java.util.Stack;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
+
 // The brains of the operation
 public class SolitaireView extends View {
 
@@ -44,6 +52,10 @@ public class SolitaireView extends View {
   private static final int MODE_ANIMATE     = 5;
   private static final int MODE_WIN         = 6;
   private static final int MODE_WIN_STOP    = 7;
+
+  private static final String SAVE_FILENAME = "solitaire_save.bin";
+  // This is incremented only when the save system changes.
+  private static final String SAVE_VERSION = "solitaire_save_1";
 
   private CharSequence mHelpText;
   private CharSequence mWinText;
@@ -71,7 +83,7 @@ public class SolitaireView extends View {
 
   private Card[] mUndoStorage;
 
-  private int mElapsed;
+  private int mElapsed = 0;
   private long mStartTime;
   private boolean mTimePaused;
 
@@ -128,7 +140,6 @@ public class SolitaireView extends View {
     ChangeViewMode(MODE_NORMAL);
     mTextView.setVisibility(View.INVISIBLE);
     mMoveHistory.clear();
-    mAnimateCard.SetAnimate(true);
     mRules = Rules.CreateRules(gameType, null, this, mMoveHistory, mAnimateCard);
     if (oldGameType == mRules.GetGameTypeString()) {
       mRules.SetCarryOverScore(oldScore);
@@ -223,32 +234,173 @@ public class SolitaireView extends View {
     }
   }
 
-  public void ToSteadyState() {
-    ChangeViewMode(MODE_NORMAL);
+  public void onPause() {
+    if (mRefreshThread != null) {
+      mRefreshHandler.SetRunning(false);
+      mRules.ClearEvent();
+      mRules.SetIgnoreEvents(true);
+      mReplay.StopPlaying();
+      try {
+        mRefreshThread.join(1000);
+      } catch (InterruptedException e) {
+      }
+      mRefreshThread = null;
+      if (mAnimateCard.GetAnimate()) {
+        mAnimateCard.Cancel();
+      }
+      if (mViewMode != MODE_WIN && mViewMode != MODE_WIN_STOP) {
+        ChangeViewMode(MODE_NORMAL);
+      }
+
+      if (mRules != null && mRules.GetScore() > GetSettings().getInt(mRules.GetGameTypeString() + "Score", -52)) {
+        SharedPreferences.Editor editor = GetSettings().edit();
+        editor.putInt(mRules.GetGameTypeString() + "Score", mRules.GetScore());
+        editor.commit();
+      }
+    }
   }
 
-  public void onPause() {
-    mAnimateCard.SetAnimate(false);
-    ToSteadyState();
-    mRefreshHandler.SetRunning(false);
-    try {
-      mRefreshThread.join(100);
-    } catch (InterruptedException e) {
+  public void SaveGame() {
+    // This is supposed to have been called but I've seen instances where it wasn't.
+    if (mRefreshThread != null) {
+      onPause();
     }
 
-    if (mRules != null && mRules.GetScore() > GetSettings().getInt(mRules.GetGameTypeString() + "Score", -52)) {
-      SharedPreferences.Editor editor = GetSettings().edit();
-      editor.putInt(mRules.GetGameTypeString() + "Score", mRules.GetScore());
-      editor.commit();
+    if (mRules != null && mViewMode == MODE_NORMAL) {
+      try {
+
+        FileOutputStream fout = mContext.openFileOutput(SAVE_FILENAME, 0);
+        ObjectOutputStream oout = new ObjectOutputStream(fout);
+
+        int cardCount = mRules.GetCardCount();
+        int[] value = new int[cardCount];
+        int[] suit = new int[cardCount];
+        int[] anchorCardCount = new int[mCardAnchor.length];
+        int[] anchorHiddenCount = new int[mCardAnchor.length];
+        int historySize = mMoveHistory.size();
+        int[] historyFrom = new int[historySize];
+        int[] historyToBegin = new int[historySize];
+        int[] historyToEnd = new int[historySize];
+        int[] historyCount = new int[historySize];
+        boolean[] historyInvert = new boolean[historySize];
+        boolean[] historyUnhide = new boolean[historySize];
+        Card[] card;
+
+        cardCount = 0;
+        for (int i = 0; i < mCardAnchor.length; i++) {
+          anchorCardCount[i] = mCardAnchor[i].GetCount();
+          anchorHiddenCount[i] = mCardAnchor[i].GetHiddenCount();
+          card = mCardAnchor[i].GetCards();
+          for (int j = 0; j < anchorCardCount[i]; j++, cardCount++) {
+            value[cardCount] = card[j].GetValue();
+            suit[cardCount] = card[j].GetSuit();
+          }
+        }
+
+        for (int i = 0; i < historySize; i++) {
+          Move move = mMoveHistory.pop();
+          historyFrom[i] = move.GetFrom();
+          historyToBegin[i] = move.GetToBegin();
+          historyToEnd[i] = move.GetToEnd();
+          historyCount[i] = move.GetCount();
+          historyInvert[i] = move.GetInvert();
+          historyUnhide[i] = move.GetUnhide();
+        }
+
+        oout.writeObject(SAVE_VERSION);
+        oout.writeInt(mCardAnchor.length);
+        oout.writeInt(cardCount);
+        oout.writeInt(mRules.GetType());
+        oout.writeObject(anchorCardCount);
+        oout.writeObject(anchorHiddenCount);
+        oout.writeObject(value);
+        oout.writeObject(suit);
+        oout.writeInt(mRules.GetRulesExtra());
+        oout.writeInt(mRules.GetScore());
+        oout.writeInt(mElapsed);
+        oout.writeObject(historyFrom);
+        oout.writeObject(historyToBegin);
+        oout.writeObject(historyToEnd);
+        oout.writeObject(historyCount);
+        oout.writeObject(historyInvert);
+        oout.writeObject(historyUnhide);
+        oout.close();
+
+        SharedPreferences.Editor editor = GetSettings().edit();
+        editor.putBoolean("SolitaireSaveValid", true);
+        editor.commit();
+
+      } catch (FileNotFoundException e) {
+        Log.e("SolitaireView.java", "onStop(): File not found");
+      } catch (IOException e) {
+        Log.e("SolitaireView.java", "onStop(): IOException");
+      }
     }
+  }
+
+  public boolean LoadSave() {
+    mDrawMaster.DrawCards(GetSettings().getBoolean("DisplayBigCards", false));
+    mTimePaused = true;
+
+    try {
+      FileInputStream fin = mContext.openFileInput(SAVE_FILENAME);
+      ObjectInputStream oin = new ObjectInputStream(fin);
+      
+      String version = (String)oin.readObject();
+      if (!version.equals(SAVE_VERSION)) {
+        Log.e("SolitaireView.java", "Invalid save version");
+        return false;
+      }
+      Bundle map = new Bundle();
+        
+      map.putInt("cardAnchorCount", oin.readInt());
+      map.putInt("cardCount", oin.readInt());
+      int type = oin.readInt();
+      map.putIntArray("anchorCardCount", (int[])oin.readObject());
+      map.putIntArray("anchorHiddenCount", (int[])oin.readObject());
+      map.putIntArray("value", (int[])oin.readObject());
+      map.putIntArray("suit", (int[])oin.readObject());
+      map.putInt("rulesExtra", oin.readInt());
+      map.putInt("score", oin.readInt());
+      mElapsed = oin.readInt();
+      mStartTime = SystemClock.uptimeMillis() - mElapsed;
+      int[] historyFrom = (int[])oin.readObject();
+      int[] historyToBegin = (int[])oin.readObject();
+      int[] historyToEnd = (int[])oin.readObject();
+      int[] historyCount = (int[])oin.readObject();
+      boolean[] historyInvert = (boolean[])oin.readObject();
+      boolean[] historyUnhide = (boolean[])oin.readObject();
+      for (int i = historyFrom.length - 1; i >= 0; i--) {
+        mMoveHistory.push(new Move(historyFrom[i], historyToBegin[i], historyToEnd[i],
+                                   historyCount[i], historyInvert[i], historyUnhide[i]));
+      }
+
+      oin.close();
+
+      mRules = Rules.CreateRules(type, map, this, mMoveHistory, mAnimateCard);
+      mCardAnchor = mRules.GetAnchorArray();
+      mTimePaused = false;
+      return true;
+      
+    } catch (FileNotFoundException e) {
+      Log.e("SolitaireView.java", "LoadSave(): File not found");
+    } catch (StreamCorruptedException e) {
+      Log.e("SolitaireView.java", "LoadSave(): Stream Corrupted");
+    } catch (IOException e) {
+      Log.e("SolitaireView.java", "LoadSave(): IOException");
+    } catch (ClassNotFoundException e) {
+      Log.e("SolitaireView.java", "LoadSave(): Class not found exception");
+    }
+    mTimePaused = false;
+    return false;
   }
 
   public void onResume() {
     mStartTime = SystemClock.uptimeMillis() - mElapsed;
-    mAnimateCard.SetAnimate(true);
     mRefreshHandler.SetRunning(true);
     mRefreshThread = new Thread(mRefreshHandler);
     mRefreshThread.start();
+    mRules.SetIgnoreEvents(false);
   }
 
   public void Refresh() {
@@ -545,53 +697,8 @@ public class SolitaireView extends View {
     }    
   }
 
-  public Bundle SaveState() {
-    mMoveCard.Release();
-    mSelectCard.Release();
-
-    Bundle map = new Bundle();
-
-    int cardCount = mRules.GetCardCount();
-    int[] value = new int[cardCount];
-    int[] suit = new int[cardCount];
-    int[] anchorCardCount = new int[mCardAnchor.length];
-    int[] anchorHiddenCount = new int[mCardAnchor.length];
-    Card[] card;
-
-    cardCount = 0;
-    for (int i = 0; i < mCardAnchor.length; i++) {
-      anchorCardCount[i] = mCardAnchor[i].GetCount();
-      anchorHiddenCount[i] = mCardAnchor[i].GetHiddenCount();
-      card = mCardAnchor[i].GetCards();
-      for (int j = 0; j < anchorCardCount[i]; j++, cardCount++) {
-        value[cardCount] = card[j].GetValue();
-        suit[cardCount] = card[j].GetSuit();
-      }
-    }
-
-    map.putInt("cardAnchorCount", mCardAnchor.length);
-    map.putInt("cardCount", cardCount);
-    map.putInt("type", mRules.GetType());
-    map.putIntArray("anchorCardCount", anchorCardCount);
-    map.putIntArray("anchorHiddenCount", anchorHiddenCount);
-    map.putIntArray("value", value);
-    map.putIntArray("suit", suit);
-    map.putInt("rulesExtra", mRules.GetRulesExtra());
-    map.putInt("score", mRules.GetScore());
-    map.putInt("elapsedMillis", mElapsed);
-
-    return map;
-  }
-
-  public void RestoreState(Bundle map) {
-    mDrawMaster.DrawCards(GetSettings().getBoolean("DisplayBigCards", false));
-    mRules = Rules.CreateRules(map.getInt("type"), map, this, mMoveHistory, mAnimateCard);
-    mCardAnchor = mRules.GetAnchorArray();
-    mElapsed = map.getInt("elapsedMillis");
-    mStartTime = SystemClock.uptimeMillis() - mElapsed;
-  }
-
   public void StartAnimating() {
+    DrawBoard();
     if (mViewMode != MODE_WIN && mViewMode != MODE_ANIMATE) {
       ChangeViewMode(MODE_ANIMATE);
     }

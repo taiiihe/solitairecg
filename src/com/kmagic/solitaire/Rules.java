@@ -29,6 +29,7 @@ public abstract class Rules {
   public static final int SPIDER = 2;
   public static final int FREECELL = 3;
 
+  public static final int EVENT_INVALID = -1;
   public static final int EVENT_DEAL = 1;
   public static final int EVENT_STACK_ADD = 2;
   public static final int EVENT_FLING = 3;
@@ -74,6 +75,7 @@ public abstract class Rules {
   abstract public void Init(Bundle map);
   public void EventAlert(int event, CardAnchor anchor) { if (!mIgnoreEvents) { mEventPoster.PostEvent(mView, event, anchor); } }
   public void EventAlert(int event, CardAnchor anchor, Card card) { if (!mIgnoreEvents) { mEventPoster.PostEvent(mView, event, anchor, card); } }
+  public void ClearEvent() { mEventPoster.ClearEvent(mView); }
   abstract public void EventProcess(int event, CardAnchor anchor);
   abstract public void EventProcess(int event, CardAnchor anchor, Card card);
   abstract public void EventProcess(int event);
@@ -117,7 +119,7 @@ class NormalSolitaire extends Rules {
 
   @Override
   public void Init(Bundle map) {
-    mIgnoreEvents = false;
+    mIgnoreEvents = true;
     mDealThree = mView.GetSettings().getBoolean("SolitaireDealThree", true);
 
     // Thirteen total anchors for regular solitaire
@@ -169,6 +171,7 @@ class NormalSolitaire extends Rules {
           mCarryOverScore = map.getInt("score") - GetScore();
         }
 
+        mIgnoreEvents = false;
         // Return here so an invalid save state will result in a new game
         return;
       }
@@ -194,6 +197,7 @@ class NormalSolitaire extends Rules {
       mScoreString = "-$52";
       mCarryOverScore = 0;
     }
+    mIgnoreEvents = false;
   }
 
   @Override
@@ -425,7 +429,7 @@ class NormalSolitaire extends Rules {
 class Spider extends Rules {
   private boolean mStillDealing;
   public void Init(Bundle map) {
-    mIgnoreEvents = false;
+    mIgnoreEvents = true;
     mStillDealing = false;
 
     mCardCount = 104;
@@ -458,6 +462,7 @@ class Spider extends Rules {
           mCardAnchor[i].SetHiddenCount(hiddenCount[i]);
         }
 
+        mIgnoreEvents = false;
         // Return here so an invalid save state will result in a new game
         return;
       }
@@ -477,6 +482,7 @@ class Spider extends Rules {
     while (!mDeck.Empty()) {
       mCardAnchor[10].AddCard(mDeck.PopCard());
     }
+    mIgnoreEvents = false;
   }
 
   public void Resize(int width, int height) {
@@ -584,7 +590,7 @@ class Spider extends Rules {
 class Freecell extends Rules {
 
   public void Init(Bundle map) {
-    mIgnoreEvents = false;
+    mIgnoreEvents = true;
 
     // Thirteen total anchors for regular solitaire
     mCardCount = 52;
@@ -625,6 +631,7 @@ class Freecell extends Rules {
           mCardAnchor[i].SetHiddenCount(hiddenCount[i]);
         }
 
+        mIgnoreEvents = false;
         // Return here so an invalid save state will result in a new game
         return;
       }
@@ -636,6 +643,7 @@ class Freecell extends Rules {
         mCardAnchor[i+8].AddCard(mDeck.PopCard());
       }
     }
+    mIgnoreEvents = false;
   }
 
   public void Resize(int width, int height) {
@@ -811,12 +819,19 @@ class EventPoster implements Runnable {
     view.post(this);
   }
 
+  public void ClearEvent(SolitaireView view) {
+    view.removeCallbacks(this);
+    mEvent = Rules.EVENT_INVALID;
+    mCardAnchor = null;
+    mCard = null;
+  }
+
   public void run() {
     if (mCardAnchor != null && mCard != null) {
       mRules.EventProcess(mEvent, mCardAnchor, mCard);
     } else if (mCardAnchor != null) {
       mRules.EventProcess(mEvent, mCardAnchor);
-    } else {
+    } else if (mEvent != Rules.EVENT_INVALID) {
       mRules.EventProcess(mEvent);
     }
   }

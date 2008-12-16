@@ -39,12 +39,12 @@ public class AnimateCard {
 
   public AnimateCard(SolitaireView view) {
     mView = view;
-    mAnimate = true;
+    mAnimate = false;
     mCard = new Card[104];
     mCallback = null;
   }
 
-  public void SetAnimate(boolean animate) { mAnimate = animate; }
+  public boolean GetAnimate() { return mAnimate; }
 
   public void Draw(DrawMaster drawMaster, Canvas canvas) {
     if (mAnimate) {
@@ -114,6 +114,17 @@ public class AnimateCard {
     mView.DrawBoard();
     if (mCallback != null) {
       mCallback.run();
+    }
+  }
+
+  public void Cancel() {
+    if (mAnimate) {
+      for (int i = 0; i < mCount; i++) {
+        mCardAnchor.AddCard(mCard[i]);
+        mCard[i] = null;
+      }
+      mCardAnchor = null;
+      mAnimate = false;
     }
   }
 }
