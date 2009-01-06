@@ -57,8 +57,9 @@ public class DrawMaster {
   public DrawMaster(Context context) {
 
     mContext = context;
-    mScreenWidth = 1;
-    mScreenHeight = 1;
+    // Default to this for simplicity
+    mScreenWidth = 480;
+    mScreenHeight = 295;
 
     // Background
     mBGPaint = new Paint();

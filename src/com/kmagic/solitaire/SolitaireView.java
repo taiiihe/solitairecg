@@ -379,6 +379,10 @@ public class SolitaireView extends View {
 
       mRules = Rules.CreateRules(type, map, this, mMoveHistory, mAnimateCard);
       mCardAnchor = mRules.GetAnchorArray();
+      if (mDrawMaster.GetWidth() > 1) {
+        mRules.Resize(mDrawMaster.GetWidth(), mDrawMaster.GetHeight());
+        Refresh();
+      }
       mTimePaused = false;
       return true;
       
