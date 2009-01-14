@@ -17,6 +17,7 @@ package com.kmagic.solitaire;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,6 +31,10 @@ public class Stats {
   public Stats(final Solitaire solitaire, final SolitaireView view) {
 
     solitaire.setContentView(R.layout.stats);
+    View statsView = (View) solitaire.findViewById(R.id.stats_view);
+    statsView.setFocusable(true);
+    statsView.setFocusableInTouchMode(true);
+
     Rules rules = view.GetRules();
     final SharedPreferences settings = solitaire.GetSettings();
     final String gameAttemptString = rules.GetGameTypeString() + "Attempts";
@@ -81,6 +86,19 @@ public class Stats {
         solitaire.CancelOptions();
       }
     });
+    statsView.setOnKeyListener(new View.OnKeyListener() {
+      @Override
+      public boolean onKey(View v, int keyCode, KeyEvent event) {
+        switch (keyCode) {
+          case KeyEvent.KEYCODE_BACK:
+          case KeyEvent.KEYCODE_HOME:
+            solitaire.CancelOptions();
+            return true;
+        }
+        return false;
+      }
+    });
+    statsView.requestFocus();
   }
 }
 

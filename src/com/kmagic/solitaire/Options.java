@@ -17,6 +17,8 @@ package com.kmagic.solitaire;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,6 +32,9 @@ public class Options {
     final int type = solitaire.GetSettings().getInt("LastType", Rules.SOLITAIRE);
 
     solitaire.setContentView(R.layout.options);
+    View view = (View) solitaire.findViewById(R.id.options_view);
+    view.setFocusable(true);
+    view.setFocusableInTouchMode(true);
 
     // Display stuff
     final boolean bigCards = solitaire.GetSettings().getBoolean("DisplayBigCards", false);
@@ -129,6 +134,20 @@ public class Options {
         solitaire.CancelOptions();
       }
     });
+
+    view.setOnKeyListener(new View.OnKeyListener() {
+      @Override
+      public boolean onKey(View v, int keyCode, KeyEvent event) {
+        switch (keyCode) {
+          case KeyEvent.KEYCODE_BACK:
+          case KeyEvent.KEYCODE_HOME:
+            solitaire.CancelOptions();
+            return true;
+        }
+        return false;
+      }
+    });
+    view.requestFocus();
   }
 }
 
