@@ -552,7 +552,7 @@ public class DrawMaster {
     canvas.drawText(mTimeString, mScreenWidth-10, mScreenHeight-10, mTimePaint);
   }
 
-  public void DrawScore(Canvas canvas, String score) {
+  public void DrawRulesString(Canvas canvas, String score) {
     mTimePaint.setARGB(255, 20, 20, 20);
     canvas.drawText(score, mScreenWidth-9, mScreenHeight-29, mTimePaint);
     if (score.charAt(0) == '-') {

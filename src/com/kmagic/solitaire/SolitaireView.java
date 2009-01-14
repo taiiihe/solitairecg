@@ -480,8 +480,8 @@ public class SolitaireView extends View {
     }
     mDrawMaster.DrawLastBoard(canvas);
     mDrawMaster.DrawTime(canvas, mElapsed);
-    if (mRules.HasScore()) {
-      mDrawMaster.DrawScore(canvas, mRules.GetScoreString());
+    if (mRules.HasString()) {
+      mDrawMaster.DrawRulesString(canvas, mRules.GetString());
     }
 
     switch (mViewMode) {

@@ -73,7 +73,8 @@ public abstract class Rules {
   public String GetGameTypeString() { return ""; }
   public String GetPrettyGameTypeString() { return ""; }
   public boolean HasScore() { return false; }
-  public String GetScoreString() { return ""; }
+  public boolean HasString() { return false; }
+  public String GetString() { return ""; }
   public void SetCarryOverScore(int score) {}
   public int GetScore() { return 0; }
   public void AddDealCount() {}
@@ -420,7 +421,12 @@ class NormalSolitaire extends Rules {
   }
 
   @Override
-  public String GetScoreString() {
+  public boolean HasString() {
+    return HasScore();
+  }
+
+  @Override
+  public String GetString() {
     if (mDealsLeft != -1) {
       int score = mCarryOverScore - 52;
       for (int i = 0; i < 4; i++) {
@@ -616,6 +622,17 @@ class Spider extends Rules {
     } else {
       return "Spider Four Suit";
     }
+  }
+
+  @Override
+  public boolean HasString() {
+    return true;
+  }
+
+  @Override
+  public String GetString() {
+    int dealCount = mCardAnchor[10].GetCount() / 10;
+    return dealCount + " deals left";
   }
 
 }
