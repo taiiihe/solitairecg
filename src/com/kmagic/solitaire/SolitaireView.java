@@ -90,6 +90,8 @@ public class SolitaireView extends View {
   private boolean mGameStarted;
   private boolean mPaused;
 
+  private int mWinningScore;
+
   public SolitaireView(Context context, AttributeSet attrs) {
     super(context, attrs);
     setFocusable(true);
@@ -115,6 +117,7 @@ public class SolitaireView extends View {
     mContext = context;
     mTextViewDown = false;
     mRefreshThread.start();
+    mWinningScore = 0;
   }
 
   public void InitGame(int gameType) {
@@ -129,12 +132,14 @@ public class SolitaireView extends View {
     SharedPreferences.Editor editor = GetSettings().edit();
     if (mRules != null) {
       if (mRules.HasScore()) {
-        oldScore = mRules.GetScore();
+        if (mViewMode == MODE_WIN || mViewMode == MODE_WIN_STOP) {
+          oldScore = mWinningScore;
+        } else {
+          oldScore = mRules.GetScore();
+        }
         oldGameType = mRules.GetGameTypeString();
-      }
-      if (mRules.HasScore()) {
-        if (mRules.GetScore() > GetSettings().getInt(mRules.GetGameTypeString() + "Score", -52)) {
-          editor.putInt(mRules.GetGameTypeString() + "Score", mRules.GetScore());
+        if (oldScore > GetSettings().getInt(mRules.GetGameTypeString() + "Score", -52)) {
+          editor.putInt(mRules.GetGameTypeString() + "Score", oldScore);
         }
       }
     }
@@ -794,6 +799,12 @@ public class SolitaireView extends View {
 
     editor.putInt(gameWinString, wins + 1);
     editor.commit();
+    if (mRules.HasScore()) {
+      mWinningScore = mRules.GetScore();
+      if (mWinningScore > GetSettings().getInt(mRules.GetGameTypeString() + "Score", -52)) {
+        editor.putInt(mRules.GetGameTypeString() + "Score", mWinningScore);
+      }
+    }
   }      
 
   // Simple function to check for a consistent state in Solitaire.
