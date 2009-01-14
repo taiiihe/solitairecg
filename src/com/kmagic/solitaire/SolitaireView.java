@@ -842,6 +842,10 @@ public class SolitaireView extends View {
       }
     }
   }
+
+  public void RefreshOptions() {
+    mRules.RefreshOptions();
+  }
 }
 
 class RefreshHandler implements Runnable {

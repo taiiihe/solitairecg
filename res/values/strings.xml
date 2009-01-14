@@ -43,6 +43,10 @@
     <string name="display_options">Display Options</string>
     <string name="normal_cards">Normal Card Art</string>
     <string name="big_cards">Large Card Art</string>
+    <string name="auto_move">Auto Move</string>
+    <string name="always">Always</string>
+    <string name="fling_only">Fling Only</string>
+    <string name="never">Never</string>
     <string name="help_text">
 Moving:\n
 Single Card: Drag the card.\n

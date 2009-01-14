@@ -50,6 +50,12 @@ public class Options {
     ((RadioButton)solitaire.findViewById(R.id.suits_2)).setChecked(suits == 2);
     ((RadioButton)solitaire.findViewById(R.id.suits_1)).setChecked(suits == 1);
 
+    // Automove 
+    final int autoMove = solitaire.GetSettings().getInt("AutoMoveLevel", Rules.AUTO_MOVE_ALWAYS);
+    ((RadioButton)solitaire.findViewById(R.id.auto_move_always)).setChecked(autoMove == Rules.AUTO_MOVE_ALWAYS);
+    ((RadioButton)solitaire.findViewById(R.id.auto_move_fling_only)).setChecked(autoMove == Rules.AUTO_MOVE_FLING_ONLY);
+    ((RadioButton)solitaire.findViewById(R.id.auto_move_never)).setChecked(autoMove == Rules.AUTO_MOVE_NEVER);
+
     final Button accept = (Button) solitaire.findViewById(R.id.button_accept);
     accept.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
@@ -94,8 +100,21 @@ public class Options {
           }
         }
 
+        int newAutoMove = Rules.AUTO_MOVE_NEVER;
+        if (((RadioButton)solitaire.findViewById(R.id.auto_move_always)).isChecked()) {
+          newAutoMove = Rules.AUTO_MOVE_ALWAYS;
+        } else if (((RadioButton)solitaire.findViewById(R.id.auto_move_fling_only)).isChecked()) {
+          newAutoMove = Rules.AUTO_MOVE_FLING_ONLY;
+        }
+
+        if (newAutoMove != autoMove) {
+          editor.putInt("AutoMoveLevel", newAutoMove);
+          commit = true;
+        }
+
         if (commit) {
           editor.commit();
+          solitaire.RefreshOptions();
         }
         if (newGame) {
           solitaire.NewOptions();

@@ -198,4 +198,10 @@ public class Solitaire extends Activity {
     setContentView(mMainView);
     mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.SOLITAIRE));
   }
+
+  // This is called for option changes that require a refresh, but not a new game
+  public void RefreshOptions() {
+    setContentView(mMainView);
+    mSolitaireView.RefreshOptions();
+  }
 }

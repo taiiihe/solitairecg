@@ -125,6 +125,37 @@
         android:text="@string/suits_1" />
 
     </RadioGroup>
+    <TextView
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/auto_move"
+      android:focusable="true"
+      android:textSize="20sp"
+      android:gravity="center"
+    />
+
+    <RadioGroup
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:orientation="horizontal">
+
+      <RadioButton android:id="@+id/auto_move_always"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/always" />
+
+      <RadioButton android:id="@+id/auto_move_fling_only"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fling_only" />
+
+      <RadioButton android:id="@+id/auto_move_never"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/never" />
+
+    </RadioGroup>
     <LinearLayout
       android:orientation="horizontal"
       android:layout_width="fill_parent"

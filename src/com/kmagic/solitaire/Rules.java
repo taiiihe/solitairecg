@@ -36,6 +36,10 @@ public abstract class Rules {
   public static final int EVENT_SMART_MOVE = 4;
   public static final int EVENT_DEAL_NEXT = 5;
 
+  public static final int AUTO_MOVE_ALWAYS = 2;
+  public static final int AUTO_MOVE_FLING_ONLY = 1;
+  public static final int AUTO_MOVE_NEVER = 0;
+
   private int mType;
   protected SolitaireView mView;
   protected Stack<Move> mMoveHistory;
@@ -50,6 +54,10 @@ public abstract class Rules {
 
   protected Deck mDeck;
   protected int mCardCount;
+
+  // Automove
+  protected int mAutoMoveLevel;
+  protected boolean mWasFling;
 
   public int GetType() { return mType; }
   public int GetCardCount() { return mCardCount; }
@@ -83,6 +91,11 @@ public abstract class Rules {
   abstract public void Resize(int width, int height);
   public boolean Fling(MoveCard moveCard) { moveCard.Release(); return false; }
 
+  public void RefreshOptions() {
+    mAutoMoveLevel = mView.GetSettings().getInt("AutoMoveLevel", Rules.AUTO_MOVE_ALWAYS);
+    mWasFling = false;
+  }
+
   public static Rules CreateRules(int type, Bundle map, SolitaireView view,
                                   Stack<Move> moveHistory, AnimateCard animate) {
     Rules ret = null;
@@ -104,6 +117,7 @@ public abstract class Rules {
       ret.SetMoveHistory(moveHistory);
       ret.SetAnimateCard(animate);
       ret.SetEventPoster(new EventPoster(ret));
+      ret.RefreshOptions();
       ret.Init(map);
     }
     return ret;
@@ -272,9 +286,14 @@ class NormalSolitaire extends Rules {
           mCardAnchor[4].GetCount() == 13 && mCardAnchor[5].GetCount() == 13) {
         SignalWin();
       } else {
-        mEventPoster.PostEvent(mView, EVENT_SMART_MOVE);
+        if (mAutoMoveLevel == AUTO_MOVE_ALWAYS ||
+            (mAutoMoveLevel == AUTO_MOVE_FLING_ONLY && mWasFling)) {
+          mEventPoster.PostEvent(mView, EVENT_SMART_MOVE);
+        } else {
+          mView.StopAnimating();
+          mWasFling = false;
+        }
       }
-      
     }
   }
 
@@ -285,8 +304,10 @@ class NormalSolitaire extends Rules {
       return;
     }
     if (event == EVENT_FLING) {
+      mWasFling = true;
       if (!TryToSinkCard(anchor, card)) {
         anchor.AddCard(card);
+        mWasFling = false;
       }
     } else {
       anchor.AddCard(card);
@@ -307,6 +328,7 @@ class NormalSolitaire extends Rules {
         }
       }
       if (i == 7) {
+        mWasFling = false;
         mView.StopAnimating();
       }
     }
@@ -685,7 +707,13 @@ class Freecell extends Rules {
             mCardAnchor[6].GetCount() == 13 && mCardAnchor[7].GetCount() == 13) {
           SignalWin();
         } else {
-          mEventPoster.PostEvent(mView, EVENT_SMART_MOVE);
+          if (mAutoMoveLevel == AUTO_MOVE_ALWAYS ||
+              (mAutoMoveLevel == AUTO_MOVE_FLING_ONLY && mWasFling)) {
+            mEventPoster.PostEvent(mView, EVENT_SMART_MOVE);
+          } else {
+            mView.StopAnimating();
+            mWasFling = false;
+          }
         }
       }
     }
@@ -717,8 +745,10 @@ class Freecell extends Rules {
       return;
     }
     if (event == EVENT_FLING) {
+      mWasFling = true;
       if (!TryToSinkCard(anchor, card)) {
         anchor.AddCard(card);
+        mWasFling = false;
       }
     } else {
       anchor.AddCard(card);
@@ -764,6 +794,7 @@ class Freecell extends Rules {
           return;
         }
       }
+      mWasFling = false;
       mView.StopAnimating();
     }
   }
