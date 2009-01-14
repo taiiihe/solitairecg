@@ -68,6 +68,7 @@ public abstract class Rules {
   public String GetScoreString() { return ""; }
   public void SetCarryOverScore(int score) {}
   public int GetScore() { return 0; }
+  public void AddDealCount() {}
 
   public int CountFreeSpaces() { return 0; }
   protected void SignalWin() { mView.DisplayWin(); }
@@ -240,18 +241,20 @@ class NormalSolitaire extends Rules {
     }
     if (event == EVENT_DEAL) {
       if (mCardAnchor[0].GetCount() == 0) {
+        boolean addDealCount = false;
         if (mDealsLeft == 0) {
           mCardAnchor[0].SetDone(true);
           return;
         } else if (mDealsLeft > 0) {
           mDealsLeft--;
+          addDealCount = true;
         }
         int count = 0;
         while (mCardAnchor[1].GetCount() > 0) {
           mCardAnchor[0].AddCard(mCardAnchor[1].PopCard());
           count++;
         }
-        mMoveHistory.push(new Move(1, 0, count, true, false));
+        mMoveHistory.push(new Move(1, 0, count, true, false, addDealCount));
       } else {
         int count = 0;
         int maxCount = mDealThree ? 3 : 1;
@@ -423,6 +426,14 @@ class NormalSolitaire extends Rules {
       return score;
     }
     return 0;
+  }
+
+  @Override
+  public void AddDealCount() {
+    if (mDealsLeft != -1) {
+      mDealsLeft++;
+      mCardAnchor[0].SetDone(false);
+    }
   }
 }
 

@@ -55,7 +55,7 @@ public class SolitaireView extends View {
 
   private static final String SAVE_FILENAME = "solitaire_save.bin";
   // This is incremented only when the save system changes.
-  private static final String SAVE_VERSION = "solitaire_save_1";
+  private static final String SAVE_VERSION = "solitaire_save_2";
 
   private CharSequence mHelpText;
   private CharSequence mWinText;
@@ -286,8 +286,7 @@ public class SolitaireView extends View {
         int[] historyToBegin = new int[historySize];
         int[] historyToEnd = new int[historySize];
         int[] historyCount = new int[historySize];
-        boolean[] historyInvert = new boolean[historySize];
-        boolean[] historyUnhide = new boolean[historySize];
+        int[] historyFlags = new int[historySize];
         Card[] card;
 
         cardCount = 0;
@@ -307,8 +306,7 @@ public class SolitaireView extends View {
           historyToBegin[i] = move.GetToBegin();
           historyToEnd[i] = move.GetToEnd();
           historyCount[i] = move.GetCount();
-          historyInvert[i] = move.GetInvert();
-          historyUnhide[i] = move.GetUnhide();
+          historyFlags[i] = move.GetFlags();
         }
 
         oout.writeObject(SAVE_VERSION);
@@ -326,8 +324,7 @@ public class SolitaireView extends View {
         oout.writeObject(historyToBegin);
         oout.writeObject(historyToEnd);
         oout.writeObject(historyCount);
-        oout.writeObject(historyInvert);
-        oout.writeObject(historyUnhide);
+        oout.writeObject(historyFlags);
         oout.close();
 
         SharedPreferences.Editor editor = GetSettings().edit();
@@ -372,11 +369,10 @@ public class SolitaireView extends View {
       int[] historyToBegin = (int[])oin.readObject();
       int[] historyToEnd = (int[])oin.readObject();
       int[] historyCount = (int[])oin.readObject();
-      boolean[] historyInvert = (boolean[])oin.readObject();
-      boolean[] historyUnhide = (boolean[])oin.readObject();
+      int[] historyFlags = (int[])oin.readObject();
       for (int i = historyFrom.length - 1; i >= 0; i--) {
         mMoveHistory.push(new Move(historyFrom[i], historyToBegin[i], historyToEnd[i],
-                                   historyCount[i], historyInvert[i], historyUnhide[i]));
+                                   historyCount[i], historyFlags[i]));
       }
 
       oin.close();
@@ -763,6 +759,9 @@ public class SolitaireView extends View {
         for (int i = count-1; i >= 0; i--) {
           mCardAnchor[from].AddCard(mUndoStorage[i]);
         }
+      }
+      if (move.GetAddDealCount()) {
+        mRules.AddDealCount();
       }
       if (mUndoStorage[0].GetValue() == 1) {
         for (int i = 0; i < mCardAnchor[from].GetCount(); i++) {
