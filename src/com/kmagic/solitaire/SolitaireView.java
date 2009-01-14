@@ -88,6 +88,7 @@ public class SolitaireView extends View {
   private boolean mTimePaused;
 
   private boolean mGameStarted;
+  private boolean mPaused;
 
   public SolitaireView(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -156,6 +157,7 @@ public class SolitaireView extends View {
     mStartTime = SystemClock.uptimeMillis();
     mElapsed = 0;
     mTimePaused = false;
+    mPaused = false;
     mGameStarted = false;
   }
 
@@ -235,6 +237,8 @@ public class SolitaireView extends View {
   }
 
   public void onPause() {
+    mPaused = true;
+
     if (mRefreshThread != null) {
       mRefreshHandler.SetRunning(false);
       mRules.ClearEvent();
@@ -396,6 +400,7 @@ public class SolitaireView extends View {
       Log.e("SolitaireView.java", "LoadSave(): Class not found exception");
     }
     mTimePaused = false;
+    mPaused = false;
     return false;
   }
 
@@ -405,6 +410,7 @@ public class SolitaireView extends View {
     mRefreshThread = new Thread(mRefreshHandler);
     mRefreshThread.start();
     mRules.SetIgnoreEvents(false);
+    mPaused = false;
   }
 
   public void Refresh() {
@@ -518,6 +524,11 @@ public class SolitaireView extends View {
   @Override
   public boolean onTouchEvent(MotionEvent event) {
     boolean ret = false;
+
+    // Yes you can get touch events while in the "paused" state.
+    if (mPaused) {
+      return false;
+    }
 
     // Text mode only handles clickys
     if (mViewMode == MODE_TEXT) {
