@@ -52,6 +52,18 @@
 
     </RadioGroup>
 
+    <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="fill_parent"
+      android:gravity="center"
+      android:layout_height="wrap_content">
+      <CheckBox android:id="@+id/display_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/display_time" />
+    </LinearLayout>
+
     <TextView
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"

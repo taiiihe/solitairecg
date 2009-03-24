@@ -47,6 +47,7 @@
     <string name="always">Always</string>
     <string name="fling_only">Fling Only</string>
     <string name="never">Never</string>
+    <string name="display_time">Display Time</string>
     <string name="help_text">
 Moving:\n
 Single Card: Drag the card.\n

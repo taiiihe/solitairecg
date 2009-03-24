@@ -22,6 +22,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.view.WindowManager;
 
@@ -40,6 +41,9 @@ public class Options {
     final boolean bigCards = solitaire.GetSettings().getBoolean("DisplayBigCards", false);
     ((RadioButton)solitaire.findViewById(R.id.normal_cards)).setChecked(!bigCards);
     ((RadioButton)solitaire.findViewById(R.id.big_cards)).setChecked(bigCards);
+
+    final boolean displayTime = solitaire.GetSettings().getBoolean("DisplayTime", true);
+    ((CheckBox)solitaire.findViewById(R.id.display_time)).setChecked(displayTime);
 
     // Solitaire stuff
     final boolean dealThree = solitaire.GetSettings().getBoolean("SolitaireDealThree", true);
@@ -72,6 +76,11 @@ public class Options {
           editor.putBoolean("DisplayBigCards", !bigCards);
           commit = true;
           drawMaster.DrawCards(!bigCards);
+        }
+
+        if (displayTime != ((CheckBox)solitaire.findViewById(R.id.display_time)).isChecked()) {
+          editor.putBoolean("DisplayTime", !displayTime);
+          commit = true;
         }
 
         if (dealThree != ((RadioButton)solitaire.findViewById(R.id.deal_3)).isChecked()) {

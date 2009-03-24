@@ -83,14 +83,20 @@ public abstract class Rules {
   protected void SignalWin() { mView.DisplayWin(); }
 
   abstract public void Init(Bundle map);
-  public void EventAlert(int event, CardAnchor anchor) { if (!mIgnoreEvents) { mEventPoster.PostEvent(mView, event, anchor); } }
-  public void EventAlert(int event, CardAnchor anchor, Card card) { if (!mIgnoreEvents) { mEventPoster.PostEvent(mView, event, anchor, card); } }
-  public void ClearEvent() { mEventPoster.ClearEvent(mView); }
+  public void EventAlert(int event) { if (!mIgnoreEvents) { mEventPoster.PostEvent(event); mView.Refresh(); } }
+  public void EventAlert(int event, CardAnchor anchor) { if (!mIgnoreEvents) { mEventPoster.PostEvent(event, anchor);  mView.Refresh();} }
+  public void EventAlert(int event, CardAnchor anchor, Card card) { if (!mIgnoreEvents) { mEventPoster.PostEvent(event, anchor, card);  mView.Refresh();} }
+  public void ClearEvent() { mEventPoster.ClearEvent(); }
   abstract public void EventProcess(int event, CardAnchor anchor);
   abstract public void EventProcess(int event, CardAnchor anchor, Card card);
   abstract public void EventProcess(int event);
   abstract public void Resize(int width, int height);
   public boolean Fling(MoveCard moveCard) { moveCard.Release(); return false; }
+  public void HandleEvents() { 
+    while (!mIgnoreEvents && mEventPoster.HasEvent()) {
+      mEventPoster.HandleEvent();
+    }
+  }
 
   public void RefreshOptions() {
     mAutoMoveLevel = mView.GetSettings().getInt("AutoMoveLevel", Rules.AUTO_MOVE_ALWAYS);
@@ -270,6 +276,7 @@ class NormalSolitaire extends Rules {
           count++;
         }
         mMoveHistory.push(new Move(1, 0, count, true, false, addDealCount));
+        mView.Refresh();
       } else {
         int count = 0;
         int maxCount = mDealThree ? 3 : 1;
@@ -289,7 +296,7 @@ class NormalSolitaire extends Rules {
       } else {
         if (mAutoMoveLevel == AUTO_MOVE_ALWAYS ||
             (mAutoMoveLevel == AUTO_MOVE_FLING_ONLY && mWasFling)) {
-          mEventPoster.PostEvent(mView, EVENT_SMART_MOVE);
+          EventAlert(EVENT_SMART_MOVE);
         } else {
           mView.StopAnimating();
           mWasFling = false;
@@ -342,7 +349,7 @@ class NormalSolitaire extends Rules {
       Card card = moveCard.DumpCards(false)[0];
       for (int i = 0; i < 4; i++) {
         if (mCardAnchor[i+2].DropSingleCard(card)) {
-          mEventPoster.PostEvent(mView, EVENT_FLING, anchor, card);
+          EventAlert(EVENT_FLING, anchor, card);
           return true;
         }
       }
@@ -582,7 +589,7 @@ class Spider extends Rules {
       }
       if (mStillDealing) {
         // Post another event if we aren't done yet.
-        mEventPoster.PostEvent(mView, EVENT_DEAL_NEXT, mCardAnchor[anchor.GetNumber()+1]);
+        EventAlert(EVENT_DEAL_NEXT, mCardAnchor[anchor.GetNumber()+1]);
       }
     } else if (event == EVENT_DEAL) {
       if (mCardAnchor[10].GetCount() > 0) {
@@ -729,7 +736,7 @@ class Freecell extends Rules {
         } else {
           if (mAutoMoveLevel == AUTO_MOVE_ALWAYS ||
               (mAutoMoveLevel == AUTO_MOVE_FLING_ONLY && mWasFling)) {
-            mEventPoster.PostEvent(mView, EVENT_SMART_MOVE);
+            EventAlert(EVENT_SMART_MOVE);
           } else {
             mView.StopAnimating();
             mWasFling = false;
@@ -746,7 +753,7 @@ class Freecell extends Rules {
       Card card = moveCard.DumpCards(false)[0];
       for (int i = 0; i < 4; i++) {
         if (mCardAnchor[i+4].DropSingleCard(card)) {
-          mEventPoster.PostEvent(mView, EVENT_FLING, anchor, card);
+          EventAlert(EVENT_FLING, anchor, card);
           return true;
         }
       }
@@ -845,7 +852,7 @@ class Freecell extends Rules {
   }
 }
 
-class EventPoster implements Runnable {
+class EventPoster {
   private int mEvent;
   private CardAnchor mCardAnchor;
   private Card mCard;
@@ -858,43 +865,44 @@ class EventPoster implements Runnable {
     mCard = null;
   }
 
-  public void PostEvent(SolitaireView view, int event, CardAnchor anchor) {
-
-    mEvent = event;
-    mCardAnchor = anchor;
-    mCard = null;
-    view.post(this);
+  public void PostEvent(int event) {
+    PostEvent(event, null, null);
   }
 
-  public void PostEvent(SolitaireView view, int event, CardAnchor anchor, Card card) {
+  public void PostEvent(int event, CardAnchor anchor) {
+    PostEvent(event, anchor, null);
+  }
 
+  public void PostEvent(int event, CardAnchor anchor, Card card) {
     mEvent = event;
     mCardAnchor = anchor;
     mCard = card;
-    view.post(this);
   }
 
-  public void PostEvent(SolitaireView view, int event) {
-    mEvent = event;
-    mCardAnchor = null;
-    mCard = null;
-    view.post(this);
-  }
 
-  public void ClearEvent(SolitaireView view) {
-    view.removeCallbacks(this);
+  public void ClearEvent() {
     mEvent = Rules.EVENT_INVALID;
     mCardAnchor = null;
     mCard = null;
   }
 
-  public void run() {
-    if (mCardAnchor != null && mCard != null) {
-      mRules.EventProcess(mEvent, mCardAnchor, mCard);
-    } else if (mCardAnchor != null) {
-      mRules.EventProcess(mEvent, mCardAnchor);
-    } else if (mEvent != Rules.EVENT_INVALID) {
-      mRules.EventProcess(mEvent);
+  public boolean HasEvent() {
+    return mEvent != Rules.EVENT_INVALID;
+  }
+
+  public void HandleEvent() {
+    if (HasEvent()) {
+      int event = mEvent;
+      CardAnchor cardAnchor = mCardAnchor;
+      Card card = mCard;
+      ClearEvent();
+      if (cardAnchor != null && card != null) {
+        mRules.EventProcess(event, cardAnchor, card);
+      } else if (cardAnchor != null) {
+        mRules.EventProcess(event, cardAnchor);
+      } else {
+        mRules.EventProcess(event);
+      }
     }
   }
 }

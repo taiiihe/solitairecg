@@ -89,6 +89,7 @@ public class SolitaireView extends View {
 
   private boolean mGameStarted;
   private boolean mPaused;
+  private boolean mDisplayTime;
 
   private int mWinningScore;
 
@@ -157,6 +158,7 @@ public class SolitaireView extends View {
       mRules.Resize(mDrawMaster.GetWidth(), mDrawMaster.GetHeight());
       Refresh();
     }
+    SetDisplayTime(GetSettings().getBoolean("DisplayTime", true));
     editor.putInt("LastType", gameType);
     editor.commit();
     mStartTime = SystemClock.uptimeMillis();
@@ -170,6 +172,7 @@ public class SolitaireView extends View {
   public DrawMaster GetDrawMaster() { return mDrawMaster; }
   public Rules GetRules() { return mRules; }
   public void ClearGameStarted() { mGameStarted = false; }
+  public void SetDisplayTime(boolean displayTime) { mDisplayTime = displayTime; }
 
   public void SetTimePassing(boolean timePassing) {
     if (timePassing == true && (mViewMode == MODE_WIN || mViewMode == MODE_WIN_STOP)) {
@@ -383,6 +386,8 @@ public class SolitaireView extends View {
       oin.close();
 
       mRules = Rules.CreateRules(type, map, this, mMoveHistory, mAnimateCard);
+      Card.SetSize(type);
+      SetDisplayTime(GetSettings().getBoolean("DisplayTime", true));
       mCardAnchor = mRules.GetAnchorArray();
       if (mDrawMaster.GetWidth() > 1) {
         mRules.Resize(mDrawMaster.GetWidth(), mDrawMaster.GetHeight());
@@ -475,11 +480,13 @@ public class SolitaireView extends View {
     // Only draw the stagnant stuff if it may have changed
     if (mViewMode == MODE_NORMAL) {
       // SanityCheck is for debug use only.
-      //SanityCheck();
+      SanityCheck();
       DrawBoard();
     }
     mDrawMaster.DrawLastBoard(canvas);
-    mDrawMaster.DrawTime(canvas, mElapsed);
+    if (mDisplayTime) {
+      mDrawMaster.DrawTime(canvas, mElapsed);
+    }
     if (mRules.HasString()) {
       mDrawMaster.DrawRulesString(canvas, mRules.GetString());
     }
@@ -502,6 +509,8 @@ public class SolitaireView extends View {
       case MODE_ANIMATE:
         mAnimateCard.Draw(mDrawMaster, canvas);
     }
+
+    mRules.HandleEvents();
   }
 
   @Override
@@ -519,6 +528,7 @@ public class SolitaireView extends View {
         Undo();
         return true;
       }
+    mRules.HandleEvents();
     return super.onKeyDown(keyCode, msg);
   }
 
@@ -571,6 +581,7 @@ public class SolitaireView extends View {
       MarkAttempt();
     }
 
+    mRules.HandleEvents();
     return ret;
   }
 
@@ -648,13 +659,11 @@ public class SolitaireView extends View {
           card = mCardAnchor[i].GrabCard(x, y);
           if (card != null) {
             if (y < card.GetY() + Card.HEIGHT/4) {
-              mCardAnchor[i].AddCard(card);
               if (mCardAnchor[i].ExpandStack(x, y)) {
+                mCardAnchor[i].AddCard(card);
                 mMoveCard.InitFromAnchor(mCardAnchor[i], x-Card.WIDTH/2, y-Card.HEIGHT/2);
                 ChangeViewMode(MODE_MOVE_CARD);
                 break;
-              } else {
-                card = mCardAnchor[i].PopCard();
               }
             }
             mMoveCard.SetAnchor(mCardAnchor[i]);
@@ -856,6 +865,7 @@ public class SolitaireView extends View {
 
   public void RefreshOptions() {
     mRules.RefreshOptions();
+    SetDisplayTime(GetSettings().getBoolean("DisplayTime", true));
   }
 }
 
