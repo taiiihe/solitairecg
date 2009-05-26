@@ -659,7 +659,10 @@ public class SolitaireView extends View {
           card = mCardAnchor[i].GrabCard(x, y);
           if (card != null) {
             if (y < card.GetY() + Card.HEIGHT/4) {
+              boolean lastIgnore = mRules.GetIgnoreEvents();
+              mRules.SetIgnoreEvents(true);
               mCardAnchor[i].AddCard(card);
+              mRules.SetIgnoreEvents(lastIgnore);
               if (mCardAnchor[i].ExpandStack(x, y)) {
                 mMoveCard.InitFromAnchor(mCardAnchor[i], x-Card.WIDTH/2, y-Card.HEIGHT/2);
                 ChangeViewMode(MODE_MOVE_CARD);
