@@ -835,6 +835,9 @@ public class SolitaireView extends View {
     } else if (type == "Spider4Suit") {
       cardCount = 52;
       matchCount = 2;
+    } else if (type == "Forty Thieves") {
+      cardCount = 52;
+      matchCount = 2;
     } else {
       cardCount = 52;
       matchCount = 1;

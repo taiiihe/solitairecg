@@ -37,8 +37,9 @@ public class Solitaire extends Activity {
   private static final int MENU_SOLITAIRE = 6;
   private static final int MENU_SPIDER    = 7;
   private static final int MENU_FREECELL  = 8;
-  private static final int MENU_STATS     = 9;
-  private static final int MENU_HELP      = 10;
+  private static final int MENU_FORTYTHIEVES = 9;
+  private static final int MENU_STATS     = 10;
+  private static final int MENU_HELP      = 11;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -105,6 +106,7 @@ public class Solitaire extends Activity {
     subMenu.add(0, MENU_SOLITAIRE, 0, R.string.menu_solitaire);
     subMenu.add(0, MENU_SPIDER, 0, R.string.menu_spider);
     subMenu.add(0, MENU_FREECELL, 0, R.string.menu_freecell);
+    subMenu.add(0, MENU_FORTYTHIEVES, 0, R.string.menu_fortythieves);
 
     menu.add(0, MENU_RESTART, 0, R.string.menu_restart);
     menu.add(0, MENU_OPTIONS, 0, R.string.menu_options);
@@ -126,6 +128,9 @@ public class Solitaire extends Activity {
         break;
       case MENU_FREECELL:
         mSolitaireView.InitGame(Rules.FREECELL);
+        break;
+      case MENU_FORTYTHIEVES:
+        mSolitaireView.InitGame(Rules.FORTYTHIEVES);
         break;
       case MENU_RESTART:
         mSolitaireView.RestartGame();
