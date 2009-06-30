@@ -993,10 +993,10 @@ class GenericAnchor extends CardAnchor {
             h = true;
             break;
           case GenericAnchor.SEQ_ASC:
-            h = this.is_seq_asc(i-1, i, mMOVEWRAP) == false;
+            h = this.is_seq_asc(i-1, i, mMOVEWRAP);
             break;
           case GenericAnchor.SEQ_DSC:
-            h = this.is_seq_asc(i, i-1, mMOVEWRAP) == false;
+            h = this.is_seq_asc(i, i-1, mMOVEWRAP);
             break;
           case GenericAnchor.SEQ_SEQ:
             h = (this.is_seq_asc(i, i-1, mMOVEWRAP) || 
@@ -1055,7 +1055,7 @@ class GenericAnchor extends CardAnchor {
     int v1 = c1.GetValue();
     int v2 = c2.GetValue();
     
-    if (v2 == v1 + 1){
+    if (v2 + 1 == v1){
       return true;
     }
     if (wrap){
@@ -1119,4 +1119,10 @@ class GenericAnchor extends CardAnchor {
     return Card.HEIGHT/3;
   }
 
+  public float GetNewY() {
+    if (mCardCount == 0) {
+      return mY;
+    }
+    return mCard[mCardCount-1].GetY() + mSpacing;
+  }
 }
