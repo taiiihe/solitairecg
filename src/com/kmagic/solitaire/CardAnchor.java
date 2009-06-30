@@ -962,6 +962,9 @@ class GenericAnchor extends CardAnchor {
   }
   
   @Override
+  public boolean CanMoveStack(float x, float y) { return ExpandStack(x, y); }
+
+  @Override
   public Card[] GetCardStack() {
     int movableCount = GetMovableCount();
     Card[] ret = new Card[movableCount];
