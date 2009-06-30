@@ -385,6 +385,7 @@ public class SolitaireView extends View {
 
       oin.close();
 
+      mGameStarted = !mMoveHistory.isEmpty();
       mRules = Rules.CreateRules(type, map, this, mMoveHistory, mAnimateCard);
       Card.SetSize(type);
       SetDisplayTime(GetSettings().getBoolean("DisplayTime", true));
