@@ -44,6 +44,7 @@ class CardAnchor {
   protected boolean mDone;
 
   //Variables for GenericAnchor
+  protected int mSTARTSEQ;
   protected int mBUILDSEQ;
   protected int mMOVESEQ;
   protected int mBUILDSUIT;
@@ -131,6 +132,7 @@ class CardAnchor {
   public void SetDone(boolean done) { mDone = done; }
 
   //Methods for GenericAnchor
+  public void SetStartSeq(int seq){ mSTARTSEQ = seq; }
   public void SetSeq(int seq){ mBUILDSEQ = seq; mMOVESEQ = seq; }
   public void SetBuildSeq(int buildseq){ mBUILDSEQ = buildseq;  }
   public void SetMoveSeq(int moveseq){ mMOVESEQ = moveseq;  }
@@ -743,6 +745,11 @@ class FreecellHold extends CardAnchor {
 
 // New Abstract
 class GenericAnchor extends CardAnchor {
+
+  //Sequence start values
+  public static final int START_ANY=1; // An empty stack can take any card.
+  public static final int START_KING=2; // An empty stack can take only a king.
+
   //Value Sequences
   public static final int SEQ_ANY=1; //You can build as you like
   public static final int SEQ_SEQ=2;  //Building only allows sequential
@@ -781,6 +788,7 @@ class GenericAnchor extends CardAnchor {
   
   public GenericAnchor(){
     super();
+    SetStartSeq(GenericAnchor.SEQ_ANY);
     SetBuildSeq(GenericAnchor.SEQ_ANY);
     SetBuildWrap(false);
     SetBuildSuit(GenericAnchor.SUIT_ANY);
@@ -862,8 +870,13 @@ class GenericAnchor extends CardAnchor {
     Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
     // Rules for empty stacks
     if (topCard == null) {
-      //No rules for this yet
-      return true;
+      switch (mSTARTSEQ) {
+        case GenericAnchor.START_KING:
+          return card.GetValue() == Card.KING;
+        case GenericAnchor.START_ANY:
+        default:
+          return true;
+      }
     }
     int value = card.GetValue();
     int suit = card.GetSuit();

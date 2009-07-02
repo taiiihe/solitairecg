@@ -170,6 +170,7 @@ class NormalSolitaire extends Rules {
     // Middle anchor stacks
     for (int i = 0; i < 7; i++) {
       mCardAnchor[i+6] = CardAnchor.CreateAnchor(CardAnchor.GENERIC_ANCHOR, i+6, this);
+      mCardAnchor[i+6].SetStartSeq(GenericAnchor.START_KING);
       mCardAnchor[i+6].SetBuildSeq(GenericAnchor.SEQ_DSC);
       mCardAnchor[i+6].SetMoveSeq(GenericAnchor.SEQ_ASC);
       mCardAnchor[i+6].SetSuit(GenericAnchor.SUIT_RB);
