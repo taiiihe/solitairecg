@@ -518,6 +518,7 @@ public class SolitaireView extends View {
   public boolean onKeyDown(int keyCode, KeyEvent msg) {
     switch (keyCode) {
     case KeyEvent.KEYCODE_DPAD_CENTER:
+    case KeyEvent.KEYCODE_SEARCH:
       if (mViewMode == MODE_TEXT) {
         ChangeViewMode(MODE_NORMAL);
       } else if (mViewMode == MODE_NORMAL) {
