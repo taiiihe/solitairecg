@@ -16,6 +16,7 @@
   Modifications by Curtis Gedak (2015)
   - Fork project from Solitaire to SolitaireCG
   - Add Deal menu entry
+  - Avoid card loss if spider deal interrupted
 */
 package net.sourceforge.solitaire_cg;
 
@@ -264,6 +265,7 @@ public class SolitaireView extends View {
       if (mAnimateCard.GetAnimate()) {
         mAnimateCard.Cancel();
       }
+      mRules.FinishDeal();
       if (mViewMode != MODE_WIN && mViewMode != MODE_WIN_STOP) {
         ChangeViewMode(MODE_NORMAL);
       }

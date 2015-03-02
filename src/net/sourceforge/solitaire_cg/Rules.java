@@ -15,6 +15,7 @@
 
   Modifications by Curtis Gedak (2015)
   - Fork project from Solitaire to SolitaireCG
+  - Avoid card loss if spider deal interrupted
 */
 package net.sourceforge.solitaire_cg;
 
@@ -136,6 +137,8 @@ public abstract class Rules {
     }
     return ret;
   }
+
+  public void FinishDeal() {};  // Used when multi-stack deal interrupted
 }
 
 class NormalSolitaire extends Rules {
@@ -486,10 +489,10 @@ class NormalSolitaire extends Rules {
 }
 
 class Spider extends Rules {
-  private boolean mStillDealing;
+  private int mStillDealingStack;
   public void Init(Bundle map) {
     mIgnoreEvents = true;
-    mStillDealing = false;
+    mStillDealingStack = 10; // Value > last anchor stack (9)
 
     mCardCount = 104;
     mCardAnchorCount = 12;
@@ -608,24 +611,38 @@ class Spider extends Rules {
           }
         }
       }
-      if (mStillDealing) {
+      if (mStillDealingStack < 10) {
         // Post another event if we aren't done yet.
-        EventAlert(EVENT_DEAL_NEXT, mCardAnchor[anchor.GetNumber()+1]);
+        mStillDealingStack = anchor.GetNumber()+1;
+        EventAlert(EVENT_DEAL_NEXT, mCardAnchor[mStillDealingStack]);
       }
     } else if (event == EVENT_DEAL) {
       if (mCardAnchor[10].GetCount() > 0) {
         int count = mCardAnchor[10].GetCount() > 10 ? 10 : mCardAnchor[10].GetCount();
         mAnimateCard.MoveCard(mCardAnchor[10].PopCard(), mCardAnchor[0]);
         mMoveHistory.push(new Move(10, 0, count-1, 1, false, false));
-        mStillDealing = true;
+        mStillDealingStack = 0; // First anchor stack
       }
     } else if (event == EVENT_DEAL_NEXT) {
       if (mCardAnchor[10].GetCount() > 0 && anchor.GetNumber() < 10) {
         mAnimateCard.MoveCard(mCardAnchor[10].PopCard(), anchor);
+        mStillDealingStack = anchor.GetNumber();
       } else {
         mView.StopAnimating();
-        mStillDealing = false;
+        mStillDealingStack = 10;
       }
+    }
+  }
+
+  @Override
+  public void FinishDeal() {
+    // Invoked if game interrupted, for example by a phone call
+    if (mStillDealingStack < 10) {
+      // Ensure multi-stack deal is finished
+      while (mCardAnchor[10].GetCount() > 0 && mStillDealingStack < 10) {
+	mCardAnchor[++mStillDealingStack].AddCard(mCardAnchor[10].PopCard());
+      }
+      mStillDealingStack = 10;
     }
   }
 
@@ -640,6 +657,7 @@ class Spider extends Rules {
       return "Spider4Suit";
     }
   }
+
   @Override
   public String GetPrettyGameTypeString() {
     int suits = mView.GetSettings().getInt("SpiderSuits", 4);

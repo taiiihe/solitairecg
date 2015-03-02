@@ -27,3 +27,4 @@ Modifications by Curtis Gedak (2015):
 - Add .gitignore file
 - Fork project from Solitaire to SolitaireCG
 - Add Deal menu entry
+- Avoid card loss if spider deal interrupted
