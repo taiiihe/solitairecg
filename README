@@ -1,3 +1,6 @@
+Original by Ken Magic
+=====================
+
 Simple solitaire game.
 
 Currently documentation is limited but I will add comments to the source and
@@ -13,3 +16,11 @@ Once installed you need to modify solitaire's build.xml file to include the
 path to the SDK (Two lines near the top). Then running ant should complete the
 job. If you have difficulties, try building a sample program from
 code.google.com first which has a bunch of detail and troubleshooting info.
+
+
+Added by Curtis Gedak
+=====================
+Original author is still Ken Magic.
+
+Modifications by Curtis Gedak (2015):
+- Upgrade project from an older version of the Android SDK
