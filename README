@@ -24,3 +24,4 @@ Original author is still Ken Magic.
 
 Modifications by Curtis Gedak (2015):
 - Upgrade project from an older version of the Android SDK
+- Add .gitignore file
