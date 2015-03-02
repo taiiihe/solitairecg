@@ -15,6 +15,7 @@
 
   Modifications by Curtis Gedak (2015)
   - Fork project from Solitaire to SolitaireCG
+  - Add Deal menu entry
 */
 package net.sourceforge.solitaire_cg;
 
@@ -43,6 +44,7 @@ public class SolitaireCG extends Activity {
   private static final int MENU_FORTYTHIEVES = 9;
   private static final int MENU_STATS     = 10;
   private static final int MENU_HELP      = 11;
+  private static final int MENU_DEAL      = 12;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -112,6 +114,7 @@ public class SolitaireCG extends Activity {
     subMenu.add(0, MENU_FORTYTHIEVES, 0, R.string.menu_fortythieves);
 
     menu.add(0, MENU_RESTART, 0, R.string.menu_restart);
+    menu.add(0, MENU_DEAL, 0, R.string.menu_deal);
     menu.add(0, MENU_OPTIONS, 0, R.string.menu_options);
     menu.add(0, MENU_SAVE_QUIT, 0, R.string.menu_save_quit);
     menu.add(0, MENU_QUIT, 0, R.string.menu_quit);
@@ -137,6 +140,9 @@ public class SolitaireCG extends Activity {
         break;
       case MENU_RESTART:
         mSolitaireView.RestartGame();
+        break;
+      case MENU_DEAL:
+        mSolitaireView.Deal();
         break;
       case MENU_STATS:
         DisplayStats();

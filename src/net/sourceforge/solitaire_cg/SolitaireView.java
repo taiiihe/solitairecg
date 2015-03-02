@@ -15,6 +15,7 @@
 
   Modifications by Curtis Gedak (2015)
   - Fork project from Solitaire to SolitaireCG
+  - Add Deal menu entry
 */
 package net.sourceforge.solitaire_cg;
 
@@ -463,6 +464,15 @@ public class SolitaireView extends View {
     Refresh();
   }
 
+  public void Deal() {
+    if (mViewMode == MODE_TEXT) {
+      ChangeViewMode(MODE_NORMAL);
+    } else if (mViewMode == MODE_NORMAL) {
+      mRules.EventAlert(Rules.EVENT_DEAL, mCardAnchor[0]);
+      Refresh();
+    }
+  }
+
   public void DisplayText(CharSequence text) {
     ChangeViewMode(MODE_TEXT);
     mTextView.setVisibility(View.VISIBLE);
@@ -520,19 +530,14 @@ public class SolitaireView extends View {
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent msg) {
     switch (keyCode) {
-    case KeyEvent.KEYCODE_DPAD_CENTER:
-    case KeyEvent.KEYCODE_SEARCH:
-      if (mViewMode == MODE_TEXT) {
-        ChangeViewMode(MODE_NORMAL);
-      } else if (mViewMode == MODE_NORMAL) {
-        mRules.EventAlert(Rules.EVENT_DEAL, mCardAnchor[0]);
-        Refresh();
-      }
-      return true;
+      case KeyEvent.KEYCODE_DPAD_CENTER:
+      case KeyEvent.KEYCODE_SEARCH:
+        Deal();
+        return true;
       case KeyEvent.KEYCODE_BACK:
         Undo();
         return true;
-      }
+    }
     mRules.HandleEvents();
     return super.onKeyDown(keyCode, msg);
   }

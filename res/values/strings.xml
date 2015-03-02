@@ -16,6 +16,7 @@
 
   Modifications by Curtis Gedak (2015)
   - Fork project from Solitaire to SolitaireCG
+  - Add Deal menu entry
   -->
 <resources>
     <string name="app_name">SolitaireCG</string>
@@ -25,6 +26,7 @@
     <string name="menu_fortythieves">Forty Thieves</string>
     <string name="menu_newgame">New Game</string>
     <string name="menu_restart">Restart</string>
+    <string name="menu_deal">Deal</string>
     <string name="menu_stats">Stats</string>
     <string name="menu_options">Options</string>
     <string name="menu_help">Help</string>
@@ -60,7 +62,7 @@ Partial Stack: Tap the stack, scroll to adjust, then drag the top card.\n\n
 Auto Move:\n
 Fling a card to start a chain of moving cards to their home.\n\n
 Dealing:\n
-Tap the deck or click the trackball or search key.\n\n
+Tap the deck or deal menu, or click the trackball or search key.\n\n
 Undo:\n
 Push the back button.\n\n
 Menu:\n
