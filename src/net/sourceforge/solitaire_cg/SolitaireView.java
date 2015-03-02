@@ -12,8 +12,11 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
-*/ 
-package com.kmagic.solitaire;
+
+  Modifications by Curtis Gedak (2015)
+  - Fork project from Solitaire to SolitaireCG
+*/
+package net.sourceforge.solitaire_cg;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -53,9 +56,9 @@ public class SolitaireView extends View {
   private static final int MODE_WIN         = 6;
   private static final int MODE_WIN_STOP    = 7;
 
-  private static final String SAVE_FILENAME = "solitaire_save.bin";
+  private static final String SAVE_FILENAME = "solitairecg_save.bin";
   // This is incremented only when the save system changes.
-  private static final String SAVE_VERSION = "solitaire_save_2";
+  private static final String SAVE_VERSION = "solitairecg_save_2";
 
   private CharSequence mHelpText;
   private CharSequence mWinText;
@@ -168,7 +171,7 @@ public class SolitaireView extends View {
     mGameStarted = false;
   }
 
-  public SharedPreferences GetSettings() { return ((Solitaire)mContext).GetSettings(); }
+  public SharedPreferences GetSettings() { return ((SolitaireCG)mContext).GetSettings(); }
   public DrawMaster GetDrawMaster() { return mDrawMaster; }
   public Rules GetRules() { return mRules; }
   public void ClearGameStarted() { mGameStarted = false; }

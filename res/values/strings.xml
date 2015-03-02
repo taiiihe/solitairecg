@@ -13,9 +13,12 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
+
+  Modifications by Curtis Gedak (2015)
+  - Fork project from Solitaire to SolitaireCG
   -->
 <resources>
-    <string name="app_name">Solitaire</string>
+    <string name="app_name">SolitaireCG</string>
     <string name="menu_solitaire">Solitaire</string>
     <string name="menu_spider">Spider</string>
     <string name="menu_freecell">Freecell</string>

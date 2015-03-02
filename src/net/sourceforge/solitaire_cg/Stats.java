@@ -12,8 +12,11 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
-*/ 
-package com.kmagic.solitaire;
+
+  Modifications by Curtis Gedak (2015)
+  - Fork project from Solitaire to SolitaireCG
+*/
+package net.sourceforge.solitaire_cg;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -28,7 +31,7 @@ import android.view.WindowManager;
 
 public class Stats {
 
-  public Stats(final Solitaire solitaire, final SolitaireView view) {
+  public Stats(final SolitaireCG solitaire, final SolitaireView view) {
 
     solitaire.setContentView(R.layout.stats);
     View statsView = (View) solitaire.findViewById(R.id.stats_view);

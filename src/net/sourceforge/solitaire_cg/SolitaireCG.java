@@ -12,8 +12,11 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
-*/ 
-package com.kmagic.solitaire;
+
+  Modifications by Curtis Gedak (2015)
+  - Fork project from Solitaire to SolitaireCG
+*/
+package net.sourceforge.solitaire_cg;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -28,7 +31,7 @@ import android.view.View;
 import android.widget.TextView;
 
 // Base activity class.
-public class Solitaire extends Activity {
+public class SolitaireCG extends Activity {
   private static final int MENU_NEW_GAME  = 1;
   private static final int MENU_RESTART   = 2;
   private static final int MENU_OPTIONS   = 3;

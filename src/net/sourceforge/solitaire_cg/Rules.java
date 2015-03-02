@@ -12,8 +12,11 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
-*/ 
-package com.kmagic.solitaire;
+
+  Modifications by Curtis Gedak (2015)
+  - Fork project from Solitaire to SolitaireCG
+*/
+package net.sourceforge.solitaire_cg;
 
 import android.os.Bundle;
 import android.util.Log;
