@@ -16,6 +16,7 @@
   Modifications by Curtis Gedak (2015)
   - Fork project from Solitaire to SolitaireCG
   - Add Deal menu entry
+  - Add README menu display - new files: readme.xml, Readme.java, Utils.java
 */
 package net.sourceforge.solitaire_cg;
 
@@ -45,6 +46,7 @@ public class SolitaireCG extends Activity {
   private static final int MENU_STATS     = 10;
   private static final int MENU_HELP      = 11;
   private static final int MENU_DEAL      = 12;
+  private static final int MENU_README    = 13;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -120,6 +122,7 @@ public class SolitaireCG extends Activity {
     menu.add(0, MENU_QUIT, 0, R.string.menu_quit);
     menu.add(0, MENU_STATS, 0, R.string.menu_stats);
     menu.add(0, MENU_HELP, 0, R.string.menu_help);
+    menu.add(0, MENU_README, 0, R.string.menu_readme);
     return true;
   }
 
@@ -149,6 +152,9 @@ public class SolitaireCG extends Activity {
         break;
       case MENU_OPTIONS:
         DisplayOptions();
+        break;
+      case MENU_README:
+        DisplayReadme();
         break;
       case MENU_HELP:
         mSolitaireView.DisplayHelp();
@@ -195,6 +201,11 @@ public class SolitaireCG extends Activity {
   public void DisplayOptions() {
     mSolitaireView.SetTimePassing(false);
     new Options(this, mSolitaireView.GetDrawMaster());
+  }
+
+  public void DisplayReadme() {
+    mSolitaireView.SetTimePassing(false);
+    new Readme(this, mSolitaireView.GetDrawMaster());
   }
 
   public void DisplayStats() {

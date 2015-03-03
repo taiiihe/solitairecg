@@ -17,6 +17,7 @@
   Modifications by Curtis Gedak (2015)
   - Fork project from Solitaire to SolitaireCG
   - Add Deal menu entry
+  - Add README menu display - new files: readme.xml, Readme.java, Utils.java
   -->
 <resources>
     <string name="app_name">SolitaireCG</string>
@@ -30,6 +31,7 @@
     <string name="menu_stats">Stats</string>
     <string name="menu_options">Options</string>
     <string name="menu_help">Help</string>
+    <string name="menu_readme">README</string>
     <string name="menu_save_quit">Save&amp;Quit</string>
     <string name="menu_quit">Quit</string>
     <string name="solitaire_layout_text_text"></string>
@@ -54,6 +56,8 @@
     <string name="fling_only">Fling Only</string>
     <string name="never">Never</string>
     <string name="display_time">Display Time</string>
+    <string name="readme_header">README file from source code</string>
+    <string name="close">Close</string>
     <string name="help_text">
 Moving:\n
 Single Card: Drag the card.\n
