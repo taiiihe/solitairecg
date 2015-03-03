@@ -20,7 +20,15 @@ code.google.com first which has a bunch of detail and troubleshooting info.
 
 Added by Curtis Gedak
 =====================
-Original author is still Ken Magic.
+SolitaireCG is Ken Magic's "Solitaire" adapted to work on devices with
+few hardware buttons.  Original author is still Ken Magic.
+SolitaireCG is available under Apache License 2.0.
+SolitaireCG current version:  <not-yet-released>
+
+More information at respective web sites:
+
+SolitaireCG:  http://solitairecg.sourceforge.net/
+Solitaire:    http://code.google.com/p/solitaire-for-android/
 
 Modifications by Curtis Gedak (2015):
 - Upgrade project from an older version of the Android SDK
