@@ -40,3 +40,4 @@ Modifications by Curtis Gedak (2015):
 - Add Deal menu entry
 - Avoid card loss if spider deal interrupted
 - Add README menu display - new files: readme.xml, Readme.java, Utils.java
+- Add COPYING menu display - new files: copying.xml, Copying.java

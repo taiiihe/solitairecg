@@ -17,6 +17,7 @@
   - Fork project from Solitaire to SolitaireCG
   - Add Deal menu entry
   - Add README menu display - new files: readme.xml, Readme.java, Utils.java
+  - Add COPYING menu display - new files: copying.xml, Copying.java
 */
 package net.sourceforge.solitaire_cg;
 
@@ -47,6 +48,7 @@ public class SolitaireCG extends Activity {
   private static final int MENU_HELP      = 11;
   private static final int MENU_DEAL      = 12;
   private static final int MENU_README    = 13;
+  private static final int MENU_COPYING   = 14;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -123,6 +125,7 @@ public class SolitaireCG extends Activity {
     menu.add(0, MENU_STATS, 0, R.string.menu_stats);
     menu.add(0, MENU_HELP, 0, R.string.menu_help);
     menu.add(0, MENU_README, 0, R.string.menu_readme);
+    menu.add(0, MENU_COPYING, 0, R.string.menu_copying);
     return true;
   }
 
@@ -155,6 +158,9 @@ public class SolitaireCG extends Activity {
         break;
       case MENU_README:
         DisplayReadme();
+        break;
+      case MENU_COPYING:
+        DisplayCopying();
         break;
       case MENU_HELP:
         mSolitaireView.DisplayHelp();
@@ -206,6 +212,11 @@ public class SolitaireCG extends Activity {
   public void DisplayReadme() {
     mSolitaireView.SetTimePassing(false);
     new Readme(this, mSolitaireView.GetDrawMaster());
+  }
+
+  public void DisplayCopying() {
+    mSolitaireView.SetTimePassing(false);
+    new Copying(this, mSolitaireView.GetDrawMaster());
   }
 
   public void DisplayStats() {
