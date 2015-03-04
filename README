@@ -28,6 +28,13 @@ few hardware buttons.  Original author is still Ken Magic.
 SolitaireCG is available under Apache License 2.0, see COPYING.
 See the source code for copyright owners.
 
+SolitaireCG requires the following permissions:
+  Device ID & call information
+    - read phone status and identity
+  Photo/Media/Files
+    - modify or delete the contents of your SD card
+    - read the contents of your SD card
+
 More information at respective web sites:
 
 SolitaireCG:  http://solitairecg.sourceforge.net/
@@ -41,3 +48,4 @@ Modifications by Curtis Gedak (2015):
 - Avoid card loss if spider deal interrupted
 - Add README menu display - new files: readme.xml, Readme.java, Utils.java
 - Add COPYING menu display - new files: copying.xml, Copying.java
+- Add application required permissions to README
