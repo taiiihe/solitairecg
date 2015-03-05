@@ -49,3 +49,4 @@ Modifications by Curtis Gedak (2015):
 - Add README menu display - new files: readme.xml, Readme.java, Utils.java
 - Add COPYING menu display - new files: copying.xml, Copying.java
 - Add application required permissions to README
+- Replace icon:  new file solitairecg_icon.png, remove solitaire_icon.png
