@@ -23,7 +23,7 @@ Added by Curtis Gedak
 SolitaireCG is Ken Magic's "Solitaire" adapted to work on devices with
 few hardware buttons.  Original author is still Ken Magic.
 
-     S o l i t a i r e C G   vX.Y.Z
+     S o l i t a i r e C G   v1.14
 
 SolitaireCG is available under Apache License 2.0, see COPYING.
 See the source code for copyright owners.
@@ -50,3 +50,4 @@ Modifications by Curtis Gedak (2015):
 - Add COPYING menu display - new files: copying.xml, Copying.java
 - Add application required permissions to README
 - Replace icon:  new file solitairecg_icon.png, remove solitaire_icon.png
+- Create 1.14 release on Mar 6, 2015

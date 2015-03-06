@@ -17,11 +17,12 @@
   Modifications by Curtis Gedak (2015)
   - Fork project from Solitaire to SolitaireCG
   - Replace icon:  new file solitairecg_icon.png, remove solitaire_icon.png
+  - Create 1.14 release on Mar 6, 2015
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.sourceforge.solitaire_cg"
-      android:versionCode="450"
-      android:versionName="1.12.2">
+      android:versionCode="452"
+      android:versionName="1.14">
     <uses-sdk android:minSdkVersion="1"></uses-sdk>
     <application android:icon="@drawable/solitairecg_icon" android:label="@string/app_name">
         <activity android:name=".SolitaireCG"
