@@ -15,6 +15,7 @@
 
   Modifications by Curtis Gedak (2015)
   - Fork project from Solitaire to SolitaireCG
+  - Add Freecell option build by suit Baker's game
 */
 package net.sourceforge.solitaire_cg;
 
@@ -61,6 +62,11 @@ public class Options {
     ((RadioButton)solitaire.findViewById(R.id.suits_4)).setChecked(suits == 4);
     ((RadioButton)solitaire.findViewById(R.id.suits_2)).setChecked(suits == 2);
     ((RadioButton)solitaire.findViewById(R.id.suits_1)).setChecked(suits == 1);
+
+    // Freecell stuff
+    final boolean bySuit = solitaire.GetSettings().getBoolean("FreecellBuildBySuit", false);
+    ((RadioButton)solitaire.findViewById(R.id.by_alternate_color)).setChecked(!bySuit);
+    ((RadioButton)solitaire.findViewById(R.id.by_suit)).setChecked(bySuit);
 
     // Automove 
     final int autoMove = solitaire.GetSettings().getInt("AutoMoveLevel", Rules.AUTO_MOVE_ALWAYS);
@@ -113,6 +119,14 @@ public class Options {
           editor.putInt("SpiderSuits", newSuits);
           commit = true;
           if (type == Rules.SPIDER) {
+            newGame = true;
+          }
+        }
+
+        if (bySuit != ((RadioButton)solitaire.findViewById(R.id.by_suit)).isChecked()) {
+          editor.putBoolean("FreecellBuildBySuit", !bySuit);
+          commit = true;
+          if (type == Rules.FREECELL) {
             newGame = true;
           }
         }

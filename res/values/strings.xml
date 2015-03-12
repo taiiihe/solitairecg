@@ -19,6 +19,7 @@
   - Add Deal menu entry
   - Add README menu display - new files: readme.xml, Readme.java, Utils.java
   - Add COPYING menu display - new files: copying.xml, Copying.java
+  - Add Freecell option build by suit Baker's game
   -->
 <resources>
     <string name="app_name">SolitaireCG</string>
@@ -50,6 +51,9 @@
     <string name="suits_4">Four Suits</string>
     <string name="suits_2">Two Suits</string>
     <string name="suits_1">One Suit</string>
+    <string name="freecell_options">Freecell Options</string>
+    <string name="by_alternate_color">Build By Alternate Color</string>
+    <string name="by_suit">Build By Suit</string>
     <string name="display_options">Display Options</string>
     <string name="normal_cards">Normal Card Art</string>
     <string name="big_cards">Large Card Art</string>

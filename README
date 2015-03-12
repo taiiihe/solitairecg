@@ -52,3 +52,4 @@ Modifications by Curtis Gedak (2015):
 - Replace icon:  new file solitairecg_icon.png, remove solitaire_icon.png
 - Create 1.14 release on Mar 6, 2015
 - Prevent illegal N+1 multi-card drop on empty stack in Forty Thieves
+- Add Freecell option build by suit Baker's game

@@ -17,6 +17,7 @@
   - Fork project from Solitaire to SolitaireCG
   - Avoid card loss if spider deal interrupted
   - Prevent illegal N+1 multi-card drop on empty stack in Forty Thieves
+  - Add Freecell option build by suit Baker's game
 */
 package net.sourceforge.solitaire_cg;
 
@@ -689,8 +690,11 @@ class Spider extends Rules {
 
 class Freecell extends Rules {
 
+  private boolean mBySuit;
+
   public void Init(Bundle map) {
     mIgnoreEvents = true;
+    mBySuit = mView.GetSettings().getBoolean("FreecellBuildBySuit", true);
 
     // Thirteen total anchors for regular solitaire
     mCardCount = 52;
@@ -709,8 +713,21 @@ class Freecell extends Rules {
 
     // Middle anchor stacks
     for (int i = 0; i < 8; i++) {
-      mCardAnchor[i+8] = CardAnchor.CreateAnchor(CardAnchor.FREECELL_STACK, i+8,
-                                                 this);
+      if ( ! mBySuit ) {
+        // Normal Freecell - build by alternate color
+        mCardAnchor[i+8] = CardAnchor.CreateAnchor(CardAnchor.FREECELL_STACK, i+8,
+                                                   this);
+      } else {
+        // Baker's Game - build by suit
+        mCardAnchor[i+8] = CardAnchor.CreateAnchor(CardAnchor.GENERIC_ANCHOR, i+8, this);
+        mCardAnchor[i+8].SetBuildSeq(GenericAnchor.SEQ_DSC);
+        mCardAnchor[i+8].SetMoveSeq(GenericAnchor.SEQ_ASC);
+        mCardAnchor[i+8].SetSuit(GenericAnchor.SUIT_SAME);
+        mCardAnchor[i+8].SetWrap(false);
+        mCardAnchor[i+8].SetPickup(GenericAnchor.PACK_LIMIT_BY_FREE);
+        mCardAnchor[i+8].SetDropoff(GenericAnchor.PACK_LIMIT_BY_FREE);
+        mCardAnchor[i+8].SetDisplay(GenericAnchor.DISPLAY_ALL);
+      }
     }
 
     if (map != null) {
@@ -884,11 +901,20 @@ class Freecell extends Rules {
 
   @Override
   public String GetGameTypeString() {
-    return "Freecell";
+    if ( ! mBySuit ) {
+      return "FreecellBuildByAlternateColor";
+    } else {
+      return "FreecellBuildBySuit";
+    }
   }
+
   @Override
   public String GetPrettyGameTypeString() {
-    return "Freecell";
+    if ( ! mBySuit ) {
+      return "Freecell Build By Alternate Color";
+    } else {
+      return "Freecell Build By Suit";
+    }
   }
 }
 
