@@ -16,6 +16,7 @@
   Modifications by Curtis Gedak (2015)
   - Fork project from Solitaire to SolitaireCG
   - Avoid card loss if spider deal interrupted
+  - Prevent illegal N+1 multi-card drop on empty stack in Forty Thieves
 */
 package net.sourceforge.solitaire_cg;
 
@@ -908,7 +909,7 @@ class FortyThieves extends Rules {
       mCardAnchor[i].SetSuit(GenericAnchor.SUIT_SAME);
       mCardAnchor[i].SetWrap(false);
       mCardAnchor[i].SetPickup(GenericAnchor.PACK_LIMIT_BY_FREE);
-      mCardAnchor[i].SetDropoff(GenericAnchor.PACK_MULTI);
+      mCardAnchor[i].SetDropoff(GenericAnchor.PACK_LIMIT_BY_FREE);
       mCardAnchor[i].SetDisplay(GenericAnchor.DISPLAY_ALL);
     }
     // Bottom anchors for holding cards

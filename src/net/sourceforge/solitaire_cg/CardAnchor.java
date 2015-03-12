@@ -15,6 +15,7 @@
 
   Modifications by Curtis Gedak (2015)
   - Fork project from Solitaire to SolitaireCG
+  - Prevent illegal N+1 multi-card drop on empty stack in Forty Thieves
 */
 package net.sourceforge.solitaire_cg;
 
@@ -491,6 +492,10 @@ class SeqSink extends CardAnchor {
 
   @Override
   public boolean CanDropCard(MoveCard moveCard, int close) {
+    /* Called for every stack on drop of MoveCard
+     * Finds the stack that matches the coordinates,
+     * but passes logic over to CanBuildCard()
+     */
     Card card = moveCard.GetTopCard();
     float x = card.GetX() + Card.WIDTH/2;
     float y = card.GetY() + Card.HEIGHT/2;
@@ -860,12 +865,14 @@ class GenericAnchor extends CardAnchor {
     //Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
     //float my = mCardCount > 0 ? topCard.GetY() : mY;
     if (IsOverCard(x, y, close)) {
-      return CanBuildCard(card);
+      //Passing movecard now, so that there can be logic for stack-size
+      return CanBuildCard(moveCard);
     }
     return false;
   }
   
-  public boolean CanBuildCard(Card card){
+  public boolean CanBuildCard(MoveCard moveCard){
+    Card card = moveCard.GetTopCard();
     // SEQ_ANY will allow all
     if (mBUILDSEQ == GenericAnchor.SEQ_ANY){
       return true;
@@ -873,6 +880,13 @@ class GenericAnchor extends CardAnchor {
     Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
     // Rules for empty stacks
     if (topCard == null) {
+      // Check stack size
+      if (mDROPOFF == GenericAnchor.PACK_LIMIT_BY_FREE){
+        // Can only move as many cards as there are free spaces
+        if (mRules.CountFreeSpaces() < moveCard.GetCount()){
+	  return false;
+        }
+      }
       switch (mSTARTSEQ) {
         case GenericAnchor.START_KING:
           return card.GetValue() == Card.KING;
