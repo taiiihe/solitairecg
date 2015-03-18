@@ -17,6 +17,7 @@
   - Fork project from Solitaire to SolitaireCG
   - Add Deal menu entry
   - Avoid card loss if spider deal interrupted
+  - Show restart unavailable message if game won and restart selected
 */
 package net.sourceforge.solitaire_cg;
 
@@ -34,6 +35,7 @@ import android.view.View;
 import android.view.MotionEvent;
 import android.view.Gravity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.Math;
 import java.lang.Runnable;
@@ -458,6 +460,10 @@ public class SolitaireView extends View {
   }
 
   public void RestartGame() {
+    if (mRules.HasWon()) {
+      Toast.makeText(mContext, R.string.toast_restart_invalid, Toast.LENGTH_SHORT).show();
+      return;
+    }
     mRules.SetIgnoreEvents(true);
     while (!mMoveHistory.empty()) {
       Undo();

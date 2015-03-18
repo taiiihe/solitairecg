@@ -18,6 +18,7 @@
   - Avoid card loss if spider deal interrupted
   - Prevent illegal N+1 multi-card drop on empty stack in Forty Thieves
   - Add Freecell option build by suit Baker's game
+  - Show restart unavailable message if game won and restart selected
 */
 package net.sourceforge.solitaire_cg;
 
@@ -53,6 +54,7 @@ public abstract class Rules {
   protected AnimateCard mAnimateCard; 
   protected boolean mIgnoreEvents;
   protected EventPoster mEventPoster;
+  protected boolean mWon;
 
 
   // Anchors
@@ -66,6 +68,7 @@ public abstract class Rules {
   protected int mAutoMoveLevel;
   protected boolean mWasFling;
 
+  public boolean HasWon() { return mWon; }
   public int GetType() { return mType; }
   public int GetCardCount() { return mCardCount; }
   public CardAnchor[] GetAnchorArray() { return mCardAnchor; }
@@ -87,7 +90,7 @@ public abstract class Rules {
   public void AddDealCount() {}
 
   public int CountFreeSpaces() { return 0; }
-  protected void SignalWin() { mView.DisplayWin(); }
+  protected void SignalWin() { mWon = true; mView.DisplayWin(); }
 
   abstract public void Init(Bundle map);
   public void EventAlert(int event) { if (!mIgnoreEvents) { mEventPoster.PostEvent(event); mView.Refresh(); } }
@@ -129,6 +132,7 @@ public abstract class Rules {
     }
 
     if (ret != null) {
+      ret.mWon = false;
       ret.SetType(type);
       ret.SetView(view);
       ret.SetMoveHistory(moveHistory);
