@@ -15,6 +15,7 @@
 
   Modifications by Curtis Gedak (2015)
   - Fork project from Solitaire to SolitaireCG
+  - Limit stats display of winning percentage to two decimal places
 */
 package net.sourceforge.solitaire_cg;
 
@@ -58,7 +59,7 @@ public class Stats {
     tv = (TextView)solitaire.findViewById(R.id.text_wins);
     tv.setText("Wins: " + wins + " Attempts: " + attempts);
     tv = (TextView)solitaire.findViewById(R.id.text_percentage);
-    tv.setText("Winning Percentage: " + ratio);
+    tv.setText("Winning Percentage: " + String.format("%.2f", ratio) + "%");
     if (bestTime != -1) {
       int seconds = (bestTime / 1000) % 60;
       int minutes = bestTime / 60000;

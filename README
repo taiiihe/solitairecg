@@ -55,3 +55,4 @@ Modifications by Curtis Gedak (2015):
 - Add Freecell option build by suit Baker's game
 - Show restart unavailable message if game won and restart selected
 - Avoid game hang in pick card from stack mode and restart selected
+- Limit stats display of winning percentage to two decimal places
