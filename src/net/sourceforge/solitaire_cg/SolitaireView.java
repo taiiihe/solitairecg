@@ -18,6 +18,7 @@
   - Add Deal menu entry
   - Avoid card loss if spider deal interrupted
   - Show restart unavailable message if game won and restart selected
+  - Avoid game hang in pick card from stack mode and restart selected
 */
 package net.sourceforge.solitaire_cg;
 
@@ -463,6 +464,9 @@ public class SolitaireView extends View {
     if (mRules.HasWon()) {
       Toast.makeText(mContext, R.string.toast_restart_invalid, Toast.LENGTH_SHORT).show();
       return;
+    }
+    if (mViewMode == MODE_CARD_SELECT) {
+      ChangeViewMode(MODE_NORMAL);
     }
     mRules.SetIgnoreEvents(true);
     while (!mMoveHistory.empty()) {
