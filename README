@@ -23,7 +23,7 @@ Added by Curtis Gedak
 SolitaireCG is Ken Magic's "Solitaire" adapted to work on devices with
 few hardware buttons.  Original author is still Ken Magic.
 
-     S o l i t a i r e C G   v1.14
+     S o l i t a i r e C G   v1.15
 
 SolitaireCG is available under Apache License 2.0, see COPYING.
 See the source code for copyright owners.
@@ -56,3 +56,4 @@ Modifications by Curtis Gedak (2015):
 - Show restart unavailable message if game won and restart selected
 - Avoid game hang in pick card from stack mode and restart selected
 - Limit stats display of winning percentage to two decimal places
+- Create 1.15 release on Mar 19, 2015
