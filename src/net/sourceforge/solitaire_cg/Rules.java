@@ -19,6 +19,7 @@
   - Prevent illegal N+1 multi-card drop on empty stack in Forty Thieves
   - Add Freecell option build by suit Baker's game
   - Show restart unavailable message if game won and restart selected
+  - Set default Freecell option to build by alternate color
 */
 package net.sourceforge.solitaire_cg;
 
@@ -698,7 +699,7 @@ class Freecell extends Rules {
 
   public void Init(Bundle map) {
     mIgnoreEvents = true;
-    mBySuit = mView.GetSettings().getBoolean("FreecellBuildBySuit", true);
+    mBySuit = mView.GetSettings().getBoolean("FreecellBuildBySuit", false);
 
     // Thirteen total anchors for regular solitaire
     mCardCount = 52;

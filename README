@@ -57,3 +57,4 @@ Modifications by Curtis Gedak (2015):
 - Avoid game hang in pick card from stack mode and restart selected
 - Limit stats display of winning percentage to two decimal places
 - Create 1.15 release on Mar 19, 2015
+- Set default Freecell option to build by alternate color
