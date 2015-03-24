@@ -13,13 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modifications by Curtis Gedak (2015)
-  - Fork project from Solitaire to SolitaireCG
-  - Avoid card loss if spider deal interrupted
-  - Prevent illegal N+1 multi-card drop on empty stack in Forty Thieves
-  - Add Freecell option build by suit Baker's game
-  - Show restart unavailable message if game won and restart selected
-  - Set default Freecell option to build by alternate color
+  Modified by Curtis Gedak 2015
 */
 package net.sourceforge.solitaire_cg;
 

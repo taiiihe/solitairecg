@@ -40,22 +40,28 @@ More information at respective web sites:
 SolitaireCG:  http://solitairecg.sourceforge.net/
 Solitaire:    http://code.google.com/p/solitaire-for-android/
 
-Modifications by Curtis Gedak (2015):
-- Upgrade project from an older version of the Android SDK
-- Add .gitignore file
-- Fork project from Solitaire to SolitaireCG
-- Add Deal menu entry
-- Avoid card loss if spider deal interrupted
-- Add README menu display - new files: readme.xml, Readme.java, Utils.java
-- Add COPYING menu display - new files: copying.xml, Copying.java
-- Add application required permissions to README
-- Replace icon:  new file solitairecg_icon.png, remove solitaire_icon.png
-- Create 1.14 release on Mar 6, 2015
-- Prevent illegal N+1 multi-card drop on empty stack in Forty Thieves
-- Add Freecell option build by suit Baker's game
-- Show restart unavailable message if game won and restart selected
-- Avoid game hang in pick card from stack mode and restart selected
-- Limit stats display of winning percentage to two decimal places
-- Create 1.15 release on Mar 19, 2015
-- Set default Freecell option to build by alternate color
-- Create 1.15.1 release on Mar 21, 2015
+Change Log (in reverse chronological order)
+-------------------------------------------
+
+  * Place Change Log in reverse chronological order in README only
+
+### Release v1.15.1 on Mar 21, 2015
+  * Set default Freecell option to build by alternate color
+
+### Release v1.15 on Mar 19, 2015
+  * Limit stats display of winning percentage to two decimal places
+  * Avoid game hang in pick card from stack mode and restart selected
+  * Show restart unavailable message if game won and restart selected
+  * Add Freecell option build by suit Baker's game
+  * Prevent illegal N+1 multi-card drop on empty stack in Forty Thieves
+
+### Release v1.14 on Mar 6, 2015
+  * Replace icon: new file solitairecg_icon.png, remove solitaire_icon.png
+  * Add application required permissions to README
+  * Add COPYING menu display - new files: copying.xml, Copying.java
+  * Add README menu display - new files: readme.xml, Readme.java, Utils.java
+  * Avoid card loss if spider deal interrupted
+  * Add Deal menu entry
+  * Fork project from Solitaire to SolitaireCG
+  * Add .gitignore file
+  * Upgrade project from an older version of the Android SDK

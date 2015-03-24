@@ -12,9 +12,6 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
-
-  Modifications by Curtis Gedak (2015)
-  - Add README menu display - new files: readme.xml, Readme.java, Utils.java
 */
 
 package net.sourceforge.solitaire_cg;

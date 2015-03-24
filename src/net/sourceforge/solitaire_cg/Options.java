@@ -13,9 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modifications by Curtis Gedak (2015)
-  - Fork project from Solitaire to SolitaireCG
-  - Add Freecell option build by suit Baker's game
+  Modified by Curtis Gedak 2015
 */
 package net.sourceforge.solitaire_cg;
 

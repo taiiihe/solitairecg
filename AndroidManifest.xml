@@ -14,12 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modifications by Curtis Gedak (2015)
-  - Fork project from Solitaire to SolitaireCG
-  - Replace icon:  new file solitairecg_icon.png, remove solitaire_icon.png
-  - Create 1.14 release on Mar 6, 2015
-  - Create 1.15 release on Mar 19, 2015
-  - Create 1.15.1 release on Mar 21, 2015
+  Modified by Curtis Gedak 2015
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.sourceforge.solitaire_cg"

@@ -13,12 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modifications by Curtis Gedak (2015)
-  - Fork project from Solitaire to SolitaireCG
-  - Add Deal menu entry
-  - Avoid card loss if spider deal interrupted
-  - Show restart unavailable message if game won and restart selected
-  - Avoid game hang in pick card from stack mode and restart selected
+  Modified by Curtis Gedak 2015
 */
 package net.sourceforge.solitaire_cg;
 

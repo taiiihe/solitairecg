@@ -14,8 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modifications by Curtis Gedak (2015)
-  - Add Freecell option build by suit Baker's game
+  Modified by Curtis Gedak 2015
   -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/options_view"
