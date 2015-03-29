@@ -43,6 +43,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Show use start menu message if game won and help selected
   * Place Change Log in reverse chronological order in README only
 
 ### Release v1.15.1 on Mar 21, 2015

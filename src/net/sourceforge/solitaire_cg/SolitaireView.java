@@ -439,6 +439,10 @@ public class SolitaireView extends View {
   }
 
   public void DisplayHelp() {
+    if (mRules.HasWon()) {
+      Toast.makeText(mContext, R.string.toast_use_start_menu, Toast.LENGTH_SHORT).show();
+      return;
+    }
     mTextView.setTextSize(15);
     mTextView.setGravity(Gravity.LEFT);
     DisplayText(mHelpText);

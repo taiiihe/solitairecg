@@ -60,7 +60,8 @@
     <string name="readme_header">README file from source code</string>
     <string name="copying_header">COPYING file from source code</string>
     <string name="close">Close</string>
-    <string name="toast_restart_invalid">Game over, restart unavailable.</string>
+    <string name="toast_restart_invalid">Game over. Restart not available.</string>
+    <string name="toast_use_start_menu">Game over. Use menu to start new game.</string>
     <string name="help_text">
 Moving:\n
 Single Card: Drag the card.\n
