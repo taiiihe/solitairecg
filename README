@@ -43,6 +43,8 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Remove hard code placement of bitmaps when building card image
+
 ### Release v1.15.2 on Apr 1, 2015
   * Show use start menu message if game won and help selected
   * Place Change Log in reverse chronological order in README only

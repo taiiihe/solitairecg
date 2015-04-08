@@ -160,6 +160,8 @@ public class DrawMaster {
     Canvas canvas;
     int width = Card.WIDTH;
     int height = Card.HEIGHT;
+    int w = 0;   // Width  of actual bitmap image
+    int h = 0;   // Height of actual bitmap image
 
     Drawable drawable = r.getDrawable(R.drawable.cardback);
 
@@ -169,38 +171,54 @@ public class DrawMaster {
     drawable.setBounds(0, 0, Card.WIDTH, Card.HEIGHT);
     drawable.draw(canvas);
 
+    // Load suit bitmaps
     drawable = r.getDrawable(R.drawable.suits);
+    w = drawable.getIntrinsicWidth();
+    h = drawable.getIntrinsicHeight();
+    int suitWidth = w/4;
+    int suitHeight = h;
     for (int i = 0; i < 4; i++) {
-      suit[i] = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_4444);
+      suit[i] = Bitmap.createBitmap(w/4, h, Bitmap.Config.ARGB_4444);
       canvas = new Canvas(suit[i]);
-      drawable.setBounds(-i*10, 0, -i*10+40, 10);
+      drawable.setBounds(-i*w/4, 0, -i*w/4+w, h);
       drawable.draw(canvas);
     }
 
+    // Load big suit bitmaps
     drawable = r.getDrawable(R.drawable.bigsuits);
+    w = drawable.getIntrinsicWidth();
+    h = drawable.getIntrinsicHeight();
+    int bigSuitWidth = w/4;
+    int bigSuitHeight = h;
     for (int i = 0; i < 4; i++) {
-      bigSuit[i] = Bitmap.createBitmap(25, 25, Bitmap.Config.ARGB_4444);
+      bigSuit[i] = Bitmap.createBitmap(w/4, h, Bitmap.Config.ARGB_4444);
       canvas = new Canvas(bigSuit[i]);
-      drawable.setBounds(-i*25, 0, -i*25+100, 25);
+      drawable.setBounds(-i*w/4, 0, -i*w/4+w, h);
       drawable.draw(canvas);
     }
 
+    // Load big black font bitmaps
     drawable = r.getDrawable(R.drawable.bigblackfont);
+    w = drawable.getIntrinsicWidth();
+    h = drawable.getIntrinsicHeight();
+    int fontWidth = w/13; // Same as for red below
     for (int i = 0; i < 13; i++) {
-      blackFont[i] = Bitmap.createBitmap(18, 15, Bitmap.Config.ARGB_4444);
+      blackFont[i] = Bitmap.createBitmap(w/13, h, Bitmap.Config.ARGB_4444);
       canvas = new Canvas(blackFont[i]);
-      drawable.setBounds(-i*18, 0, -i*18+234, 15);
+      drawable.setBounds(-i*w/13, 0, -i*w/13+w, h);
       drawable.draw(canvas);
     }
 
+    // Load big red font bitmaps
     drawable = r.getDrawable(R.drawable.bigredfont);
     for (int i = 0; i < 13; i++) {
-      redFont[i] = Bitmap.createBitmap(18, 15, Bitmap.Config.ARGB_4444);
+      redFont[i] = Bitmap.createBitmap(w/13, h, Bitmap.Config.ARGB_4444);
       canvas = new Canvas(redFont[i]);
-      drawable.setBounds(-i*18, 0, -i*18+234, 15);
+      drawable.setBounds(-i*w/13, 0, -i*w/13+w, h);
       drawable.draw(canvas);
     }
 
+    // Create deck of cards
     cardBorderPaint.setARGB(255, 0, 0, 0);
     cardFrontPaint.setARGB(255, 255, 255, 255);
     RectF pos = new RectF();
@@ -209,20 +227,29 @@ public class DrawMaster {
         mCardBitmap[suitIdx*13+valueIdx] = Bitmap.createBitmap(
             width, height, Bitmap.Config.ARGB_4444);
         canvas = new Canvas(mCardBitmap[suitIdx*13+valueIdx]);
+        // Draw card outline
+        int cardOutline = 2;
+        int roundEdge = 4;   // Round curve on each card corner
         pos.set(0, 0, width, height);
-        canvas.drawRoundRect(pos, 4, 4, cardBorderPaint);
+        canvas.drawRoundRect(pos, roundEdge, roundEdge, cardBorderPaint);
         pos.set(1, 1, width-1, height-1);
-        canvas.drawRoundRect(pos, 4, 4, cardFrontPaint);
+        canvas.drawRoundRect(pos, roundEdge, roundEdge, cardFrontPaint);
 
+	// Draw font in upper-left
         if ((suitIdx & 1) == 1) {
-          canvas.drawBitmap(redFont[valueIdx], 3, 4, mSuitPaint);
+          canvas.drawBitmap(redFont[valueIdx], cardOutline+1, cardOutline+2,
+                            mSuitPaint);
         } else {
-          canvas.drawBitmap(blackFont[valueIdx], 3, 4, mSuitPaint);
+          canvas.drawBitmap(blackFont[valueIdx], cardOutline+1, cardOutline+2,
+                            mSuitPaint);
         }
 
-
-        canvas.drawBitmap(suit[suitIdx], width-14, 4, mSuitPaint);
-        canvas.drawBitmap(bigSuit[suitIdx], width/2-12, height/2-13, mSuitPaint);
+	// Draw suit in upper-right
+        canvas.drawBitmap(suit[suitIdx], width-suitWidth-cardOutline-2,
+                          cardOutline+2, mSuitPaint);
+	// Draw big suit in center of card
+        canvas.drawBitmap(bigSuit[suitIdx], (width-bigSuitWidth)/2+1,
+                          (height-bigSuitHeight)/2+3, mSuitPaint);
       }
     }
   }
@@ -254,13 +281,9 @@ public class DrawMaster {
     Canvas canvas;
     int width = Card.WIDTH;
     int height = Card.HEIGHT;
-    int fontWidth;
-    int fontHeight;
-    float[] faceBox = { 9,8,width-10,8,
-                        width-10,8,width-10,height-9,
-                        width-10,height-9,9,height-9,
-                        9,height-8,9,8
-                      };
+    int w = 0;   // Width  of actual bitmap image
+    int h = 0;   // Height of actual bitmap image
+
     Drawable drawable = r.getDrawable(R.drawable.cardback);
 
     mCardHidden = Bitmap.createBitmap(Card.WIDTH, Card.HEIGHT,
@@ -269,35 +292,63 @@ public class DrawMaster {
     drawable.setBounds(0, 0, Card.WIDTH, Card.HEIGHT);
     drawable.draw(canvas);
 
+    // Load suit bitmaps
     drawable = r.getDrawable(R.drawable.suits);
+    w = drawable.getIntrinsicWidth();
+    h = drawable.getIntrinsicHeight();
     for (int i = 0; i < 4; i++) {
-      suit[i] = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_4444);
-      revSuit[i] = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_4444);
+      suit[i] = Bitmap.createBitmap(w/4, h, Bitmap.Config.ARGB_4444);
+      revSuit[i] = Bitmap.createBitmap(w/4, h, Bitmap.Config.ARGB_4444);
       canvas = new Canvas(suit[i]);
-      drawable.setBounds(-i*10, 0, -i*10+40, 10);
+      drawable.setBounds(-i*w/4, 0, -i*w/4+w, h);
       drawable.draw(canvas);
       canvas = new Canvas(revSuit[i]);
       canvas.rotate(180);
-      drawable.setBounds(-i*10-10, -10, -i*10+30, 0);
+      drawable.setBounds(-i*w/4-w/4, -h, -i*w/4+(w-w/4), 0);
       drawable.draw(canvas);
     }
 
+    // Define faceBox line pairs now that we have suits (w)idth and (h)eight.
+    // Allow 1 pixel for line.
+    //                     x0,y0,x1,y1
+    // float[] faceBox = { 9,8,width-10,8,               //  Top edge
+    //                     width-10,8,width-10,height-9, //  Right edge
+    //                     width-10,height-9,9,height-9, //  Bottom edge
+    //                     9,height-9,9,8                //  Left edge
+    //                   };
+    int suitWidth = w/4;
+    int suitHeight = h;
+    float[] faceBox = {
+      suitWidth-1, suitHeight-2, width-suitWidth, suitHeight-2,
+      width-suitWidth, suitHeight-2, width-suitWidth, height-suitHeight+1,
+      width-suitWidth, height-suitHeight+1, suitWidth-1, height-suitHeight+1,
+      suitWidth-1, height-suitHeight+1, suitWidth-1, suitHeight-2
+                      };
+
+    // Load small suit bitmaps
     drawable = r.getDrawable(R.drawable.smallsuits);
+    w = drawable.getIntrinsicWidth();
+    h = drawable.getIntrinsicHeight();
+    int smallSuitWidth = w/4;
+    int smallSuitHeight = h;
     for (int i = 0; i < 4; i++) {
-      smallSuit[i] = Bitmap.createBitmap(5, 5, Bitmap.Config.ARGB_4444);
-      revSmallSuit[i] = Bitmap.createBitmap(5, 5, Bitmap.Config.ARGB_4444);
+      smallSuit[i] = Bitmap.createBitmap(w/4, h, Bitmap.Config.ARGB_4444);
+      revSmallSuit[i] = Bitmap.createBitmap(w/4, h, Bitmap.Config.ARGB_4444);
       canvas = new Canvas(smallSuit[i]);
-      drawable.setBounds(-i*5, 0, -i*5+20, 5);
+      drawable.setBounds(-i*w/4, 0, -i*w/4+w, h);
       drawable.draw(canvas);
       canvas = new Canvas(revSmallSuit[i]);
       canvas.rotate(180);
-      drawable.setBounds(-i*5-5, -5, -i*5+15, 0);
+      drawable.setBounds(-i*w/4-w/4, -h, -i*w/4+(w-w/4), 0);
       drawable.draw(canvas);
     }
 
+    // Load medium black font bitmaps
     drawable = r.getDrawable(R.drawable.medblackfont);
-    fontWidth = 7;
-    fontHeight = 9;
+    w = drawable.getIntrinsicWidth();
+    h = drawable.getIntrinsicHeight();
+    int fontWidth = w/13;   // Same as for red below
+    int fontHeight = h;     // Same as for red below
     for (int i = 0; i < 13; i++) {
       blackFont[i] = Bitmap.createBitmap(fontWidth, fontHeight, Bitmap.Config.ARGB_4444);
       revBlackFont[i] = Bitmap.createBitmap(fontWidth, fontHeight, Bitmap.Config.ARGB_4444);
@@ -310,6 +361,7 @@ public class DrawMaster {
       drawable.draw(canvas);
     }
 
+    // Load medium red font bitmaps
     drawable = r.getDrawable(R.drawable.medredfont);
     for (int i = 0; i < 13; i++) {
       redFont[i] = Bitmap.createBitmap(fontWidth, fontHeight, Bitmap.Config.ARGB_4444);
@@ -323,8 +375,9 @@ public class DrawMaster {
       drawable.draw(canvas);
     }
 
-    int faceWidth = width - 20;
-    int faceHeight = height/2 - 9;
+    int faceWidth = width - suitWidth*2;
+    int faceHeight = height/2 - suitHeight+1;
+    // Load red jack bitmap
     drawable = r.getDrawable(R.drawable.redjack);
     redJack = Bitmap.createBitmap(faceWidth, faceHeight, Bitmap.Config.ARGB_4444);
     redRevJack = Bitmap.createBitmap(faceWidth, faceHeight, Bitmap.Config.ARGB_4444);
@@ -336,6 +389,7 @@ public class DrawMaster {
     drawable.setBounds(-faceWidth, -faceHeight, 0, 0);
     drawable.draw(canvas);
 
+    // Load red queen bitmap
     drawable = r.getDrawable(R.drawable.redqueen);
     redQueen = Bitmap.createBitmap(faceWidth, faceHeight, Bitmap.Config.ARGB_4444);
     redRevQueen = Bitmap.createBitmap(faceWidth, faceHeight, Bitmap.Config.ARGB_4444);
@@ -347,6 +401,7 @@ public class DrawMaster {
     drawable.setBounds(-faceWidth, -faceHeight, 0, 0);
     drawable.draw(canvas);
 
+    // Load red king bitmap
     drawable = r.getDrawable(R.drawable.redking);
     redKing = Bitmap.createBitmap(faceWidth, faceHeight, Bitmap.Config.ARGB_4444);
     redRevKing = Bitmap.createBitmap(faceWidth, faceHeight, Bitmap.Config.ARGB_4444);
@@ -358,6 +413,7 @@ public class DrawMaster {
     drawable.setBounds(-faceWidth, -faceHeight, 0, 0);
     drawable.draw(canvas);
 
+    // Load black jack bitmap
     drawable = r.getDrawable(R.drawable.blackjack);
     blackJack = Bitmap.createBitmap(faceWidth, faceHeight, Bitmap.Config.ARGB_4444);
     blackRevJack = Bitmap.createBitmap(faceWidth, faceHeight, Bitmap.Config.ARGB_4444);
@@ -369,6 +425,7 @@ public class DrawMaster {
     drawable.setBounds(-faceWidth, -faceHeight, 0, 0);
     drawable.draw(canvas);
 
+    // Load black queen bitmap
     drawable = r.getDrawable(R.drawable.blackqueen);
     blackQueen = Bitmap.createBitmap(faceWidth, faceHeight, Bitmap.Config.ARGB_4444);
     blackRevQueen = Bitmap.createBitmap(faceWidth, faceHeight, Bitmap.Config.ARGB_4444);
@@ -380,6 +437,7 @@ public class DrawMaster {
     drawable.setBounds(-faceWidth, -faceHeight, 0, 0);
     drawable.draw(canvas);
 
+    // Load black king bitmap
     drawable = r.getDrawable(R.drawable.blackking);
     blackKing = Bitmap.createBitmap(faceWidth, faceHeight, Bitmap.Config.ARGB_4444);
     blackRevKing = Bitmap.createBitmap(faceWidth, faceHeight, Bitmap.Config.ARGB_4444);
@@ -391,6 +449,7 @@ public class DrawMaster {
     drawable.setBounds(-faceWidth, -faceHeight, 0, 0);
     drawable.draw(canvas);
 
+    // Create deck of cards
     cardBorderPaint.setARGB(255, 0, 0, 0);
     cardFrontPaint.setARGB(255, 255, 255, 255);
     RectF pos = new RectF();
@@ -399,39 +458,60 @@ public class DrawMaster {
         mCardBitmap[suitIdx*13+valueIdx] = Bitmap.createBitmap(
             width, height, Bitmap.Config.ARGB_4444);
         canvas = new Canvas(mCardBitmap[suitIdx*13+valueIdx]);
+        // Draw card outline
+        int cardOutline = 2;
+        int roundEdge = 4;   // Round curve on each card corner
         pos.set(0, 0, width, height);
-        canvas.drawRoundRect(pos, 4, 4, cardBorderPaint);
+        canvas.drawRoundRect(pos, roundEdge, roundEdge, cardBorderPaint);
         pos.set(1, 1, width-1, height-1);
-        canvas.drawRoundRect(pos, 4, 4, cardFrontPaint);
+        canvas.drawRoundRect(pos, roundEdge, roundEdge, cardFrontPaint);
 
         if ((suitIdx & 1) == 1) {
-          canvas.drawBitmap(redFont[valueIdx], 2, 4, mSuitPaint);
-          canvas.drawBitmap(revRedFont[valueIdx], width-fontWidth-2, height-fontHeight-4,
-                            mSuitPaint);
+          // Draw upper-left red card number
+          canvas.drawBitmap(redFont[valueIdx], cardOutline,
+                            cardOutline+2, mSuitPaint);
+          // Draw lower-right red card number
+          canvas.drawBitmap(revRedFont[valueIdx], width-fontWidth-cardOutline,
+                            height-fontHeight-cardOutline-2, mSuitPaint);
         } else {
-          canvas.drawBitmap(blackFont[valueIdx], 2, 4, mSuitPaint);
-          canvas.drawBitmap(revBlackFont[valueIdx], width-fontWidth-2, height-fontHeight-4,
-                            mSuitPaint);
-        }
-        if (fontWidth > 6) {
-          canvas.drawBitmap(smallSuit[suitIdx], 3, 5+fontHeight, mSuitPaint);
-          canvas.drawBitmap(revSmallSuit[suitIdx], width-7, height-11-fontHeight,
-                            mSuitPaint);
-        } else {
-          canvas.drawBitmap(smallSuit[suitIdx], 2, 5+fontHeight, mSuitPaint);
-          canvas.drawBitmap(revSmallSuit[suitIdx], width-6, height-11-fontHeight,
-                            mSuitPaint);
+          // Draw upper-left black card number
+          canvas.drawBitmap(blackFont[valueIdx], cardOutline,
+                            cardOutline+2, mSuitPaint);
+          // Draw lower-right black card number
+          canvas.drawBitmap(revBlackFont[valueIdx], width-fontWidth-cardOutline,
+                            height-fontHeight-cardOutline-2, mSuitPaint);
         }
 
+	// Draw small suit centered below upper-left card number
+        canvas.drawBitmap(smallSuit[suitIdx],
+                          cardOutline+(fontWidth-smallSuitWidth)/2,
+                          cardOutline+2+fontHeight+2,
+                          mSuitPaint);
+	// Draw small suit centered above lower-right card number
+        canvas.drawBitmap(revSmallSuit[suitIdx],
+                          width-cardOutline-fontWidth+(fontWidth-smallSuitWidth)/2,
+                          height-cardOutline-2-fontHeight-2-smallSuitHeight,
+                          mSuitPaint);
+
+        // Add suit to face cards
         if (valueIdx >= 10) {
-          canvas.drawBitmap(suit[suitIdx], 10, 9, mSuitPaint);
-          canvas.drawBitmap(revSuit[suitIdx], width-21, height-20,
+        // Draw suit in upper-left
+          canvas.drawBitmap(suit[suitIdx],
+                            cardOutline+1+fontWidth,
+                            suitHeight,
+                            mSuitPaint);
+        // Draw suit in lower-right
+          canvas.drawBitmap(revSuit[suitIdx],
+                            width-cardOutline-fontWidth-suitWidth,
+                            height-suitHeight-suitHeight,
                             mSuitPaint);
         }
 
-        int[] suitX = {9,width/2-5,width-20};
-        int[] suitY = {7,2*height/5-5,3*height/5-5,height-18};
-        int suitMidY = height/2 - 6;
+        // Add multiple suits positioned geometrically on card
+        int[] suitX = {suitWidth-1, (width-suitWidth)/2, width-suitWidth*2};
+        int[] suitY = {suitHeight-3, 2*height/5-suitHeight/2,
+                       3*height/5-suitHeight/2,height-suitHeight*2+2};
+        int suitMidY = (height-suitHeight)/2-1;
         switch (valueIdx+1) {
           case 1:
             canvas.drawBitmap(suit[suitIdx], suitX[1], suitMidY, mSuitPaint);
@@ -504,31 +584,31 @@ public class DrawMaster {
           case Card.JACK:
             canvas.drawLines(faceBox, cardBorderPaint);
             if ((suitIdx & 1) == 1) {
-              canvas.drawBitmap(redJack, 10, 9, mSuitPaint);
-              canvas.drawBitmap(redRevJack, 10, height-faceHeight-9, mSuitPaint);
+              canvas.drawBitmap(redJack, suitWidth, suitHeight-1, mSuitPaint);
+              canvas.drawBitmap(redRevJack, suitWidth, height-faceHeight-suitHeight+1, mSuitPaint);
             } else {
-              canvas.drawBitmap(blackJack, 10, 9, mSuitPaint);
-              canvas.drawBitmap(blackRevJack, 10, height-faceHeight-9, mSuitPaint);
+              canvas.drawBitmap(blackJack, suitWidth, suitHeight-1, mSuitPaint);
+              canvas.drawBitmap(blackRevJack, suitWidth, height-faceHeight-suitHeight+1, mSuitPaint);
             }
             break;
           case Card.QUEEN:
             canvas.drawLines(faceBox, cardBorderPaint);
             if ((suitIdx & 1) == 1) {
-              canvas.drawBitmap(redQueen, 10, 9, mSuitPaint);
-              canvas.drawBitmap(redRevQueen, 10, height-faceHeight-9, mSuitPaint);
+              canvas.drawBitmap(redQueen, suitWidth, suitHeight-1, mSuitPaint);
+              canvas.drawBitmap(redRevQueen, suitWidth, height-faceHeight-suitHeight+1, mSuitPaint);
             } else {
-              canvas.drawBitmap(blackQueen, 10, 9, mSuitPaint);
-              canvas.drawBitmap(blackRevQueen, 10, height-faceHeight-9, mSuitPaint);
+              canvas.drawBitmap(blackQueen, suitWidth, suitHeight-1, mSuitPaint);
+              canvas.drawBitmap(blackRevQueen, suitWidth, height-faceHeight-suitHeight+1, mSuitPaint);
             }
             break;
           case Card.KING:
             canvas.drawLines(faceBox, cardBorderPaint);
             if ((suitIdx & 1) == 1) {
-              canvas.drawBitmap(redKing, 10, 9, mSuitPaint);
-              canvas.drawBitmap(redRevKing, 10, height-faceHeight-9, mSuitPaint);
+              canvas.drawBitmap(redKing, suitWidth, suitHeight-1, mSuitPaint);
+              canvas.drawBitmap(redRevKing, suitWidth, height-faceHeight-suitHeight+1, mSuitPaint);
             } else {
-              canvas.drawBitmap(blackKing, 10, 9, mSuitPaint);
-              canvas.drawBitmap(blackRevKing, 10, height-faceHeight-9, mSuitPaint);
+              canvas.drawBitmap(blackKing, suitWidth, suitHeight-1, mSuitPaint);
+              canvas.drawBitmap(blackRevKing, suitWidth, height-faceHeight-suitHeight+1, mSuitPaint);
             }
             break;
         }
