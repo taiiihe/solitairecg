@@ -96,12 +96,16 @@ public class SolitaireView extends View {
 
   private int mWinningScore;
 
+  // Temporarily hardcode screen size prior to upcoming hi-res support
+  private int mScreenWidth = 480;
+  private int mScreenHeight = 295;
+
   public SolitaireView(Context context, AttributeSet attrs) {
     super(context, attrs);
     setFocusable(true);
     setFocusableInTouchMode(true);
 
-    mDrawMaster = new DrawMaster(context);
+    mDrawMaster = new DrawMaster(context, mScreenWidth, mScreenHeight);
     mMoveCard = new MoveCard();
     mSelectCard = new SelectCard();
     mViewMode = MODE_NORMAL;
@@ -154,7 +158,7 @@ public class SolitaireView extends View {
     if (oldGameType == mRules.GetGameTypeString()) {
       mRules.SetCarryOverScore(oldScore);
     }
-    Card.SetSize(gameType);
+    Card.SetSize(gameType, mScreenWidth);
     mDrawMaster.DrawCards(GetSettings().getBoolean("DisplayBigCards", false));
     mCardAnchor = mRules.GetAnchorArray();
     if (mDrawMaster.GetWidth() > 1) {
@@ -391,7 +395,7 @@ public class SolitaireView extends View {
 
       mGameStarted = !mMoveHistory.isEmpty();
       mRules = Rules.CreateRules(type, map, this, mMoveHistory, mAnimateCard);
-      Card.SetSize(type);
+      Card.SetSize(type, mScreenWidth);
       SetDisplayTime(GetSettings().getBoolean("DisplayTime", true));
       mCardAnchor = mRules.GetAnchorArray();
       if (mDrawMaster.GetWidth() > 1) {

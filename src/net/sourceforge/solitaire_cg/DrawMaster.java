@@ -56,12 +56,11 @@ public class DrawMaster {
   private Bitmap mBoardBitmap;
   private Canvas mBoardCanvas;
 
-  public DrawMaster(Context context) {
+  public DrawMaster(Context context, int width, int height) {
 
     mContext = context;
-    // Default to this for simplicity
-    mScreenWidth = 480;
-    mScreenHeight = 295;
+    mScreenWidth = width;
+    mScreenHeight = height;
 
     // Background
     mBGPaint = new Paint();

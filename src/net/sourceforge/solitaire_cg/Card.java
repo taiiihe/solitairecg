@@ -32,24 +32,28 @@ class Card {
     "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"
   };
 
-  public static int WIDTH = 45;
-  public static int HEIGHT = 64;
+  public static int WIDTH = 45;   // Card width
+  public static int HEIGHT = 64;  // Card height
 
   private int mValue;
   private int mSuit;
   private float mX;
   private float mY;
 
-  public static void SetSize(int type) {
+  public static void SetSize(int type, int screenWidth) {
     if (type == Rules.SOLITAIRE) {
-      WIDTH = 51;
-      HEIGHT = 72;
+      // 7 anchor columns
+      WIDTH = screenWidth*100 / (7*100+241); // 2.41 is card spacing factor
+      // Use integer math for height:  1.425 = 57/40, even number = /2*2
+      HEIGHT = WIDTH * 57/40/2*2;            // 1.425 card h/w ratio -> even #
     } else if (type == Rules.FREECELL) {
-      WIDTH = 49;
-      HEIGHT = 68;
+      // 8 anchor columns
+      WIDTH = screenWidth*100 / (8*100+179); // 1.79 is card spacing factor
+      HEIGHT = WIDTH * 57/40/2*2;
     } else {
-      WIDTH = 45;
-      HEIGHT = 64;
+      // 10 anchor columns
+      WIDTH = screenWidth*100 / (10*100+66); // 0.66 is card spacing factor
+      HEIGHT = WIDTH * 57/40/2*2;
     }
   }
 
