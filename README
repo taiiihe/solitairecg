@@ -28,13 +28,6 @@ few hardware buttons.  Original author is still Ken Magic.
 SolitaireCG is available under Apache License 2.0, see COPYING.
 See the source code for copyright owners.
 
-SolitaireCG requires the following permissions:
-  Device ID & call information
-    - read phone status and identity
-  Photo/Media/Files
-    - modify or delete the contents of your SD card
-    - read the contents of your SD card
-
 More information at respective web sites:
 
 SolitaireCG:  http://solitairecg.sourceforge.net/
@@ -43,6 +36,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Set minimum to Android 1.6 to support multiple screen sizes and densities
   * Remove hard code card dimensions
   * Remove hard code placement of bitmaps when building card image
 
