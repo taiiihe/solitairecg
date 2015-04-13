@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Window;
 import android.view.Menu;
@@ -52,7 +53,7 @@ public class SolitaireCG extends Activity {
   private SharedPreferences mSettings;
 
   private boolean mDoSave;
-  
+
   // Shared preferences are where the various user settings are stored.
   public SharedPreferences GetSettings() { return mSettings; }
 
@@ -80,6 +81,8 @@ public class SolitaireCG extends Activity {
   @Override
   public void onStart() {
     super.onStart();
+    mSolitaireView.onStart();
+
     if (mSettings.getBoolean("SolitaireSaveValid", false)) {
       SharedPreferences.Editor editor = GetSettings().edit();
       editor.putBoolean("SolitaireSaveValid", false);

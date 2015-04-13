@@ -25,11 +25,13 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.MotionEvent;
 import android.view.Gravity;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -90,22 +92,29 @@ public class SolitaireView extends View {
   private long mStartTime;
   private boolean mTimePaused;
 
+  private int mCurrentGameType;
   private boolean mGameStarted;
   private boolean mPaused;
   private boolean mDisplayTime;
 
   private int mWinningScore;
 
-  // Temporarily hardcode screen size prior to upcoming hi-res support
-  private int mScreenWidth = 480;
-  private int mScreenHeight = 295;
-
   public SolitaireView(Context context, AttributeSet attrs) {
     super(context, attrs);
     setFocusable(true);
     setFocusableInTouchMode(true);
 
-    mDrawMaster = new DrawMaster(context, mScreenWidth, mScreenHeight);
+    // Get display properties
+    DisplayMetrics metrics = new DisplayMetrics();
+    WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+    wm.getDefaultDisplay().getMetrics(metrics);
+    int dpi = metrics.densityDpi;
+    // Some devices report incorrect DPI so fall back to default
+    if (dpi < 60)
+      dpi = 160;
+
+    mDrawMaster = new DrawMaster(context, metrics.widthPixels,
+                                 metrics.heightPixels, dpi);
     mMoveCard = new MoveCard();
     mSelectCard = new SelectCard();
     mViewMode = MODE_NORMAL;
@@ -131,6 +140,7 @@ public class SolitaireView extends View {
   public void InitGame(int gameType) {
     int oldScore = 0;
     String oldGameType = "None";
+    mCurrentGameType = gameType;
 
     // We really really want focus :)
     setFocusable(true);
@@ -149,6 +159,7 @@ public class SolitaireView extends View {
         if (oldScore > GetSettings().getInt(mRules.GetGameTypeString() + "Score", -52)) {
           editor.putInt(mRules.GetGameTypeString() + "Score", oldScore);
         }
+
       }
     }
     ChangeViewMode(MODE_NORMAL);
@@ -158,7 +169,7 @@ public class SolitaireView extends View {
     if (oldGameType == mRules.GetGameTypeString()) {
       mRules.SetCarryOverScore(oldScore);
     }
-    Card.SetSize(gameType, mScreenWidth);
+    Card.SetSize(gameType, mDrawMaster.GetWidth());
     mDrawMaster.DrawCards(GetSettings().getBoolean("DisplayBigCards", false));
     mCardAnchor = mRules.GetAnchorArray();
     if (mDrawMaster.GetWidth() > 1) {
@@ -395,7 +406,7 @@ public class SolitaireView extends View {
 
       mGameStarted = !mMoveHistory.isEmpty();
       mRules = Rules.CreateRules(type, map, this, mMoveHistory, mAnimateCard);
-      Card.SetSize(type, mScreenWidth);
+      Card.SetSize(type, mDrawMaster.GetWidth());
       SetDisplayTime(GetSettings().getBoolean("DisplayTime", true));
       mCardAnchor = mRules.GetAnchorArray();
       if (mDrawMaster.GetWidth() > 1) {
@@ -426,6 +437,16 @@ public class SolitaireView extends View {
     mRefreshThread.start();
     mRules.SetIgnoreEvents(false);
     mPaused = false;
+  }
+
+  public void onStart() {
+    // Get display properties
+    DisplayMetrics metrics = new DisplayMetrics();
+    WindowManager wm = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
+    wm.getDefaultDisplay().getMetrics(metrics);
+    // Restore card size
+    Card.SetSize(GetSettings().getInt("LastType", Rules.SOLITAIRE),
+                 metrics.widthPixels);
   }
 
   public void Refresh() {

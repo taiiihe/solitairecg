@@ -36,6 +36,7 @@ public class DrawMaster {
   // Background
   private int mScreenWidth;
   private int mScreenHeight;
+  private int mDpi;
   private Paint mBGPaint;
 
   // Card stuff
@@ -47,7 +48,9 @@ public class DrawMaster {
   private Paint mDoneEmptyAnchorPaint;
   private Paint mShadePaint;
   private Paint mLightShadePaint;
-  
+
+  private int roundEdge;   // Round curve on each card corner
+
   private Paint mTimePaint;
   private int mLastSeconds;
   private String mTimeString;
@@ -56,11 +59,13 @@ public class DrawMaster {
   private Bitmap mBoardBitmap;
   private Canvas mBoardCanvas;
 
-  public DrawMaster(Context context, int width, int height) {
+
+  public DrawMaster(Context context, int width, int height, int dpi) {
 
     mContext = context;
     mScreenWidth = width;
     mScreenHeight = height;
+    mDpi = dpi;
 
     // Background
     mBGPaint = new Paint();
@@ -77,9 +82,10 @@ public class DrawMaster {
     mEmptyAnchorPaint.setARGB(255, 0, 64, 0);
     mDoneEmptyAnchorPaint = new Paint();
     mDoneEmptyAnchorPaint.setARGB(128, 255, 0, 0);
+    roundEdge = 4 * mDpi/160;
 
     mTimePaint = new Paint();
-    mTimePaint.setTextSize(18);
+    mTimePaint.setTextSize(18 * mDpi/160);
     mTimePaint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD));
     mTimePaint.setTextAlign(Paint.Align.RIGHT);
     mTimePaint.setAntiAlias(true);
@@ -111,9 +117,9 @@ public class DrawMaster {
   public void DrawEmptyAnchor(Canvas canvas, float x, float y, boolean done) {
     RectF pos = new RectF(x, y, x + Card.WIDTH, y + Card.HEIGHT);
     if (!done) {
-      canvas.drawRoundRect(pos, 4, 4, mEmptyAnchorPaint);
+      canvas.drawRoundRect(pos, roundEdge, roundEdge, mEmptyAnchorPaint);
     } else {
-      canvas.drawRoundRect(pos, 4, 4, mDoneEmptyAnchorPaint);
+      canvas.drawRoundRect(pos, roundEdge, roundEdge, mDoneEmptyAnchorPaint);
     }
   }
 
@@ -228,7 +234,6 @@ public class DrawMaster {
         canvas = new Canvas(mCardBitmap[suitIdx*13+valueIdx]);
         // Draw card outline
         int cardOutline = 2;
-        int roundEdge = 4;   // Round curve on each card corner
         pos.set(0, 0, width, height);
         canvas.drawRoundRect(pos, roundEdge, roundEdge, cardBorderPaint);
         pos.set(1, 1, width-1, height-1);
@@ -236,16 +241,16 @@ public class DrawMaster {
 
 	// Draw font in upper-left
         if ((suitIdx & 1) == 1) {
-          canvas.drawBitmap(redFont[valueIdx], cardOutline+1, cardOutline+2,
+          canvas.drawBitmap(redFont[valueIdx], roundEdge, roundEdge,
                             mSuitPaint);
         } else {
-          canvas.drawBitmap(blackFont[valueIdx], cardOutline+1, cardOutline+2,
+          canvas.drawBitmap(blackFont[valueIdx], roundEdge, roundEdge,
                             mSuitPaint);
         }
 
 	// Draw suit in upper-right
-        canvas.drawBitmap(suit[suitIdx], width-suitWidth-cardOutline-2,
-                          cardOutline+2, mSuitPaint);
+        canvas.drawBitmap(suit[suitIdx], width-suitWidth-roundEdge,
+                          roundEdge, mSuitPaint);
 	// Draw big suit in center of card
         canvas.drawBitmap(bigSuit[suitIdx], (width-bigSuitWidth)/2+1,
                           (height-bigSuitHeight)/2+3, mSuitPaint);
@@ -459,7 +464,6 @@ public class DrawMaster {
         canvas = new Canvas(mCardBitmap[suitIdx*13+valueIdx]);
         // Draw card outline
         int cardOutline = 2;
-        int roundEdge = 4;   // Round curve on each card corner
         pos.set(0, 0, width, height);
         canvas.drawRoundRect(pos, roundEdge, roundEdge, cardBorderPaint);
         pos.set(1, 1, width-1, height-1);
@@ -467,41 +471,41 @@ public class DrawMaster {
 
         if ((suitIdx & 1) == 1) {
           // Draw upper-left red card number
-          canvas.drawBitmap(redFont[valueIdx], cardOutline,
-                            cardOutline+2, mSuitPaint);
+          canvas.drawBitmap(redFont[valueIdx], roundEdge/2,
+                            roundEdge, mSuitPaint);
           // Draw lower-right red card number
-          canvas.drawBitmap(revRedFont[valueIdx], width-fontWidth-cardOutline,
-                            height-fontHeight-cardOutline-2, mSuitPaint);
+          canvas.drawBitmap(revRedFont[valueIdx], width-fontWidth-roundEdge/2,
+                            height-fontHeight-roundEdge, mSuitPaint);
         } else {
           // Draw upper-left black card number
-          canvas.drawBitmap(blackFont[valueIdx], cardOutline,
-                            cardOutline+2, mSuitPaint);
+          canvas.drawBitmap(blackFont[valueIdx], roundEdge/2,
+                            roundEdge, mSuitPaint);
           // Draw lower-right black card number
-          canvas.drawBitmap(revBlackFont[valueIdx], width-fontWidth-cardOutline,
-                            height-fontHeight-cardOutline-2, mSuitPaint);
+          canvas.drawBitmap(revBlackFont[valueIdx], width-fontWidth-roundEdge/2,
+                            height-fontHeight-roundEdge, mSuitPaint);
         }
 
 	// Draw small suit centered below upper-left card number
         canvas.drawBitmap(smallSuit[suitIdx],
-                          cardOutline+(fontWidth-smallSuitWidth)/2,
-                          cardOutline+2+fontHeight+2,
+                          roundEdge/2+(fontWidth-smallSuitWidth)/2,
+                          roundEdge/2+fontHeight+roundEdge,
                           mSuitPaint);
 	// Draw small suit centered above lower-right card number
         canvas.drawBitmap(revSmallSuit[suitIdx],
-                          width-cardOutline-fontWidth+(fontWidth-smallSuitWidth)/2,
-                          height-cardOutline-2-fontHeight-2-smallSuitHeight,
+                          width-roundEdge/2-fontWidth+(fontWidth-smallSuitWidth)/2,
+                          height-roundEdge/2-fontHeight-roundEdge-smallSuitHeight,
                           mSuitPaint);
 
         // Add suit to face cards
         if (valueIdx >= 10) {
         // Draw suit in upper-left
           canvas.drawBitmap(suit[suitIdx],
-                            cardOutline+1+fontWidth,
+                            roundEdge/2+fontWidth,
                             suitHeight,
                             mSuitPaint);
         // Draw suit in lower-right
           canvas.drawBitmap(revSuit[suitIdx],
-                            width-cardOutline-fontWidth-suitWidth,
+                            width-roundEdge/2-fontWidth-suitWidth,
                             height-suitHeight-suitHeight,
                             mSuitPaint);
         }
@@ -635,13 +639,13 @@ public class DrawMaster {
 
   public void DrawRulesString(Canvas canvas, String score) {
     mTimePaint.setARGB(255, 20, 20, 20);
-    canvas.drawText(score, mScreenWidth-9, mScreenHeight-29, mTimePaint);
+    canvas.drawText(score, mScreenWidth-9, mScreenHeight-(18*mDpi/160)-9, mTimePaint);
     if (score.charAt(0) == '-') {
       mTimePaint.setARGB(255, 255, 0, 0);
     } else {
       mTimePaint.setARGB(255, 0, 0, 0);
     }
-    canvas.drawText(score, mScreenWidth-10, mScreenHeight-30, mTimePaint);
+    canvas.drawText(score, mScreenWidth-10, mScreenHeight-(18*mDpi/160)-10, mTimePaint);
 
   }
 }

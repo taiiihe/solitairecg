@@ -36,6 +36,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Remove hard code screen size
   * Set minimum to Android 1.6 to support multiple screen sizes and densities
   * Remove hard code card dimensions
   * Remove hard code placement of bitmaps when building card image

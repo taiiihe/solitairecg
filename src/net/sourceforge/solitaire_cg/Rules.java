@@ -571,8 +571,8 @@ class Spider extends Rules {
     }
     // These two are offscreen as the user doesn't need to see them, but they
     // are needed to hold onto out of play cards.
-    mCardAnchor[10].SetPosition(-50, 1);
-    mCardAnchor[11].SetPosition(-50, 1);
+    mCardAnchor[10].SetPosition(-Card.WIDTH * 2, 1);
+    mCardAnchor[11].SetPosition(-Card.WIDTH * 2, 1);
   }
 
   @Override
