@@ -29,7 +29,6 @@ public class Replay implements Runnable {
 
   private Card[] mSinkCard;
   private int mSinkCount;
-  private int mEventCount;
   private CardAnchor mSinkAnchor;
   private CardAnchor mSinkFrom;
   private boolean mSinkUnhide;
@@ -74,7 +73,6 @@ public class Replay implements Runnable {
 
     if (move.GetToBegin() == move.GetToEnd()) {
       mSinkCount = move.GetCount();
-      mEventCount = 0;
       mSinkAnchor = mCardAnchor[move.GetToBegin()];
       mSinkUnhide = move.GetUnhide();
       mSinkFrom = mCardAnchor[move.GetFrom()];

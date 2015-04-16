@@ -20,8 +20,6 @@ package net.sourceforge.solitaire_cg;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 
-import android.util.Log;
-
 
 class MoveCard {
 

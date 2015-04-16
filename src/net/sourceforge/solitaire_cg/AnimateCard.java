@@ -18,12 +18,6 @@
 package net.sourceforge.solitaire_cg;
 
 import android.graphics.Canvas;
-import android.util.Log;
-import java.lang.InterruptedException;
-import java.lang.Runnable;
-import java.lang.Thread;
-import java.lang.Math;
-import java.util.concurrent.Semaphore;
 
 public class AnimateCard {
 

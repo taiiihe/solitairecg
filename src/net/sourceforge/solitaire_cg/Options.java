@@ -17,16 +17,12 @@
 */
 package net.sourceforge.solitaire_cg;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
-import android.view.WindowManager;
 
 
 public class Options {

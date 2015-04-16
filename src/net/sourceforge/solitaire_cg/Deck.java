@@ -24,7 +24,6 @@ public class Deck {
 
   private Card[] mCard;
   private int mCardCount;
-  private int mTotalCards;
 
   public Deck(int decks) {
     Init(decks, 4);
@@ -41,7 +40,6 @@ public class Deck {
 
   private void Init(int decks, int suits) {
     mCardCount = decks * 13 * suits;
-    mTotalCards = mCardCount;
     mCard = new Card[mCardCount];
     for (int deck = 0; deck < decks; deck++) {
       for (int suit = Card.CLUBS; suit < suits; suit++) {

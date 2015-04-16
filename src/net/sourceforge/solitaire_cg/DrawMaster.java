@@ -25,8 +25,6 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
-import java.text.DecimalFormat;
 
 
 public class DrawMaster {

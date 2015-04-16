@@ -18,7 +18,6 @@
 package net.sourceforge.solitaire_cg;
 
 import android.graphics.Canvas;
-import android.util.Log;
 
 
 class CardAnchor {

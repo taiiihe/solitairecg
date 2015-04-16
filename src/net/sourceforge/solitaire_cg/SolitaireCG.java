@@ -22,12 +22,11 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Window;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 // Base activity class.

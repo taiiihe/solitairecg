@@ -28,16 +28,12 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.MotionEvent;
 import android.view.Gravity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.lang.Math;
-import java.lang.Runnable;
-import java.util.Stack;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,6 +42,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.util.Stack;
 
 // The brains of the operation
 public class SolitaireView extends View {

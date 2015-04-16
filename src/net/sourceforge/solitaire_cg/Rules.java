@@ -18,10 +18,6 @@
 package net.sourceforge.solitaire_cg;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.graphics.Canvas;
-import java.lang.InterruptedException;
-import java.lang.Thread;
 import java.util.Stack;
 
 
