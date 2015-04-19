@@ -34,13 +34,15 @@ class Card {
 
   public static int WIDTH = 45;   // Card width
   public static int HEIGHT = 64;  // Card height
+  public static int SMALL_SPACING = 7;  // Top shown portion of card on stack
+  public static int HIDDEN_SPACING = 3; // Tip shown of hidden card on stack
 
   private int mValue;
   private int mSuit;
   private float mX;
   private float mY;
 
-  public static void SetSize(int type, int screenWidth) {
+  public static void SetSize(int type, int screenWidth, int dpi) {
     if (type == Rules.SOLITAIRE) {
       // 7 anchor columns
       WIDTH = screenWidth*100 / (7*100+241); // 2.41 is card spacing factor
@@ -55,6 +57,9 @@ class Card {
       WIDTH = screenWidth*100 / (10*100+66); // 0.66 is card spacing factor
       HEIGHT = WIDTH * 57/40/2*2;
     }
+
+    SMALL_SPACING = 7 * dpi/160;
+    HIDDEN_SPACING = 3 * dpi/160;
   }
 
   public Card(int value, int suit) {

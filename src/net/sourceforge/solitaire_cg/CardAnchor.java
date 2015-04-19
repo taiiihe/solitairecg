@@ -326,8 +326,6 @@ class DealTo extends CardAnchor {
 
 // Abstract stack anchor
 class SeqStack extends CardAnchor {
-  protected static final int SMALL_SPACING = 7;
-  protected static final int HIDDEN_SPACING = 3;
 
   protected int mSpacing;
   protected boolean mHideHidden;
@@ -358,10 +356,10 @@ class SeqStack extends CardAnchor {
       if (mHideHidden) {
         mCard[idx].SetPosition(mX, mY);
       } else {
-        mCard[idx].SetPosition(mX, mY + HIDDEN_SPACING * idx);
+        mCard[idx].SetPosition(mX, mY + Card.HIDDEN_SPACING * idx);
       }
     } else {
-      int startY = mHideHidden ? HIDDEN_SPACING : mHiddenCount * HIDDEN_SPACING;
+      int startY = mHideHidden ? Card.HIDDEN_SPACING : mHiddenCount * Card.HIDDEN_SPACING;
       int y = (int)mY + startY + (idx - mHiddenCount) * mSpacing;
       mCard[idx].SetPosition(mX, y);
     }
@@ -426,12 +424,12 @@ class SeqStack extends CardAnchor {
     int max = mMaxHeight;
     int hidden = mHiddenCount;
     int showing = mCardCount - hidden;
-    int spaceLeft = max - (hidden * HIDDEN_SPACING) - Card.HEIGHT;
+    int spaceLeft = max - (hidden * Card.HIDDEN_SPACING) - Card.HEIGHT;
     int spacing = spaceLeft / (showing - 1);
 
-    if (spacing < SMALL_SPACING && hidden > 1) {
+    if (spacing < Card.SMALL_SPACING && hidden > 1) {
       mHideHidden = true;
-      spaceLeft = max - HIDDEN_SPACING - Card.HEIGHT;
+      spaceLeft = max - Card.HIDDEN_SPACING - Card.HEIGHT;
       spacing = spaceLeft / (showing - 1);
     } else {
       mHideHidden = false;
@@ -784,13 +782,10 @@ class GenericAnchor extends CardAnchor {
   //Hack to fix Spider Dealing
   public static final int DEALHACK=1;
     
-  protected static final int SMALL_SPACING = 7;
-  protected static final int HIDDEN_SPACING = 3;
-
   protected int mSpacing;
   protected boolean mHideHidden;
   protected int mMaxHeight;
-  
+
   public GenericAnchor(){
     super();
     SetStartSeq(GenericAnchor.SEQ_ANY);
@@ -818,10 +813,10 @@ class GenericAnchor extends CardAnchor {
       if (mHideHidden) {
         mCard[idx].SetPosition(mX, mY);
       } else {
-        mCard[idx].SetPosition(mX, mY + HIDDEN_SPACING * idx);
+        mCard[idx].SetPosition(mX, mY + Card.HIDDEN_SPACING * idx);
       }
     } else {
-      int startY = mHideHidden ? HIDDEN_SPACING : mHiddenCount * HIDDEN_SPACING;
+      int startY = mHideHidden ? Card.HIDDEN_SPACING : mHiddenCount * Card.HIDDEN_SPACING;
       int y = (int)mY + startY + (idx - mHiddenCount) * mSpacing;
       mCard[idx].SetPosition(mX, y);
     }
@@ -1123,12 +1118,12 @@ class GenericAnchor extends CardAnchor {
     int max = mMaxHeight;
     int hidden = mHiddenCount;
     int showing = mCardCount - hidden;
-    int spaceLeft = max - (hidden * HIDDEN_SPACING) - Card.HEIGHT;
+    int spaceLeft = max - (hidden * Card.HIDDEN_SPACING) - Card.HEIGHT;
     int spacing = spaceLeft / (showing - 1);
 
-    if (spacing < SMALL_SPACING && hidden > 1) {
+    if (spacing < Card.SMALL_SPACING && hidden > 1) {
       mHideHidden = true;
-      spaceLeft = max - HIDDEN_SPACING - Card.HEIGHT;
+      spaceLeft = max - Card.HIDDEN_SPACING - Card.HEIGHT;
       spacing = spaceLeft / (showing - 1);
     } else {
       mHideHidden = false;

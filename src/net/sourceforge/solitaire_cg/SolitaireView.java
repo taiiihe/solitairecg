@@ -166,7 +166,7 @@ public class SolitaireView extends View {
     if (oldGameType == mRules.GetGameTypeString()) {
       mRules.SetCarryOverScore(oldScore);
     }
-    Card.SetSize(gameType, mDrawMaster.GetWidth());
+    Card.SetSize(gameType, mDrawMaster.GetWidth(), mDrawMaster.GetDpi());
     mDrawMaster.DrawCards(GetSettings().getBoolean("DisplayBigCards", false));
     mCardAnchor = mRules.GetAnchorArray();
     if (mDrawMaster.GetWidth() > 1) {
@@ -403,7 +403,7 @@ public class SolitaireView extends View {
 
       mGameStarted = !mMoveHistory.isEmpty();
       mRules = Rules.CreateRules(type, map, this, mMoveHistory, mAnimateCard);
-      Card.SetSize(type, mDrawMaster.GetWidth());
+      Card.SetSize(type, mDrawMaster.GetWidth(), mDrawMaster.GetDpi());
       SetDisplayTime(GetSettings().getBoolean("DisplayTime", true));
       mCardAnchor = mRules.GetAnchorArray();
       if (mDrawMaster.GetWidth() > 1) {
@@ -441,9 +441,13 @@ public class SolitaireView extends View {
     DisplayMetrics metrics = new DisplayMetrics();
     WindowManager wm = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
     wm.getDefaultDisplay().getMetrics(metrics);
+    int dpi = metrics.densityDpi;
+    // Some devices report incorrect DPI so fall back to default
+    if (dpi < 60)
+      dpi = 160;
     // Restore card size
     Card.SetSize(GetSettings().getInt("LastType", Rules.SOLITAIRE),
-                 metrics.widthPixels);
+                 metrics.widthPixels, dpi);
   }
 
   public void Refresh() {
