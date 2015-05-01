@@ -36,6 +36,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Migrate drawable to drawable-nodpi and add xml links to images
   * Base card build and position math on dpi
   * Cleanup unused code, resources and imports
   * Remove hard code screen size
