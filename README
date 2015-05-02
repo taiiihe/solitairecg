@@ -36,6 +36,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Add hdpi images for all suits and all fonts for cards
   * Add xhdpi high resolution graphic images for cards
   * Add ldpi big fonts, big suits and suits images
   * Migrate drawable to drawable-nodpi and add xml links to images
