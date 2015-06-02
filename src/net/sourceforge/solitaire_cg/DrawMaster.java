@@ -93,7 +93,6 @@ public class DrawMaster {
     mLastSeconds = -1;
 
     mCardBitmap = new Bitmap[52];
-    DrawCards(false);
     mBoardBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.RGB_565);
     mBoardCanvas = new Canvas(mBoardBitmap);
   }
