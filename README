@@ -36,6 +36,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Add xlarge screen hdpi graphics -> xxhdpi graphics
   * Add xlarge screen ldpi graphics -> hdpi graphics
   * Add xlarge screen (mdpi) graphics -> xhdpi graphics
   * Add large screen xhdpi graphics -> xxhdpi graphics
