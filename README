@@ -36,6 +36,8 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Use only png (no xml links) for launcher icons
+
 ### Release v2.0 on Jul 6, 2015
   * Add xlarge screen hdpi graphics -> xxhdpi graphics
   * Add xlarge screen ldpi graphics -> hdpi graphics
