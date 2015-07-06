@@ -23,7 +23,7 @@ Added by Curtis Gedak
 SolitaireCG is Ken Magic's "Solitaire" adapted to work on devices with
 few hardware buttons.  Original author is still Ken Magic.
 
-     S o l i t a i r e C G   v1.15.2
+     S o l i t a i r e C G   v2.0
 
 SolitaireCG is available under Apache License 2.0, see COPYING.
 See the source code for copyright owners.
@@ -36,6 +36,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+### Release v2.0 on Jul 6, 2015
   * Add xlarge screen hdpi graphics -> xxhdpi graphics
   * Add xlarge screen ldpi graphics -> hdpi graphics
   * Add xlarge screen (mdpi) graphics -> xhdpi graphics
