@@ -63,6 +63,7 @@ public class SolitaireView extends View {
   private CharSequence mWinText;
 
   private CardAnchor[] mCardAnchor;
+  private DisplayMetrics mMetrics;
   private DrawMaster mDrawMaster;
   private Rules mRules;
   private TextView mTextView;
@@ -100,18 +101,19 @@ public class SolitaireView extends View {
     super(context, attrs);
     setFocusable(true);
     setFocusableInTouchMode(true);
+    setLongClickable(true);
 
     // Get display properties
-    DisplayMetrics metrics = new DisplayMetrics();
+    mMetrics = new DisplayMetrics();
     WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-    wm.getDefaultDisplay().getMetrics(metrics);
-    int dpi = metrics.densityDpi;
+    wm.getDefaultDisplay().getMetrics(mMetrics);
+    int dpi = mMetrics.densityDpi;
     // Some devices report incorrect DPI so fall back to default
     if (dpi < 60)
       dpi = 160;
 
-    mDrawMaster = new DrawMaster(context, metrics.widthPixels,
-                                 metrics.heightPixels, dpi);
+    mDrawMaster = new DrawMaster(context, mMetrics.widthPixels,
+                                 mMetrics.heightPixels, dpi);
     mMoveCard = new MoveCard();
     mSelectCard = new SelectCard();
     mViewMode = MODE_NORMAL;
@@ -535,6 +537,7 @@ public class SolitaireView extends View {
       DrawBoard();
     }
     mDrawMaster.DrawLastBoard(canvas);
+    mDrawMaster.DrawAltMenuString(canvas, "^");
     if (mDisplayTime) {
       mDrawMaster.DrawTime(canvas, mElapsed);
     }
@@ -629,6 +632,23 @@ public class SolitaireView extends View {
     }
 
     mRules.HandleEvents();
+
+    // Allow long press if press AND NOT move
+    //   and near bottom center of screen
+    //   and in both game and win mode.
+    if ( !mHasMoved &&
+         ( (mDownPoint.x > (mMetrics.widthPixels*3/7)) &&
+           (mDownPoint.x < (mMetrics.widthPixels*4/7))
+         ) &&
+         (mDownPoint.y > (mMetrics.heightPixels*5/7)) &&
+         ( mViewMode==MODE_NORMAL ||
+           mViewMode==MODE_WIN || mViewMode==MODE_WIN_STOP
+         )
+       )
+    {
+      return super.onTouchEvent(event);
+    }
+
     return ret;
   }
 
@@ -870,7 +890,6 @@ public class SolitaireView extends View {
   // Simple function to check for a consistent state in Solitaire.
   private void SanityCheck() {
     int cardCount;
-    int diffCardCount;
     int matchCount;
     String type = mRules.GetGameTypeString();
     if (type == "Spider1Suit") {

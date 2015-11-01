@@ -22,7 +22,11 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
@@ -73,6 +77,7 @@ public class SolitaireCG extends Activity {
     mSolitaireView.SetTextView((TextView) findViewById(R.id.text));
 
     //StartSolitaire(savedInstanceState);
+    registerForContextMenu(mSolitaireView);
   }
 
   // Entry point for starting the game.
@@ -172,6 +177,60 @@ public class SolitaireCG extends Activity {
         mDoSave = false;
         finish();
         break;
+    }
+
+    return false;
+  }
+
+  @Override
+  public void onCreateContextMenu(ContextMenu menu, View v,
+                                  ContextMenuInfo menuInfo) {
+    super.onCreateContextMenu(menu, v, menuInfo);
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.context, menu);
+  }
+
+  // Alternate Menu
+  // Invoked with long press and needed on some devices where Android
+  // options menu is not accessible or available.
+  @Override
+  public boolean onContextItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.context_solitaire:
+        mSolitaireView.InitGame(Rules.SOLITAIRE);
+        break;
+      case R.id.context_spider:
+        mSolitaireView.InitGame(Rules.SPIDER);
+        break;
+      case R.id.context_freecell:
+        mSolitaireView.InitGame(Rules.FREECELL);
+        break;
+      case R.id.context_fortythieves:
+        mSolitaireView.InitGame(Rules.FORTYTHIEVES);
+        break;
+      case R.id.context_restart:
+        mSolitaireView.RestartGame();
+        break;
+      case R.id.context_deal:
+        mSolitaireView.Deal();
+        return true;
+      case R.id.context_options:
+        DisplayOptions();
+        break;
+      case R.id.context_stats:
+        DisplayStats();
+        break;
+      case R.id.context_help:
+        mSolitaireView.DisplayHelp();
+        break;
+      case R.id.context_readme:
+        DisplayReadme();
+        break;
+      case R.id.context_copying:
+        DisplayCopying();
+        break;
+      default:
+        return super.onContextItemSelected(item);
     }
 
     return false;

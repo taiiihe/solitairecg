@@ -51,6 +51,7 @@ public class DrawMaster {
   private int cardOutline;  // Card outline border thickness in pixels
   private int offset;       // Whitespace between card border and font
   private Paint mTimePaint;
+  private Paint mMenuPaint;
   private int mLastSeconds;
   private String mTimeString;
   private Paint mScorePaint;
@@ -90,6 +91,11 @@ public class DrawMaster {
     mTimePaint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD));
     mTimePaint.setTextAlign(Paint.Align.RIGHT);
     mTimePaint.setAntiAlias(true);
+    mMenuPaint = new Paint();
+    mMenuPaint.setTextSize(18 * mDpi/160);
+    mMenuPaint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD));
+    mMenuPaint.setTextAlign(Paint.Align.CENTER);
+    mMenuPaint.setAntiAlias(true);
     mLastSeconds = -1;
 
     mCardBitmap = new Bitmap[52];
@@ -638,6 +644,13 @@ public class DrawMaster {
     canvas.drawText(mTimeString, mScreenWidth-9, mScreenHeight-9, mTimePaint);
     mTimePaint.setARGB(255, 0, 0, 0);
     canvas.drawText(mTimeString, mScreenWidth-10, mScreenHeight-10, mTimePaint);
+  }
+
+  public void DrawAltMenuString(Canvas canvas, String text) {
+    mMenuPaint.setARGB(255, 20, 20, 20);
+    canvas.drawText(text, canvas.getWidth()/2, mScreenHeight-9, mMenuPaint);
+    mMenuPaint.setARGB(255, 0, 0, 0);
+    canvas.drawText(text, canvas.getWidth()/2-1, mScreenHeight-10, mMenuPaint);
   }
 
   public void DrawRulesString(Canvas canvas, String score) {
