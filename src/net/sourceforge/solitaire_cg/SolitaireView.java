@@ -123,7 +123,7 @@ public class SolitaireView extends View {
     mRefreshThread = new Thread(mRefreshHandler);
     mMoveHistory = new Stack<Move>();
     mUndoStorage = new Card[CardAnchor.MAX_CARDS];
-    mAnimateCard = new AnimateCard(this);
+    mAnimateCard = new AnimateCard(this, mMetrics.widthPixels);
     mSpeed = new Speed();
     mReplay = new Replay(this, mAnimateCard);
 
