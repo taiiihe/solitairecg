@@ -43,20 +43,37 @@ class Card {
   private float mY;
 
   public static void SetSize(int type, int screenWidth, int dpi) {
+    int mdpi_card_width = 45;
     if (type == Rules.SOLITAIRE) {
       // 7 anchor columns
-      WIDTH = screenWidth*100 / (7*100+241); // 2.41 is card spacing factor
-      // Use integer math for height:  1.425 = 57/40, even number = /2*2
-      HEIGHT = WIDTH * 57/40/2*2;            // 1.425 card h/w ratio -> even #
+      mdpi_card_width = 51;
     } else if (type == Rules.FREECELL) {
       // 8 anchor columns
-      WIDTH = screenWidth*100 / (8*100+179); // 1.79 is card spacing factor
-      HEIGHT = WIDTH * 57/40/2*2;
+      mdpi_card_width = 49;
     } else {
       // 10 anchor columns
-      WIDTH = screenWidth*100 / (10*100+66); // 0.66 is card spacing factor
-      HEIGHT = WIDTH * 57/40/2*2;
+      mdpi_card_width = 45;
     }
+
+    // Calculate card WIDTH
+    if (screenWidth >= 480) {
+      // Simulate Android scaling of original solitaire-for-android card
+      //   width by using the average of high and low value of calculations
+      //   due to loss of precision when using integer math.
+      WIDTH = (   (screenWidth/480*mdpi_card_width) /* low precision */
+                + (screenWidth*mdpi_card_width/480) /* high precision */
+              ) / 2;
+    } else {
+      //   Multiply and divide by 4 to deal with 0.75x ldpi graphics
+      WIDTH = (   (4*screenWidth/480*mdpi_card_width/4) /* low precision */
+                + (4*screenWidth*mdpi_card_width/480/4) /* high precision */
+              ) / 2;
+    }
+
+    // Calculate card HEIGHT
+    //   Use integer math:  1.425 = 57/40, even number = /2*2
+    //                      1.425 card height/width ratio -> even #
+    HEIGHT = WIDTH * 57/40/2*2;
 
     SMALL_SPACING = 7 * dpi/160;
     HIDDEN_SPACING = 3 * dpi/160;
