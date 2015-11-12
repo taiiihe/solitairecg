@@ -36,6 +36,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Add xxxhdpi high resolution graphic images for cards
   * Simulate Android scaling of original game card dimensions
   * Make card animation speed the same for all screen resolutions
   * Add long press on bottom center of screen to invoke alternate menu
