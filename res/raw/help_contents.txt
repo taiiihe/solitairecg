@@ -1,0 +1,31 @@
+<p>
+<b>Solitaire</b> <b>C</b>ard <b>G</b>ames for Android&trade; offers
+several single player card games for your enjoyment.
+</p>
+<p>
+<a href="#navigation">Navigation</a><br>
+</p>
+
+<h2 id="navigation">Navigation</h2>
+<p>
+In addition to the usual Android gestures and navigation, SolitaireCG
+includes the following features:<br>
+<br>
+<b>Moving</b><br>
+Single Card: Drag the card.<br>
+Whole Stack: Drag the stack starting above the bottom card.<br>
+Partial Stack: Tap the stack, scroll to adjust, then drag the top card.<br>
+<br>
+<b>Auto Move</b><br>
+Fling a card to start a chain of moving cards to their home.<br>
+<br>
+<b>Dealing</b><br>
+Tap the deck or deal menu, or click the trackball or search key.<br>
+<br>
+<b>Undo</b><br>
+Push the back button.<br>
+<br>
+<b>Menu</b><br>
+Change the game type, restart, deal, change the options, view stats or help.<br>
+Long press bottom center of screen for alternate menu.
+</p>

@@ -20,8 +20,10 @@ package net.sourceforge.solitaire_cg;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
@@ -35,6 +37,9 @@ import android.widget.TextView;
 
 // Base activity class.
 public class SolitaireCG extends Activity {
+
+  public static String VERSION_NAME = "";
+
   private static final int MENU_NEW_GAME  = 1;
   private static final int MENU_RESTART   = 2;
   private static final int MENU_OPTIONS   = 3;
@@ -78,6 +83,13 @@ public class SolitaireCG extends Activity {
 
     //StartSolitaire(savedInstanceState);
     registerForContextMenu(mSolitaireView);
+
+    // Set global variable for versionName
+    try {
+      VERSION_NAME = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+    } catch (NameNotFoundException e) {
+      Log.e("SolitaireCG.java", e.getMessage());
+    }
   }
 
   // Entry point for starting the game.
@@ -165,7 +177,7 @@ public class SolitaireCG extends Activity {
         DisplayCopying();
         break;
       case MENU_HELP:
-        mSolitaireView.DisplaySplash();
+        DisplayHelp();
         break;
       case MENU_SAVE_QUIT:
         mSolitaireView.SaveGame();
@@ -220,7 +232,7 @@ public class SolitaireCG extends Activity {
         DisplayStats();
         break;
       case R.id.context_help:
-        mSolitaireView.DisplaySplash();
+        DisplayHelp();
         break;
       case R.id.context_readme:
         DisplayReadme();
@@ -263,6 +275,11 @@ public class SolitaireCG extends Activity {
   public void DisplayOptions() {
     mSolitaireView.SetTimePassing(false);
     new Options(this, mSolitaireView.GetDrawMaster());
+  }
+
+  public void DisplayHelp() {
+    mSolitaireView.SetTimePassing(false);
+    new Help(this, mSolitaireView.GetDrawMaster());
   }
 
   public void DisplayReadme() {
