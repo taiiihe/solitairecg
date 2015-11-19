@@ -93,20 +93,19 @@ public class SolitaireCG extends Activity {
       editor.commit();
       // If save is corrupt, just start a new game.
       if (mSolitaireView.LoadSave()) {
-        HelpSplashScreen();
+        SplashScreen();
         return;
       }
     }
 
     mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.SOLITAIRE));
-    HelpSplashScreen();
+    SplashScreen();
   }
 
-  // Force show the help if this is the first time played. Sadly no one reads
-  // it anyways.
-  private void HelpSplashScreen() {
+  // Force show splash screen if this is the first time played.
+  private void SplashScreen() {
     if (!mSettings.getBoolean("PlayedBefore", false)) {
-      mSolitaireView.DisplayHelp();
+      mSolitaireView.DisplaySplash();
     }
   }
 
@@ -166,7 +165,7 @@ public class SolitaireCG extends Activity {
         DisplayCopying();
         break;
       case MENU_HELP:
-        mSolitaireView.DisplayHelp();
+        mSolitaireView.DisplaySplash();
         break;
       case MENU_SAVE_QUIT:
         mSolitaireView.SaveGame();
@@ -221,7 +220,7 @@ public class SolitaireCG extends Activity {
         DisplayStats();
         break;
       case R.id.context_help:
-        mSolitaireView.DisplayHelp();
+        mSolitaireView.DisplaySplash();
         break;
       case R.id.context_readme:
         DisplayReadme();

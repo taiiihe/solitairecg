@@ -59,7 +59,7 @@ public class SolitaireView extends View {
   // This is incremented only when the save system changes.
   private static final String SAVE_VERSION = "solitairecg_save_2";
 
-  private CharSequence mHelpText;
+  private CharSequence mSplashText;
   private CharSequence mWinText;
 
   private CardAnchor[] mCardAnchor;
@@ -128,7 +128,7 @@ public class SolitaireView extends View {
     mReplay = new Replay(this, mAnimateCard);
 
     Resources res = context.getResources();
-    mHelpText = context.getResources().getText(R.string.help_text);
+    mSplashText = context.getResources().getText(R.string.splash_text);
     mWinText = context.getResources().getText(R.string.win_text);
     mContext = context;
     mTextViewDown = false;
@@ -466,14 +466,14 @@ public class SolitaireView extends View {
     mSelectCard.SetHeight(h);
   }
 
-  public void DisplayHelp() {
+  public void DisplaySplash() {
     if (mRules.HasWon()) {
       Toast.makeText(mContext, R.string.toast_use_start_menu, Toast.LENGTH_SHORT).show();
       return;
     }
     mTextView.setTextSize(15);
     mTextView.setGravity(Gravity.LEFT);
-    DisplayText(mHelpText);
+    DisplayText(mSplashText);
   }
 
   public void DisplayWin() {

@@ -62,19 +62,9 @@
     <string name="close">Close</string>
     <string name="toast_restart_invalid">Game over. Restart not available.</string>
     <string name="toast_use_start_menu">Game over. Use menu to start new game.</string>
-    <string name="help_text">
-Moving:\n
-Single Card: Drag the card.\n
-Whole Stack: Drag the stack starting above the bottom card.\n
-Partial Stack: Tap the stack, scroll to adjust, then drag the top card.\n\n
-Auto Move:\n
-Fling a card to start a chain of moving cards to their home.\n\n
-Dealing:\n
-Tap the deck or deal menu, or click the trackball or search key.\n\n
-Undo:\n
-Push the back button.\n\n
-Menu:\n
-Long press bottom center of screen for menu options and to view this help.
+    <string name="splash_text">
+\n\n\n\n\n\n\n\n
+TIP:  Long press ^ at bottom center of screen for alternate menu.
 </string>
     <string name="win_text">You Win!\n\nUse the menu to start a new game.</string>
 </resources>
