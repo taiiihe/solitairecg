@@ -4,6 +4,8 @@ several single player card games for your enjoyment.
 </p>
 <p>
 <a href="#navigation">Navigation</a><br>
+<a href="#readme">README</a><br>
+<a href="#copying">COPYING</a><br>
 </p>
 
 <h2 id="navigation">Navigation</h2>

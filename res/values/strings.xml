@@ -28,11 +28,8 @@
     <string name="menu_stats">Stats</string>
     <string name="menu_options">Options</string>
     <string name="menu_help">Help</string>
-    <string name="menu_readme">README</string>
-    <string name="menu_copying">COPYING</string>
     <string name="menu_save_quit">Save&amp;Quit</string>
     <string name="menu_quit">Quit</string>
-    <string name="menu_more">More</string>
     <string name="solitaire_layout_text_text"></string>
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
@@ -59,7 +56,6 @@
     <string name="display_time">Display Time</string>
     <string name="readme_header">README file from source code</string>
     <string name="copying_header">COPYING file from source code</string>
-    <string name="close">Close</string>
     <string name="toast_restart_invalid">Game over. Restart not available.</string>
     <string name="toast_use_start_menu">Game over. Use menu to start new game.</string>
     <string name="splash_text">

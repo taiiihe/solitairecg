@@ -52,8 +52,6 @@ public class SolitaireCG extends Activity {
   private static final int MENU_STATS     = 10;
   private static final int MENU_HELP      = 11;
   private static final int MENU_DEAL      = 12;
-  private static final int MENU_README    = 13;
-  private static final int MENU_COPYING   = 14;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -138,8 +136,6 @@ public class SolitaireCG extends Activity {
     menu.add(0, MENU_QUIT, 0, R.string.menu_quit);
     menu.add(0, MENU_STATS, 0, R.string.menu_stats);
     menu.add(0, MENU_HELP, 0, R.string.menu_help);
-    menu.add(0, MENU_README, 0, R.string.menu_readme);
-    menu.add(0, MENU_COPYING, 0, R.string.menu_copying);
     return true;
   }
 
@@ -169,12 +165,6 @@ public class SolitaireCG extends Activity {
         break;
       case MENU_OPTIONS:
         DisplayOptions();
-        break;
-      case MENU_README:
-        DisplayReadme();
-        break;
-      case MENU_COPYING:
-        DisplayCopying();
         break;
       case MENU_HELP:
         DisplayHelp();
@@ -234,12 +224,6 @@ public class SolitaireCG extends Activity {
       case R.id.context_help:
         DisplayHelp();
         break;
-      case R.id.context_readme:
-        DisplayReadme();
-        break;
-      case R.id.context_copying:
-        DisplayCopying();
-        break;
       default:
         return super.onContextItemSelected(item);
     }
@@ -280,16 +264,6 @@ public class SolitaireCG extends Activity {
   public void DisplayHelp() {
     mSolitaireView.SetTimePassing(false);
     new Help(this, mSolitaireView.GetDrawMaster());
-  }
-
-  public void DisplayReadme() {
-    mSolitaireView.SetTimePassing(false);
-    new Readme(this, mSolitaireView.GetDrawMaster());
-  }
-
-  public void DisplayCopying() {
-    mSolitaireView.SetTimePassing(false);
-    new Copying(this, mSolitaireView.GetDrawMaster());
   }
 
   public void DisplayStats() {

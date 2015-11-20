@@ -34,6 +34,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Move readme and copying from separate menu items into help
   * Move help and version to html in scrollable webview
   * Make splash screen tip of long press for alternate menu
 

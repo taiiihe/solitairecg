@@ -34,17 +34,8 @@
           android:title="@string/menu_deal" />
     <item android:id="@+id/context_options"
           android:title="@string/menu_options" />
-    <item android:id="@+id/context_more"
-          android:title="@string/menu_more">
-        <menu>
-            <item android:id="@+id/context_stats"
-                  android:title="@string/menu_stats" />
-            <item android:id="@+id/context_help"
-                  android:title="@string/menu_help" />
-            <item android:id="@+id/context_readme"
-                  android:title="@string/menu_readme" />
-            <item android:id="@+id/context_copying"
-                  android:title="@string/menu_copying" />
-        </menu>
-    </item>
+    <item android:id="@+id/context_stats"
+          android:title="@string/menu_stats" />
+    <item android:id="@+id/context_help"
+          android:title="@string/menu_help" />
 </menu>

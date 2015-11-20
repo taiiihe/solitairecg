@@ -46,6 +46,23 @@ public class Help {
     String helpText = "<html><body>"
       + "<h1>SolitaireCG " + solitaire.VERSION_NAME + " Help</h1>"
       + Utils.readRawTextFile(solitaire, R.raw.help_contents).replace("\n"," ")
+        // Append README file
+      + "<hr>"
+      + "<h2 id='readme'>"
+      + solitaire.getString(R.string.readme_header)
+      + "</h2></a>"
+      + "<pre style='font-size:smaller;'>"
+      + Utils.readRawTextFile(solitaire, R.raw.readme).replace("\n","<br>")
+      + "</pre>"
+        // Append COPYING file
+      + "<hr>"
+      + "<h2 id='copying'>"
+      + solitaire.getString(R.string.copying_header)
+      + "</h2></a>"
+      + "<pre style='font-size:smaller;'>"
+      //Work around android API loadData issue 4401 problem with % character
+      + Utils.readRawTextFile(solitaire, R.raw.copying).replace("\n","<br>").replace("%","&#37;")
+      + "</pre>"
       + "</body></html>";
     webView.loadData(helpText, "text/html; charset=utf-8", "utf-8");
 
