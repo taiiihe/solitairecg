@@ -3,31 +3,259 @@
 several single player card games for your enjoyment.
 </p>
 <p>
-<a href="#navigation">Navigation</a><br>
+<a href="#general">General</a><br>
+<a href="#terms">Terminology</a><br>
+ &nbsp; <a href="#forty-thieves">Forty Thieves</a><br>
+ &nbsp; <a href="#freecell">Freecell</a><br>
+ &nbsp; <a href="#klondike">Klondike (Solitaire)</a><br>
+ &nbsp; <a href="#spider">Spider</a><br>
 <a href="#readme">README</a><br>
 <a href="#copying">COPYING</a><br>
 </p>
 
-<h2 id="navigation">Navigation</h2>
+<h2 id="general">General</h2>
 <p>
-In addition to the usual Android gestures and navigation, SolitaireCG
-includes the following features:<br>
+SolitaireCG features the following game play navigation:
+</p>
+<ul style="list-style: none;">
+  <li><b>Moving</b><br>
+    <i>Single Card</i> - Drag the card.<br>
+    <i>Whole Stack</i> - Drag the stack starting above the bottom
+      card.<br>
+    <i>Partial Stack</i> - Tap the stack, scroll to adjust, then drag
+      the top card.<br><br>
+  </li>
+  <li><b>Auto Move</b><br>
+    Fling a card to start a chain of moving cards to their
+    home.<br><br>
+  </li>
+  <li><b>Dealing</b><br>
+    Tap the deck or deal menu, or click the trackball or search
+    key.<br><br>
+  </li>
+  <li><b>Undo</b><br>
+    Push the back button.<br><br>
+  </li>
+  <li><b>Menu</b><br>
+    Use either standard Android menu, or long press bottom center of
+    screen for alternate menu.<br><br>
+  </li>
+</ul>
+<p>
+Game play may be customized with the following options:
+</p>
+<ul style="list-style: none;">
+  <li><b>Display Options</b><br>
+    <i>Normal Card Art</i> - use standard card graphics.<br>
+    <i>Large Card Art</i> - use increased size font and suit
+    graphics.<br><br>
+  </li>
+  <li><b>Display Time</b><br>
+    Enable or disable display of time elapsed.<br><br>
+  </li>
+  <li><b>Auto Move</b><br>
+    <i>Always</i> - will automatically move cards to foundations.<br>
+    <i>Fling Only</i> - will start a chain of moving cards to
+    foundations if you fling a card.<br>
+    <i>Never</i> - will not automatically move cards.  All cards must
+    be moved manually.<br><br>
+  </li>
+</ul>
+<p>
+Card game variations are available as game options.  See each game
+below for variations.<br>
+<i>Note that selecting an option different than the current game will
+result in a new game.</i>
+</p>
+<p>
+Current game statistics are available, such as wins and losses.
+</p>
+
+<h2 id="terms">Terminology</h2>
+<p>
+A card game contains one or more card decks of 52 cards each.
+</p>
+<p>
+Each deck contains four suits: Clubs &clubs;,
+Diamonds <font color="red">&diams;</font>,
+Hearts <font color="red">&hearts;</font>, and Spades &spades;.
+</p>
+<p>
+Each suit contains thirteen card types with the following ascending
+order: Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, and King.
+</p>
+<p>
+The purpose of solitaire card games generally involves manipulating a
+layout of cards with the goal of sorting the cards in some manner.
+</p>
+<p>
+Several terms are helpful to describe solitaire card games:
+</p>
+<p>
+<b id="stock">Stock</b><br>
+A pile of cards that can be drawn upon during the game, usually one
+card at a time.
+</p>
+<p>
+<b id="waste">Waste</b><br>
+A pile where discarded cards are stored, usually so that these may be
+used later in the game.
+</p>
+<p>
+<b id="foundation">Foundation</b><br>
+A pile of cards that is built upon a base card, usually in an
+ascending sequence of the same card suit.
+</p>
+<p>
+<b id="tableau">Tableau</b><br>
+A temporary working pile where you build groups of cards in some
+sequence before you are able to move the cards to a foundation.
+</p>
+<p>
+<b id="build">Build</b><br>
+An ordered sequence of cards that may be partial or full (13 in
+sequence cards).
+</p>
+
+<h2 id="forty-thieves">Forty Thieves</h2>
+<p>
+A widely known two deck solitaire game.
+</p>
+<p>
+<b>Layout</b><br>
+Eight foundations in upper left.  Further right are the stock and the
+waste.  On the row below are ten tableaus, each contain four face-up
+cards.
+</p>
+<p>
+<b>Play</b><br>
+Tableaus build down in suit order.  Single cards may be moved among
+the tableaus.  Empty tableaus may be filled with any card.
+</p>
+<p>
+Tap the stock to turn over one card at a time to the waste.  The top
+card in the waste may be played on tableaus or foundations.
+</p>
+<p>
+Foundations build up in suit from the Ace.
+</p>
+<p>
+<b>Goal</b><br>
+Move all cards to the foundations.
+</p>
+
+<h2 id="freecell">Freecell</h2>
+<p>
+A classic single deck solitaire game.
+</p>
+<p>
+<b>Layout</b><br>
+Four stocks in upper left with four foundations to the right.  On the
+row below are eight tableaus.  The left four tableaus contain 7 face-up
+cards and the right four tableaus contain 6 face-up cards.
+</p>
+<p>
+<b>Play</b><br>
+Tableaus build down in alternating colors.  Single cards may be moved
+among tableaus.  Empty tableaus may be filled with any card.
+</p>
+<p>
+Stocks hold any single card.
+</p>
+<p>
+Foundations build up in suit from the Ace.
+</p>
+<p>
+<b>Goal</b><br>
+Move all cards to the foundations.
+</p>
+<p>
+<b>Variations</b><br>
+<i>Baker's Game</i> - Use Freecell option "Build By Suit".<br>
+Play is the same as Freecell except tableaus build down in suit.<br>
 <br>
-<b>Moving</b><br>
-Single Card: Drag the card.<br>
-Whole Stack: Drag the stack starting above the bottom card.<br>
-Partial Stack: Tap the stack, scroll to adjust, then drag the top card.<br>
+For <i>Freecell</i> use default Freecell option "Build By Alternate
+Color".<br>
+</p>
+
+<h2 id="klondike">Klondike (Solitaire)</h2>
+<p>
+Probably the most popular single deck solitaire game.  Also known as
+solitaire or patience.
+</p>
+<p>
+<b>Layout</b><br>
+Stock in upper left with waste to the right.  Further to the right are
+four foundations.  On the row below, seven tableaus each contain a
+face-up card.  Each adjacent tableau to the right contains one more
+hidden card than the tableau to the left.
+</p>
+<p>
+<b>Play</b><br>
+Tableaus build down in alternating colors.  Full or partial builds may
+be moved among the tableaus.  Empty tableaus may be filled with Kings
+or builds beginning with Kings.
+</p>
+<p>
+Top card from the waste pile may be played on tableaus or foundations.
+</p>
+<p>
+Foundations build up in suit from the Ace.
+</p>
+<p>
+Tap the stock to turn up three cards onto the waste.  Tap the empty
+stock to start through the stock again.
+</p>
+<p>
+<b>Goal</b><br>
+Move all cards to the foundations.
+</p>
+<p>
+<b>Variations</b><br>
+<i>Vegas Solitaire</i> - Use Solitaire options "Deal 1 Card" and
+"Vegas Style".<br>
+Play is the same as in Klondike, but instead of turning up cards from
+the stock three at a time indefinitely, the cards are turned up one at
+a time, going through the stock only once. A score is kept.<br>
 <br>
-<b>Auto Move</b><br>
-Fling a card to start a chain of moving cards to their home.<br>
+For <i>Klondike</i> use default Solitaire options "Deal 3 Cards" and
+"Normal Style".<br>
+</p>
+
+<h2 id="spider">Spider</h2>
+<p>
+One of the most popular two deck solitaire games.
+</p>
+<p>
+<b>Layout</b><br>
+Ten tableaus each contain a face up card.  The left four tableaus have
+5 hidden cards, and the right six tableaus have 4 hidden cards.  A
+stock pile containing 50 cards is off screen.
+</p>
+<p>
+<b>Play</b><br>
+Tableaus build down regardless of suit or color.  Full or partial
+builds in suit may be moved among the tableaus.  Empty tableaus may be
+filled with any available build.
+</p>
+<p>
+Builds of thirteen cards, in suit from King down to Ace will be
+automatically removed.
+</p>
+<p>
+Deal one card on to each tableau by selecting the menu item deal.
+</p>
+<p>
+<b>Goal</b><br>
+Arrange all cards in builds in suit from King down to Ace.
+</p>
+<p>
+<b>Variations</b><br>
+<i>Tarantula</i> - Use Spider option "Two Suits".<br>
+Play is the same as Spider.  Less suits is easier to win.<br>
 <br>
-<b>Dealing</b><br>
-Tap the deck or deal menu, or click the trackball or search key.<br>
+<i>Black Widow</i> - Use Spider option "One Suit".<br>
+Play is the same as Spider and the easiest to win.<br>
 <br>
-<b>Undo</b><br>
-Push the back button.<br>
-<br>
-<b>Menu</b><br>
-Change the game type, restart, deal, change the options, view stats or help.<br>
-Long press bottom center of screen for alternate menu.
+For <i>Spider</i> use default Spider option "Four Suits".<br>
 </p>
