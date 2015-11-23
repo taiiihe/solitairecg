@@ -34,6 +34,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Remove Quit and Save&Quit menu options
   * Add text indication when no undo left
   * Add general features, terminology and game rules to help
   * Move readme and copying from separate menu items into help

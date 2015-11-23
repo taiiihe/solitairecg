@@ -89,7 +89,6 @@ public class Stats {
       public boolean onKey(View v, int keyCode, KeyEvent event) {
         switch (keyCode) {
           case KeyEvent.KEYCODE_BACK:
-          case KeyEvent.KEYCODE_HOME:
             solitaire.CancelOptions();
             return true;
         }

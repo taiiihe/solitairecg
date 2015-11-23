@@ -43,22 +43,18 @@ public class SolitaireCG extends Activity {
   private static final int MENU_NEW_GAME  = 1;
   private static final int MENU_RESTART   = 2;
   private static final int MENU_OPTIONS   = 3;
-  private static final int MENU_SAVE_QUIT = 4;
-  private static final int MENU_QUIT      = 5;
-  private static final int MENU_SOLITAIRE = 6;
-  private static final int MENU_SPIDER    = 7;
-  private static final int MENU_FREECELL  = 8;
-  private static final int MENU_FORTYTHIEVES = 9;
-  private static final int MENU_STATS     = 10;
-  private static final int MENU_HELP      = 11;
-  private static final int MENU_DEAL      = 12;
+  private static final int MENU_SOLITAIRE = 4;
+  private static final int MENU_SPIDER    = 5;
+  private static final int MENU_FREECELL  = 6;
+  private static final int MENU_FORTYTHIEVES = 7;
+  private static final int MENU_STATS     = 8;
+  private static final int MENU_HELP      = 9;
+  private static final int MENU_DEAL      = 10;
 
   // View extracted from main.xml.
   private View mMainView;
   private SolitaireView mSolitaireView;
   private SharedPreferences mSettings;
-
-  private boolean mDoSave;
 
   // Shared preferences are where the various user settings are stored.
   public SharedPreferences GetSettings() { return mSettings; }
@@ -66,7 +62,6 @@ public class SolitaireCG extends Activity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    mDoSave = true;
 
     // Force landscape and no title for extra room
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -132,8 +127,6 @@ public class SolitaireCG extends Activity {
     menu.add(0, MENU_RESTART, 0, R.string.menu_restart);
     menu.add(0, MENU_DEAL, 0, R.string.menu_deal);
     menu.add(0, MENU_OPTIONS, 0, R.string.menu_options);
-    menu.add(0, MENU_SAVE_QUIT, 0, R.string.menu_save_quit);
-    menu.add(0, MENU_QUIT, 0, R.string.menu_quit);
     menu.add(0, MENU_STATS, 0, R.string.menu_stats);
     menu.add(0, MENU_HELP, 0, R.string.menu_help);
     return true;
@@ -160,23 +153,14 @@ public class SolitaireCG extends Activity {
       case MENU_DEAL:
         mSolitaireView.Deal();
         break;
-      case MENU_STATS:
-        DisplayStats();
-        break;
       case MENU_OPTIONS:
         DisplayOptions();
         break;
+      case MENU_STATS:
+        DisplayStats();
+        break;
       case MENU_HELP:
         DisplayHelp();
-        break;
-      case MENU_SAVE_QUIT:
-        mSolitaireView.SaveGame();
-        mDoSave = false;
-        finish();
-        break;
-      case MENU_QUIT:
-        mDoSave = false;
-        finish();
         break;
     }
 
@@ -240,9 +224,7 @@ public class SolitaireCG extends Activity {
   @Override
   protected void onStop() {
     super.onStop();
-    if (mDoSave) {
-      mSolitaireView.SaveGame();
-    }
+    mSolitaireView.SaveGame();
   }
 
   @Override
