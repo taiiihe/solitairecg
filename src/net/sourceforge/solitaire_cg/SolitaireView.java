@@ -818,7 +818,9 @@ public class SolitaireView extends View {
     mMoveCard.Release();
     mSelectCard.Release();
 
-    if (!mMoveHistory.empty()) {
+    if (mMoveHistory.empty()) {
+      Toast.makeText(mContext, R.string.toast_no_undo_left, Toast.LENGTH_SHORT).show();
+    } else {
       Move move = mMoveHistory.pop();
       int count = 0;
       int from = move.GetFrom();
