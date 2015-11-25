@@ -28,7 +28,7 @@ import android.widget.RadioButton;
 public class Options {
 
   public Options(final SolitaireCG solitaire, final DrawMaster drawMaster) {
-    final int type = solitaire.GetSettings().getInt("LastType", Rules.SOLITAIRE);
+    final int type = solitaire.GetSettings().getInt("LastType", Rules.KLONDIKE);
 
     solitaire.setContentView(R.layout.options);
     View view = (View) solitaire.findViewById(R.id.options_view);
@@ -44,8 +44,8 @@ public class Options {
     ((CheckBox)solitaire.findViewById(R.id.display_time)).setChecked(displayTime);
 
     // Solitaire stuff
-    final boolean dealThree = solitaire.GetSettings().getBoolean("SolitaireDealThree", true);
-    final boolean styleNormal = solitaire.GetSettings().getBoolean("SolitaireStyleNormal", true);
+    final boolean dealThree = solitaire.GetSettings().getBoolean("KlondikeDealThree", true);
+    final boolean styleNormal = solitaire.GetSettings().getBoolean("KlondikeStyleNormal", true);
     ((RadioButton)solitaire.findViewById(R.id.deal_3)).setChecked(dealThree);
     ((RadioButton)solitaire.findViewById(R.id.deal_1)).setChecked(!dealThree);
     ((RadioButton)solitaire.findViewById(R.id.style_normal)).setChecked(styleNormal);
@@ -87,17 +87,17 @@ public class Options {
         }
 
         if (dealThree != ((RadioButton)solitaire.findViewById(R.id.deal_3)).isChecked()) {
-          editor.putBoolean("SolitaireDealThree", !dealThree);
+          editor.putBoolean("KlondikeDealThree", !dealThree);
           commit = true;
-          if (type == Rules.SOLITAIRE) {
+          if (type == Rules.KLONDIKE) {
             newGame = true;
           }
         }
         
         if (styleNormal != ((RadioButton)solitaire.findViewById(R.id.style_normal)).isChecked()) {
-          editor.putBoolean("SolitaireStyleNormal", !styleNormal);
+          editor.putBoolean("KlondikeStyleNormal", !styleNormal);
           commit = true;
-          if (type == Rules.SOLITAIRE) {
+          if (type == Rules.KLONDIKE) {
             newGame = true;
           }
         }

@@ -18,14 +18,14 @@
     <item android:id="@+id/context_newgame"
           android:title="@string/menu_newgame">
         <menu>
-            <item android:id="@+id/context_solitaire"
-                  android:title="@string/menu_solitaire" />
-            <item android:id="@+id/context_spider"
-                  android:title="@string/menu_spider" />
-            <item android:id="@+id/context_freecell"
-                  android:title="@string/menu_freecell" />
             <item android:id="@+id/context_fortythieves"
                   android:title="@string/menu_fortythieves" />
+            <item android:id="@+id/context_freecell"
+                  android:title="@string/menu_freecell" />
+            <item android:id="@+id/context_klondike"
+                  android:title="@string/menu_klondike" />
+            <item android:id="@+id/context_spider"
+                  android:title="@string/menu_spider" />
         </menu>
     </item>
     <item android:id="@+id/context_restart"

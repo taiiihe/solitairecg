@@ -448,7 +448,7 @@ public class SolitaireView extends View {
     if (dpi < 60)
       dpi = 160;
     // Restore card size
-    Card.SetSize(GetSettings().getInt("LastType", Rules.SOLITAIRE),
+    Card.SetSize(GetSettings().getInt("LastType", Rules.KLONDIKE),
                  metrics.widthPixels, dpi);
   }
 

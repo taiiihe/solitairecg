@@ -40,16 +40,16 @@ public class SolitaireCG extends Activity {
 
   public static String VERSION_NAME = "";
 
-  private static final int MENU_NEW_GAME  = 1;
-  private static final int MENU_RESTART   = 2;
-  private static final int MENU_OPTIONS   = 3;
-  private static final int MENU_SOLITAIRE = 4;
-  private static final int MENU_SPIDER    = 5;
-  private static final int MENU_FREECELL  = 6;
+  private static final int MENU_NEW_GAME     = 1;
+  private static final int MENU_RESTART      = 2;
+  private static final int MENU_DEAL         = 3;
+  private static final int MENU_OPTIONS      = 4;
+  private static final int MENU_STATS        = 5;
+  private static final int MENU_HELP         = 6;
   private static final int MENU_FORTYTHIEVES = 7;
-  private static final int MENU_STATS     = 8;
-  private static final int MENU_HELP      = 9;
-  private static final int MENU_DEAL      = 10;
+  private static final int MENU_FREECELL     = 8;
+  private static final int MENU_KLONDIKE     = 9;
+  private static final int MENU_SPIDER       = 10;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -103,7 +103,7 @@ public class SolitaireCG extends Activity {
       }
     }
 
-    mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.SOLITAIRE));
+    mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.KLONDIKE));
     SplashScreen();
   }
 
@@ -119,10 +119,10 @@ public class SolitaireCG extends Activity {
     super.onCreateOptionsMenu(menu);
 
     SubMenu subMenu = menu.addSubMenu(0, MENU_NEW_GAME, 0, R.string.menu_newgame);
-    subMenu.add(0, MENU_SOLITAIRE, 0, R.string.menu_solitaire);
-    subMenu.add(0, MENU_SPIDER, 0, R.string.menu_spider);
-    subMenu.add(0, MENU_FREECELL, 0, R.string.menu_freecell);
     subMenu.add(0, MENU_FORTYTHIEVES, 0, R.string.menu_fortythieves);
+    subMenu.add(0, MENU_FREECELL, 0, R.string.menu_freecell);
+    subMenu.add(0, MENU_KLONDIKE, 0, R.string.menu_klondike);
+    subMenu.add(0, MENU_SPIDER, 0, R.string.menu_spider);
 
     menu.add(0, MENU_RESTART, 0, R.string.menu_restart);
     menu.add(0, MENU_DEAL, 0, R.string.menu_deal);
@@ -135,17 +135,17 @@ public class SolitaireCG extends Activity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case MENU_SOLITAIRE:
-        mSolitaireView.InitGame(Rules.SOLITAIRE);
-        break;
-      case MENU_SPIDER:
-        mSolitaireView.InitGame(Rules.SPIDER);
+      case MENU_FORTYTHIEVES:
+        mSolitaireView.InitGame(Rules.FORTYTHIEVES);
         break;
       case MENU_FREECELL:
         mSolitaireView.InitGame(Rules.FREECELL);
         break;
-      case MENU_FORTYTHIEVES:
-        mSolitaireView.InitGame(Rules.FORTYTHIEVES);
+      case MENU_KLONDIKE:
+        mSolitaireView.InitGame(Rules.KLONDIKE);
+        break;
+      case MENU_SPIDER:
+        mSolitaireView.InitGame(Rules.SPIDER);
         break;
       case MENU_RESTART:
         mSolitaireView.RestartGame();
@@ -181,17 +181,17 @@ public class SolitaireCG extends Activity {
   @Override
   public boolean onContextItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.context_solitaire:
-        mSolitaireView.InitGame(Rules.SOLITAIRE);
-        break;
-      case R.id.context_spider:
-        mSolitaireView.InitGame(Rules.SPIDER);
+      case R.id.context_fortythieves:
+        mSolitaireView.InitGame(Rules.FORTYTHIEVES);
         break;
       case R.id.context_freecell:
         mSolitaireView.InitGame(Rules.FREECELL);
         break;
-      case R.id.context_fortythieves:
-        mSolitaireView.InitGame(Rules.FORTYTHIEVES);
+      case R.id.context_klondike:
+        mSolitaireView.InitGame(Rules.KLONDIKE);
+        break;
+      case R.id.context_spider:
+        mSolitaireView.InitGame(Rules.SPIDER);
         break;
       case R.id.context_restart:
         mSolitaireView.RestartGame();
@@ -261,7 +261,7 @@ public class SolitaireCG extends Activity {
 
   public void NewOptions() {
     setContentView(mMainView);
-    mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.SOLITAIRE));
+    mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.KLONDIKE));
   }
 
   // This is called for option changes that require a refresh, but not a new game

@@ -212,13 +212,13 @@ Move all cards to the foundations.
 </p>
 <p>
 <b>Variations</b><br>
-<i>Vegas Solitaire</i> - Use Solitaire options "Deal 1 Card" and
+<i>Vegas Solitaire</i> - Use Klondike options "Deal 1 Card" and
 "Vegas Style".<br>
 Play is the same as in Klondike, but instead of turning up cards from
 the stock three at a time indefinitely, the cards are turned up one at
 a time, going through the stock only once. A score is kept.<br>
 <br>
-For <i>Klondike</i> use default Solitaire options "Deal 3 Cards" and
+For <i>Klondike</i> use default Klondike options "Deal 3 Cards" and
 "Normal Style".<br>
 </p>
 

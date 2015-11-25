@@ -18,21 +18,21 @@
   -->
 <resources>
     <string name="app_name">SolitaireCG</string>
-    <string name="menu_solitaire">Solitaire</string>
-    <string name="menu_spider">Spider</string>
-    <string name="menu_freecell">Freecell</string>
     <string name="menu_fortythieves">Forty Thieves</string>
+    <string name="menu_freecell">Freecell</string>
+    <string name="menu_klondike">Klondike (Solitaire)</string>
+    <string name="menu_spider">Spider</string>
     <string name="menu_newgame">New Game</string>
     <string name="menu_restart">Restart</string>
     <string name="menu_deal">Deal</string>
-    <string name="menu_stats">Stats</string>
     <string name="menu_options">Options</string>
+    <string name="menu_stats">Stats</string>
     <string name="menu_help">Help</string>
     <string name="solitaire_layout_text_text"></string>
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear Stats</string>
-    <string name="solitaire_options">Solitaire Options</string>
+    <string name="klondike_options">Klondike Options</string>
     <string name="deal_1">Deal 1 Card</string>
     <string name="deal_3">Deal 3 Cards</string>
     <string name="normal">Normal Style</string>

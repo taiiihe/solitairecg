@@ -69,7 +69,7 @@
     <TextView
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:text="@string/solitaire_options"
+      android:text="@string/klondike_options"
       android:focusable="true"
       android:textSize="20sp"
       android:gravity="center"
