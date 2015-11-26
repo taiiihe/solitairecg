@@ -34,6 +34,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Add Golf solitaire game and help rules
   * Sort card game names and refactor into separate files
   * Remove Quit and Save&Quit menu options
   * Add text indication when no undo left

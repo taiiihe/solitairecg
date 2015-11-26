@@ -48,8 +48,9 @@ public class SolitaireCG extends Activity {
   private static final int MENU_HELP         = 6;
   private static final int MENU_FORTYTHIEVES = 7;
   private static final int MENU_FREECELL     = 8;
-  private static final int MENU_KLONDIKE     = 9;
-  private static final int MENU_SPIDER       = 10;
+  private static final int MENU_GOLF         = 9;
+  private static final int MENU_KLONDIKE     = 10;
+  private static final int MENU_SPIDER       = 11;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -121,6 +122,7 @@ public class SolitaireCG extends Activity {
     SubMenu subMenu = menu.addSubMenu(0, MENU_NEW_GAME, 0, R.string.menu_newgame);
     subMenu.add(0, MENU_FORTYTHIEVES, 0, R.string.menu_fortythieves);
     subMenu.add(0, MENU_FREECELL, 0, R.string.menu_freecell);
+    subMenu.add(0, MENU_GOLF, 0, R.string.menu_golf);
     subMenu.add(0, MENU_KLONDIKE, 0, R.string.menu_klondike);
     subMenu.add(0, MENU_SPIDER, 0, R.string.menu_spider);
 
@@ -140,6 +142,9 @@ public class SolitaireCG extends Activity {
         break;
       case MENU_FREECELL:
         mSolitaireView.InitGame(Rules.FREECELL);
+        break;
+      case MENU_GOLF:
+        mSolitaireView.InitGame(Rules.GOLF);
         break;
       case MENU_KLONDIKE:
         mSolitaireView.InitGame(Rules.KLONDIKE);
@@ -186,6 +191,9 @@ public class SolitaireCG extends Activity {
         break;
       case R.id.context_freecell:
         mSolitaireView.InitGame(Rules.FREECELL);
+        break;
+      case R.id.context_golf:
+        mSolitaireView.InitGame(Rules.GOLF);
         break;
       case R.id.context_klondike:
         mSolitaireView.InitGame(Rules.KLONDIKE);

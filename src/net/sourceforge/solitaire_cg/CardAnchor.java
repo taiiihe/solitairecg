@@ -30,7 +30,8 @@ class CardAnchor {
   public static final int SPIDER_STACK = 5;
   public static final int FREECELL_STACK = 6;
   public static final int FREECELL_HOLD = 7;
-  public static final int GENERIC_ANCHOR = 8;
+  public static final int GOLF_WASTE = 8;
+  public static final int GENERIC_ANCHOR = 9;
 
   private int mNumber;
   protected Rules mRules;
@@ -83,6 +84,9 @@ class CardAnchor {
         break;
       case FREECELL_HOLD:
         ret = new FreecellHold();
+        break;
+      case GOLF_WASTE:
+        ret = new GolfWaste();
         break;
       case GENERIC_ANCHOR:
         ret = new GenericAnchor();
@@ -746,12 +750,64 @@ class FreecellHold extends CardAnchor {
 
 }
 
+// Golf waste pile.  Builds any suit in increasing or decreasing value.
+// No build on King
+class GolfWaste extends CardAnchor {
+
+  @Override
+  public Card GrabCard(float x, float y) { return null; }
+
+  @Override
+  public void AddCard(Card card) {
+    super.AddCard(card);
+    mRules.EventAlert(Rules.EVENT_STACK_ADD, this);
+  }
+
+  @Override
+  public boolean CanDropCard(MoveCard moveCard, int close) {
+    /* Called for every stack on drop of MoveCard
+     * Finds the stack that matches the coordinates,
+     * but passes logic over to CanBuildCard()
+     */
+    Card card = moveCard.GetTopCard();
+    float x = card.GetX() + Card.WIDTH/2;
+    float y = card.GetY() + Card.HEIGHT/2;
+    Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
+    float my = mCardCount > 0 ? topCard.GetY() : mY;
+
+    if (IsOverCard(x, y, close)) {
+      if (moveCard.GetCount() == 1) {
+        if (topCard != null && topCard.GetValue() != Card.KING &&
+            ((card.GetValue() == topCard.GetValue() + 1) ||
+             (card.GetValue() == topCard.GetValue() - 1))) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  @Override
+  public boolean DropSingleCard(Card card) {
+    Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
+    if (topCard != null && topCard.GetValue() != Card.KING &&
+        ((card.GetValue() == topCard.GetValue() + 1) ||
+         (card.GetValue() == topCard.GetValue() - 1))) {
+      //AddCard(card);
+      return true;
+    }
+    return false;
+  }
+}
+
 // New Abstract
 class GenericAnchor extends CardAnchor {
 
   //Sequence start values
   public static final int START_ANY=1; // An empty stack can take any card.
   public static final int START_KING=2; // An empty stack can take only a king.
+  public static final int START_NONE=3; // An empty stack can take no card.
 
   //Value Sequences
   public static final int SEQ_ANY=1; //You can build as you like
@@ -882,6 +938,8 @@ class GenericAnchor extends CardAnchor {
       switch (mSTARTSEQ) {
         case GenericAnchor.START_KING:
           return card.GetValue() == Card.KING;
+        case GenericAnchor.START_NONE:
+          return false;
         case GenericAnchor.START_ANY:
         default:
           return true;

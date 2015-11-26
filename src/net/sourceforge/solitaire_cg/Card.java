@@ -44,7 +44,7 @@ class Card {
 
   public static void SetSize(int type, int screenWidth, int dpi) {
     int mdpi_card_width = 45;
-    if (type == Rules.KLONDIKE) {
+    if (type == Rules.GOLF || type == Rules.KLONDIKE) {
       // 7 anchor columns
       mdpi_card_width = 51;
     } else if (type == Rules.FREECELL) {

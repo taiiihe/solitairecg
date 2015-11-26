@@ -25,8 +25,9 @@ public abstract class Rules {
 
   public static final int FORTYTHIEVES = 1;
   public static final int FREECELL     = 2;
-  public static final int KLONDIKE     = 3;
-  public static final int SPIDER       = 4;
+  public static final int GOLF         = 3;
+  public static final int KLONDIKE     = 4;
+  public static final int SPIDER       = 5;
 
   public static final int EVENT_INVALID = -1;
   public static final int EVENT_DEAL = 1;
@@ -113,6 +114,9 @@ public abstract class Rules {
         break;
       case FREECELL:
         ret = new RulesFreecell();
+        break;
+      case GOLF:
+        ret = new RulesGolf();
         break;
       case KLONDIKE:
         ret = new RulesKlondike();

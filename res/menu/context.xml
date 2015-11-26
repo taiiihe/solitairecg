@@ -22,6 +22,8 @@
                   android:title="@string/menu_fortythieves" />
             <item android:id="@+id/context_freecell"
                   android:title="@string/menu_freecell" />
+            <item android:id="@+id/context_golf"
+                  android:title="@string/menu_golf" />
             <item android:id="@+id/context_klondike"
                   android:title="@string/menu_klondike" />
             <item android:id="@+id/context_spider"

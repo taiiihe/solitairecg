@@ -7,6 +7,7 @@ several single player card games for your enjoyment.
 <a href="#terms">Terminology</a><br>
  &nbsp; <a href="#forty-thieves">Forty Thieves</a><br>
  &nbsp; <a href="#freecell">Freecell</a><br>
+ &nbsp; <a href="#golf">Golf</a><br>
  &nbsp; <a href="#klondike">Klondike (Solitaire)</a><br>
  &nbsp; <a href="#spider">Spider</a><br>
 <a href="#readme">README</a><br>
@@ -176,6 +177,32 @@ Play is the same as Freecell except tableaus build down in suit.<br>
 <br>
 For <i>Freecell</i> use default Freecell option "Build By Alternate
 Color".<br>
+</p>
+
+<h2 id="golf">Golf</h2>
+<p>
+Count up and down and try to end with fewer than 4 cards showing.  The
+analogy with golf is the number of cards left in the tableaus after
+finishing the hand are strokes, and a game is golf hole.
+</p>
+<p>
+<b>Layout</b><br>
+Stock in upper right with waste to the left.  On the row below, seven
+tableaus each contain five face-up cards.
+</p>
+<p>
+<b>Play</b><br>
+Waste builds up or down regardless of suit.  A king may not be built upon.
+</p>
+<p>
+Tableaus do not allow building.  Top cards can only be moved to the waste.
+</p>
+<p>
+Tap the stock to turn up one card onto the waste.
+</p>
+<p>
+<b>Goal</b><br>
+Empty all tableaus.
 </p>
 
 <h2 id="klondike">Klondike (Solitaire)</h2>

@@ -20,6 +20,7 @@
     <string name="app_name">SolitaireCG</string>
     <string name="menu_fortythieves">Forty Thieves</string>
     <string name="menu_freecell">Freecell</string>
+    <string name="menu_golf">Golf</string>
     <string name="menu_klondike">Klondike (Solitaire)</string>
     <string name="menu_spider">Spider</string>
     <string name="menu_newgame">New Game</string>
