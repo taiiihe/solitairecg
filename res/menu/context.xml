@@ -32,8 +32,6 @@
     </item>
     <item android:id="@+id/context_restart"
           android:title="@string/menu_restart" />
-    <item android:id="@+id/context_deal"
-          android:title="@string/menu_deal" />
     <item android:id="@+id/context_options"
           android:title="@string/menu_options" />
     <item android:id="@+id/context_stats"

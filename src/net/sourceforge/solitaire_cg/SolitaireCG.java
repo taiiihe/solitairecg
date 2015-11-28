@@ -42,7 +42,6 @@ public class SolitaireCG extends Activity {
 
   private static final int MENU_NEW_GAME     = 1;
   private static final int MENU_RESTART      = 2;
-  private static final int MENU_DEAL         = 3;
   private static final int MENU_OPTIONS      = 4;
   private static final int MENU_STATS        = 5;
   private static final int MENU_HELP         = 6;
@@ -127,7 +126,6 @@ public class SolitaireCG extends Activity {
     subMenu.add(0, MENU_SPIDER, 0, R.string.menu_spider);
 
     menu.add(0, MENU_RESTART, 0, R.string.menu_restart);
-    menu.add(0, MENU_DEAL, 0, R.string.menu_deal);
     menu.add(0, MENU_OPTIONS, 0, R.string.menu_options);
     menu.add(0, MENU_STATS, 0, R.string.menu_stats);
     menu.add(0, MENU_HELP, 0, R.string.menu_help);
@@ -154,9 +152,6 @@ public class SolitaireCG extends Activity {
         break;
       case MENU_RESTART:
         mSolitaireView.RestartGame();
-        break;
-      case MENU_DEAL:
-        mSolitaireView.Deal();
         break;
       case MENU_OPTIONS:
         DisplayOptions();
@@ -204,9 +199,6 @@ public class SolitaireCG extends Activity {
       case R.id.context_restart:
         mSolitaireView.RestartGame();
         break;
-      case R.id.context_deal:
-        mSolitaireView.Deal();
-        return true;
       case R.id.context_options:
         DisplayOptions();
         break;

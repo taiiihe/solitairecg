@@ -31,8 +31,7 @@ SolitaireCG features the following game play navigation:
     home.<br><br>
   </li>
   <li><b>Dealing</b><br>
-    Tap the deck or deal menu, or click the trackball or search
-    key.<br><br>
+    Tap the deck, or click the trackball or search key.<br><br>
   </li>
   <li><b>Undo</b><br>
     Push the back button.<br><br>
@@ -257,7 +256,7 @@ One of the most popular two deck solitaire games.
 <b>Layout</b><br>
 Ten tableaus each contain a face up card.  The left four tableaus have
 5 hidden cards, and the right six tableaus have 4 hidden cards.  A
-stock pile containing 50 cards is off screen.
+stock containing 50 cards is in the lower left screen corner.
 </p>
 <p>
 <b>Play</b><br>
@@ -270,7 +269,7 @@ Builds of thirteen cards, in suit from King down to Ace will be
 automatically removed.
 </p>
 <p>
-Deal one card on to each tableau by selecting the menu item deal.
+Tap the deck to turn up one card on to each tableau.
 </p>
 <p>
 <b>Goal</b><br>

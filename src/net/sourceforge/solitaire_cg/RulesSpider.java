@@ -91,7 +91,12 @@ class RulesSpider extends Rules {
     int rem = (width - (Card.WIDTH * 10)) / 10;
     for (int i = 0; i < 10; i++) {
       mCardAnchor[i].SetPosition(rem/2 + i * (rem + Card.WIDTH), 10);
-      mCardAnchor[i].SetMaxHeight(height-10);
+      if (i != 0) {
+        mCardAnchor[i].SetMaxHeight(height-10);
+      } else {
+        // Leave room for deck at bottom left of screen
+        mCardAnchor[i].SetMaxHeight(height - Card.HEIGHT - 2*10);
+      }
     }
     // Setup edge cards (Touch sensor loses sensitivity towards the edge).
     mCardAnchor[0].SetLeftEdge(0);
@@ -100,9 +105,12 @@ class RulesSpider extends Rules {
     for (int i = 0; i < 10; i++) {
       mCardAnchor[i].SetBottom(height);
     }
-    // These two are offscreen as the user doesn't need to see them, but they
-    // are needed to hold onto out of play cards.
+    // Setup deck in bottom left corner
     mCardAnchor[10].SetPosition(-Card.WIDTH * 2, 1);
+    mCardAnchor[10].SetPosition(rem/2, height - Card.HEIGHT - 10);
+    mCardAnchor[10].SetMaxHeight(height-10);
+    // This is offscreen as the user doesn't need to see it, but it is
+    // needed to hold onto out of play cards.
     mCardAnchor[11].SetPosition(-Card.WIDTH * 2, 1);
   }
 
