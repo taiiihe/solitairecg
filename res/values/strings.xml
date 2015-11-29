@@ -23,7 +23,7 @@
     <string name="menu_golf">Golf</string>
     <string name="menu_klondike">Klondike (Solitaire)</string>
     <string name="menu_spider">Spider</string>
-    <string name="menu_newgame">New Game</string>
+    <string name="menu_selectgame">Select Game</string>
     <string name="menu_restart">Restart</string>
     <string name="menu_options">Options</string>
     <string name="menu_stats">Stats</string>

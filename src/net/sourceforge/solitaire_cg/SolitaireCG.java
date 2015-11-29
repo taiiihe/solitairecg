@@ -40,7 +40,7 @@ public class SolitaireCG extends Activity {
 
   public static String VERSION_NAME = "";
 
-  private static final int MENU_NEW_GAME     = 1;
+  private static final int MENU_SELECT_GAME  = 1;
   private static final int MENU_RESTART      = 2;
   private static final int MENU_OPTIONS      = 4;
   private static final int MENU_STATS        = 5;
@@ -118,7 +118,7 @@ public class SolitaireCG extends Activity {
   public boolean onCreateOptionsMenu(Menu menu) {
     super.onCreateOptionsMenu(menu);
 
-    SubMenu subMenu = menu.addSubMenu(0, MENU_NEW_GAME, 0, R.string.menu_newgame);
+    SubMenu subMenu = menu.addSubMenu(0, MENU_SELECT_GAME, 0, R.string.menu_selectgame);
     subMenu.add(0, MENU_FORTYTHIEVES, 0, R.string.menu_fortythieves);
     subMenu.add(0, MENU_FREECELL, 0, R.string.menu_freecell);
     subMenu.add(0, MENU_GOLF, 0, R.string.menu_golf);

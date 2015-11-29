@@ -15,8 +15,8 @@
   limitations under the License.
   -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/context_newgame"
-          android:title="@string/menu_newgame">
+    <item android:id="@+id/context_selectgame"
+          android:title="@string/menu_selectgame">
         <menu>
             <item android:id="@+id/context_fortythieves"
                   android:title="@string/menu_fortythieves" />
