@@ -41,7 +41,8 @@ public class SolitaireCG extends Activity {
   public static String VERSION_NAME = "";
 
   private static final int MENU_SELECT_GAME  = 1;
-  private static final int MENU_RESTART      = 2;
+  private static final int MENU_NEW          = 2;
+  private static final int MENU_RESTART      = 3;
   private static final int MENU_OPTIONS      = 4;
   private static final int MENU_STATS        = 5;
   private static final int MENU_HELP         = 6;
@@ -125,6 +126,7 @@ public class SolitaireCG extends Activity {
     subMenu.add(0, MENU_KLONDIKE, 0, R.string.menu_klondike);
     subMenu.add(0, MENU_SPIDER, 0, R.string.menu_spider);
 
+    menu.add(0, MENU_NEW, 0, R.string.menu_new);
     menu.add(0, MENU_RESTART, 0, R.string.menu_restart);
     menu.add(0, MENU_OPTIONS, 0, R.string.menu_options);
     menu.add(0, MENU_STATS, 0, R.string.menu_stats);
@@ -149,6 +151,9 @@ public class SolitaireCG extends Activity {
         break;
       case MENU_SPIDER:
         mSolitaireView.InitGame(Rules.SPIDER);
+        break;
+      case MENU_NEW:
+        mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.KLONDIKE));
         break;
       case MENU_RESTART:
         mSolitaireView.RestartGame();
@@ -195,6 +200,9 @@ public class SolitaireCG extends Activity {
         break;
       case R.id.context_spider:
         mSolitaireView.InitGame(Rules.SPIDER);
+        break;
+      case R.id.context_new:
+        mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.KLONDIKE));
         break;
       case R.id.context_restart:
         mSolitaireView.RestartGame();

@@ -30,6 +30,8 @@
                   android:title="@string/menu_spider" />
         </menu>
     </item>
+    <item android:id="@+id/context_new"
+          android:title="@string/menu_new" />
     <item android:id="@+id/context_restart"
           android:title="@string/menu_restart" />
     <item android:id="@+id/context_options"
