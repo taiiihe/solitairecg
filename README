@@ -34,6 +34,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Migrate Solitaire options to Klondike and Vegas game menu items
   * Add menu item New to start a new game of the same solitaire type
   * Rename menu item New Game to Select Game
   * Make spider deck visible and remove deal menu item

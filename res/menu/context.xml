@@ -24,10 +24,16 @@
                   android:title="@string/menu_freecell" />
             <item android:id="@+id/context_golf"
                   android:title="@string/menu_golf" />
-            <item android:id="@+id/context_klondike"
-                  android:title="@string/menu_klondike" />
+            <item android:id="@+id/context_klondike_dealone"
+                  android:title="@string/menu_klondike_dealone" />
+            <item android:id="@+id/context_klondike_dealthree"
+                  android:title="@string/menu_klondike_dealthree" />
             <item android:id="@+id/context_spider"
                   android:title="@string/menu_spider" />
+            <item android:id="@+id/context_vegas_dealone"
+                  android:title="@string/menu_vegas_dealone" />
+            <item android:id="@+id/context_vegas_dealthree"
+                  android:title="@string/menu_vegas_dealthree" />
         </menu>
     </item>
     <item android:id="@+id/context_new"

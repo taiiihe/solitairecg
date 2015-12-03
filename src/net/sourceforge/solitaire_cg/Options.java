@@ -42,15 +42,6 @@ public class Options {
 
     final boolean displayTime = solitaire.GetSettings().getBoolean("DisplayTime", true);
     ((CheckBox)solitaire.findViewById(R.id.display_time)).setChecked(displayTime);
-
-    // Solitaire stuff
-    final boolean dealThree = solitaire.GetSettings().getBoolean("KlondikeDealThree", true);
-    final boolean styleNormal = solitaire.GetSettings().getBoolean("KlondikeStyleNormal", true);
-    ((RadioButton)solitaire.findViewById(R.id.deal_3)).setChecked(dealThree);
-    ((RadioButton)solitaire.findViewById(R.id.deal_1)).setChecked(!dealThree);
-    ((RadioButton)solitaire.findViewById(R.id.style_normal)).setChecked(styleNormal);
-    ((RadioButton)solitaire.findViewById(R.id.style_vegas)).setChecked(!styleNormal);
-
     // Spider stuff
     final int suits = solitaire.GetSettings().getInt("SpiderSuits", 4);
     ((RadioButton)solitaire.findViewById(R.id.suits_4)).setChecked(suits == 4);
@@ -84,22 +75,6 @@ public class Options {
         if (displayTime != ((CheckBox)solitaire.findViewById(R.id.display_time)).isChecked()) {
           editor.putBoolean("DisplayTime", !displayTime);
           commit = true;
-        }
-
-        if (dealThree != ((RadioButton)solitaire.findViewById(R.id.deal_3)).isChecked()) {
-          editor.putBoolean("KlondikeDealThree", !dealThree);
-          commit = true;
-          if (type == Rules.KLONDIKE) {
-            newGame = true;
-          }
-        }
-        
-        if (styleNormal != ((RadioButton)solitaire.findViewById(R.id.style_normal)).isChecked()) {
-          editor.putBoolean("KlondikeStyleNormal", !styleNormal);
-          commit = true;
-          if (type == Rules.KLONDIKE) {
-            newGame = true;
-          }
         }
 
         int newSuits = 1;

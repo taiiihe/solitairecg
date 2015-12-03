@@ -21,8 +21,11 @@
     <string name="menu_fortythieves">Forty Thieves</string>
     <string name="menu_freecell">Freecell</string>
     <string name="menu_golf">Golf</string>
-    <string name="menu_klondike">Klondike (Solitaire)</string>
+    <string name="menu_klondike_dealone">Klondike (deal 1)</string>
+    <string name="menu_klondike_dealthree">Klondike (deal 3)</string>
     <string name="menu_spider">Spider</string>
+    <string name="menu_vegas_dealone">Vegas (deal 1)</string>
+    <string name="menu_vegas_dealthree">Vegas (deal 3)</string>
     <string name="menu_selectgame">Select Game</string>
     <string name="menu_new">New</string>
     <string name="menu_restart">Restart</string>
@@ -33,11 +36,6 @@
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear Stats</string>
-    <string name="klondike_options">Klondike Options</string>
-    <string name="deal_1">Deal 1 Card</string>
-    <string name="deal_3">Deal 3 Cards</string>
-    <string name="normal">Normal Style</string>
-    <string name="vegas">Vegas Style</string>
     <string name="spider_options">Spider Options</string>
     <string name="suits_4">Four Suits</string>
     <string name="suits_2">Two Suits</string>

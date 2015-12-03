@@ -8,8 +8,11 @@ several single player card games for your enjoyment.
  &nbsp; <a href="#forty-thieves">Forty Thieves</a><br>
  &nbsp; <a href="#freecell">Freecell</a><br>
  &nbsp; <a href="#golf">Golf</a><br>
- &nbsp; <a href="#klondike">Klondike (Solitaire)</a><br>
+ &nbsp; <a href="#klondike-deal1">Klondike (deal 1)</a><br>
+ &nbsp; <a href="#klondike-deal3">Klondike (deal 3)</a><br>
  &nbsp; <a href="#spider">Spider</a><br>
+ &nbsp; <a href="#vegas-deal1">Vegas (deal 1)</a><br>
+ &nbsp; <a href="#vegas-deal3">Vegas (deal 3)</a><br>
 <a href="#readme">README</a><br>
 <a href="#copying">COPYING</a><br>
 </p>
@@ -204,7 +207,14 @@ Tap the stock to turn up one card onto the waste.
 Empty all tableaus.
 </p>
 
-<h2 id="klondike">Klondike (Solitaire)</h2>
+<h2 id="klondike-deal1">Klondike (deal 1)</h2>
+<p>
+Play is similar to <a href="#klondike-deal3">Klondike (deal 3)</a>.
+The key difference is that cards are dealt from the stock one at a
+time.
+</p>
+
+<h2 id="klondike-deal3">Klondike (deal 3)</h2>
 <p>
 Probably the most popular single deck solitaire game.  Also known as
 solitaire or patience.
@@ -238,14 +248,11 @@ Move all cards to the foundations.
 </p>
 <p>
 <b>Variations</b><br>
-<i>Vegas Solitaire</i> - Use Klondike options "Deal 1 Card" and
-"Vegas Style".<br>
-Play is the same as in Klondike, but instead of turning up cards from
-the stock three at a time indefinitely, the cards are turned up one at
-a time, going through the stock only once. A score is kept.<br>
-<br>
-For <i>Klondike</i> use default Klondike options "Deal 3 Cards" and
-"Normal Style".<br>
+<i>Stock Deal</i> - Turn up from the stock either: <i>(deal 1)</i> one
+card at at time, or <i>(deal 3)</i> three cards at a time.<br>
+<i>Style</i> - Go through the stock either: <i>(Klondike)</i> infinite
+times, or <i>(<a href="#vegas-deal1">Vegas</a>)</i> only once and keep
+score.
 </p>
 
 <h2 id="spider">Spider</h2>
@@ -284,4 +291,18 @@ Play is the same as Spider.  Less suits is easier to win.<br>
 Play is the same as Spider and the easiest to win.<br>
 <br>
 For <i>Spider</i> use default Spider option "Four Suits".<br>
+</p>
+
+<h2 id="vegas-deal1">Vegas (deal 1)</h2>
+<p>
+Play is similar to <a href="#klondike-deal3">Klondike (deal 3)</a>.
+The key differences are that cards are dealt from the stock one at a
+time, and only one pass through the stock is permitted.
+</p>
+
+<h2 id="vegas-deal3">Vegas (deal 3)</h2>
+<p>
+Play is similar to <a href="#klondike-deal3">Klondike (deal 3)</a>.
+The key difference is that only three passes through the stock are
+permitted.
 </p>

@@ -69,49 +69,6 @@
     <TextView
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:text="@string/klondike_options"
-      android:focusable="true"
-      android:textSize="20sp"
-      android:gravity="center"
-    />
-
-    <RadioGroup
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:orientation="horizontal">
-
-      <RadioButton android:id="@+id/deal_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/deal_3" />
-
-      <RadioButton android:id="@+id/deal_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/deal_1" />
-
-    </RadioGroup>
-    <RadioGroup
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:orientation="horizontal">
-
-      <RadioButton android:id="@+id/style_normal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/normal" />
-
-      <RadioButton android:id="@+id/style_vegas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/vegas" />
-
-    </RadioGroup>
-    <TextView
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
       android:text="@string/spider_options"
       android:focusable="true"
       android:textSize="20sp"

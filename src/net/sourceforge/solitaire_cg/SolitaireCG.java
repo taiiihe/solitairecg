@@ -46,11 +46,14 @@ public class SolitaireCG extends Activity {
   private static final int MENU_OPTIONS      = 4;
   private static final int MENU_STATS        = 5;
   private static final int MENU_HELP         = 6;
-  private static final int MENU_FORTYTHIEVES = 7;
-  private static final int MENU_FREECELL     = 8;
-  private static final int MENU_GOLF         = 9;
-  private static final int MENU_KLONDIKE     = 10;
-  private static final int MENU_SPIDER       = 11;
+  private static final int MENU_FORTYTHIEVES       = 7;
+  private static final int MENU_FREECELL           = 8;
+  private static final int MENU_GOLF               = 9;
+  private static final int MENU_KLONDIKE_DEALONE   = 10;
+  private static final int MENU_KLONDIKE_DEALTHREE = 11;
+  private static final int MENU_SPIDER             = 12;
+  private static final int MENU_VEGAS_DEALONE      = 13;
+  private static final int MENU_VEGAS_DEALTHREE    = 14;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -123,8 +126,11 @@ public class SolitaireCG extends Activity {
     subMenu.add(0, MENU_FORTYTHIEVES, 0, R.string.menu_fortythieves);
     subMenu.add(0, MENU_FREECELL, 0, R.string.menu_freecell);
     subMenu.add(0, MENU_GOLF, 0, R.string.menu_golf);
-    subMenu.add(0, MENU_KLONDIKE, 0, R.string.menu_klondike);
+    subMenu.add(0, MENU_KLONDIKE_DEALONE, 0, R.string.menu_klondike_dealone);
+    subMenu.add(0, MENU_KLONDIKE_DEALTHREE, 0, R.string.menu_klondike_dealthree);
     subMenu.add(0, MENU_SPIDER, 0, R.string.menu_spider);
+    subMenu.add(0, MENU_VEGAS_DEALONE, 0, R.string.menu_vegas_dealone);
+    subMenu.add(0, MENU_VEGAS_DEALTHREE, 0, R.string.menu_vegas_dealthree);
 
     menu.add(0, MENU_NEW, 0, R.string.menu_new);
     menu.add(0, MENU_RESTART, 0, R.string.menu_restart);
@@ -136,6 +142,7 @@ public class SolitaireCG extends Activity {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
+    SharedPreferences.Editor editor = GetSettings().edit();
     switch (item.getItemId()) {
       case MENU_FORTYTHIEVES:
         mSolitaireView.InitGame(Rules.FORTYTHIEVES);
@@ -146,11 +153,32 @@ public class SolitaireCG extends Activity {
       case MENU_GOLF:
         mSolitaireView.InitGame(Rules.GOLF);
         break;
-      case MENU_KLONDIKE:
+      case MENU_KLONDIKE_DEALONE:
+        editor.putBoolean("KlondikeDealThree", false);
+        editor.putBoolean("KlondikeStyleNormal", true);
+        editor.commit();
         mSolitaireView.InitGame(Rules.KLONDIKE);
+        break;
+      case MENU_KLONDIKE_DEALTHREE:
+        editor.putBoolean("KlondikeDealThree", true);
+        editor.putBoolean("KlondikeStyleNormal", true);
+        editor.commit();
+	mSolitaireView.InitGame(Rules.KLONDIKE);
         break;
       case MENU_SPIDER:
         mSolitaireView.InitGame(Rules.SPIDER);
+        break;
+      case MENU_VEGAS_DEALONE:
+        editor.putBoolean("KlondikeDealThree", false);
+        editor.putBoolean("KlondikeStyleNormal", false);
+        editor.commit();
+        mSolitaireView.InitGame(Rules.KLONDIKE);
+        break;
+      case MENU_VEGAS_DEALTHREE:
+        editor.putBoolean("KlondikeDealThree", true);
+        editor.putBoolean("KlondikeStyleNormal", false);
+        editor.commit();
+	mSolitaireView.InitGame(Rules.KLONDIKE);
         break;
       case MENU_NEW:
         mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.KLONDIKE));
@@ -185,6 +213,7 @@ public class SolitaireCG extends Activity {
   // options menu is not accessible or available.
   @Override
   public boolean onContextItemSelected(MenuItem item) {
+    SharedPreferences.Editor editor = GetSettings().edit();
     switch (item.getItemId()) {
       case R.id.context_fortythieves:
         mSolitaireView.InitGame(Rules.FORTYTHIEVES);
@@ -195,11 +224,32 @@ public class SolitaireCG extends Activity {
       case R.id.context_golf:
         mSolitaireView.InitGame(Rules.GOLF);
         break;
-      case R.id.context_klondike:
+      case R.id.context_klondike_dealone:
+        editor.putBoolean("KlondikeDealThree", false);
+        editor.putBoolean("KlondikeStyleNormal", true);
+        editor.commit();
+        mSolitaireView.InitGame(Rules.KLONDIKE);
+        break;
+      case R.id.context_klondike_dealthree:
+        editor.putBoolean("KlondikeDealThree", true);
+        editor.putBoolean("KlondikeStyleNormal", true);
+        editor.commit();
         mSolitaireView.InitGame(Rules.KLONDIKE);
         break;
       case R.id.context_spider:
         mSolitaireView.InitGame(Rules.SPIDER);
+        break;
+      case R.id.context_vegas_dealone:
+        editor.putBoolean("KlondikeDealThree", false);
+        editor.putBoolean("KlondikeStyleNormal", false);
+        editor.commit();
+        mSolitaireView.InitGame(Rules.KLONDIKE);
+        break;
+      case R.id.context_vegas_dealthree:
+        editor.putBoolean("KlondikeDealThree", true);
+        editor.putBoolean("KlondikeStyleNormal", false);
+        editor.commit();
+        mSolitaireView.InitGame(Rules.KLONDIKE);
         break;
       case R.id.context_new:
         mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.KLONDIKE));
