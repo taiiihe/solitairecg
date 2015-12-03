@@ -42,12 +42,6 @@ public class Options {
 
     final boolean displayTime = solitaire.GetSettings().getBoolean("DisplayTime", true);
     ((CheckBox)solitaire.findViewById(R.id.display_time)).setChecked(displayTime);
-    // Spider stuff
-    final int suits = solitaire.GetSettings().getInt("SpiderSuits", 4);
-    ((RadioButton)solitaire.findViewById(R.id.suits_4)).setChecked(suits == 4);
-    ((RadioButton)solitaire.findViewById(R.id.suits_2)).setChecked(suits == 2);
-    ((RadioButton)solitaire.findViewById(R.id.suits_1)).setChecked(suits == 1);
-
     // Automove 
     final int autoMove = solitaire.GetSettings().getInt("AutoMoveLevel", Rules.AUTO_MOVE_ALWAYS);
     ((RadioButton)solitaire.findViewById(R.id.auto_move_always)).setChecked(autoMove == Rules.AUTO_MOVE_ALWAYS);
@@ -70,21 +64,6 @@ public class Options {
         if (displayTime != ((CheckBox)solitaire.findViewById(R.id.display_time)).isChecked()) {
           editor.putBoolean("DisplayTime", !displayTime);
           commit = true;
-        }
-
-        int newSuits = 1;
-        if (((RadioButton)solitaire.findViewById(R.id.suits_4)).isChecked()) {
-          newSuits = 4;
-        } else if (((RadioButton)solitaire.findViewById(R.id.suits_2)).isChecked()) {
-          newSuits = 2;
-        }
-
-        if (newSuits != suits) {
-          editor.putInt("SpiderSuits", newSuits);
-          commit = true;
-          if (type == Rules.SPIDER) {
-            newGame = true;
-          }
         }
 
         int newAutoMove = Rules.AUTO_MOVE_NEVER;

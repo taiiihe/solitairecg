@@ -34,6 +34,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Migrate Spider options to Spider, Tarantula and Black Widow menu items
   * Migrate Freecell options to Freecell and Baker's Game menu items
   * Migrate Solitaire options to Klondike and Vegas game menu items
   * Add menu item New to start a new game of the same solitaire type

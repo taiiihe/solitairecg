@@ -6,12 +6,14 @@ several single player card games for your enjoyment.
 <a href="#general">General</a><br>
 <a href="#terms">Terminology</a><br>
  &nbsp; <a href="#bakersgame">Baker's Game</a><br>
- &nbsp; <a href="#forty-thieves">Forty Thieves</a><br>
+ &nbsp; <a href="#blackwidow">Black Widow</a><br>
+ &nbsp; <a href="#fortythieves">Forty Thieves</a><br>
  &nbsp; <a href="#freecell">Freecell</a><br>
  &nbsp; <a href="#golf">Golf</a><br>
  &nbsp; <a href="#klondike-deal1">Klondike (deal 1)</a><br>
  &nbsp; <a href="#klondike-deal3">Klondike (deal 3)</a><br>
  &nbsp; <a href="#spider">Spider</a><br>
+ &nbsp; <a href="#tarantula">Tarantula</a><br>
  &nbsp; <a href="#vegas-deal1">Vegas (deal 1)</a><br>
  &nbsp; <a href="#vegas-deal3">Vegas (deal 3)</a><br>
 <a href="#readme">README</a><br>
@@ -65,12 +67,6 @@ Game play may be customized with the following options:
     be moved manually.<br><br>
   </li>
 </ul>
-<p>
-Card game variations are available as game options.  See each game
-below for variations.<br>
-<i>Note that selecting an option different than the current game will
-result in a new game.</i>
-</p>
 <p>
 Current game statistics are available, such as wins and losses.
 </p>
@@ -127,7 +123,14 @@ Play is the similar to <a href="#freecell">Freecell</a> except
 tableaus build down in suit.
 </p>
 
-<h2 id="forty-thieves">Forty Thieves</h2>
+<h2 id="blackwidow">Black Widow</h2>
+<p>
+Play is the same as <a href="#spider">Spider</a> except there is only
+one suit.  Less suits is easier to play.  See also <a
+href="#tarantula">Tarantula</a>.
+</p>
+
+<h2 id="fortythieves">Forty Thieves</h2>
 <p>
 A widely known two deck solitaire game.
 </p>
@@ -289,13 +292,16 @@ Arrange all cards in builds in suit from King down to Ace.
 </p>
 <p>
 <b>Variations</b><br>
-<i>Tarantula</i> - Use Spider option "Two Suits".<br>
-Play is the same as Spider.  Less suits is easier to win.<br>
-<br>
-<i>Black Widow</i> - Use Spider option "One Suit".<br>
-Play is the same as Spider and the easiest to win.<br>
-<br>
-For <i>Spider</i> use default Spider option "Four Suits".<br>
+<i><a href="#blackwidow">Black Widow</a></i> - Use one suit only.  Less
+suits is easier to play.<br>
+<i><a href="#tarantula">Tarantula</a></i> - Use two suits.</br>
+<i>Spider</i> -  Use four suits.
+</p>
+
+<h2 id="tarantula">Tarantula</h2>
+<p>
+Play is the same as <a href="#spider">Spider</a> except there are only
+two suits.  See also <a href="#blackwidow">Black Widow</a>.
 </p>
 
 <h2 id="vegas-deal1">Vegas (deal 1)</h2>

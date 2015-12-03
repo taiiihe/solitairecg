@@ -47,14 +47,16 @@ public class SolitaireCG extends Activity {
   private static final int MENU_STATS        = 5;
   private static final int MENU_HELP         = 6;
   private static final int MENU_BAKERSGAME         = 7;
-  private static final int MENU_FORTYTHIEVES       = 8;
-  private static final int MENU_FREECELL           = 9;
-  private static final int MENU_GOLF               = 10;
-  private static final int MENU_KLONDIKE_DEALONE   = 11;
-  private static final int MENU_KLONDIKE_DEALTHREE = 12;
-  private static final int MENU_SPIDER             = 13;
-  private static final int MENU_VEGAS_DEALONE      = 14;
-  private static final int MENU_VEGAS_DEALTHREE    = 15;
+  private static final int MENU_BLACKWIDOW         = 8;
+  private static final int MENU_FORTYTHIEVES       = 9;
+  private static final int MENU_FREECELL           = 10;
+  private static final int MENU_GOLF               = 11;
+  private static final int MENU_KLONDIKE_DEALONE   = 12;
+  private static final int MENU_KLONDIKE_DEALTHREE = 13;
+  private static final int MENU_SPIDER             = 14;
+  private static final int MENU_TARANTULA          = 15;
+  private static final int MENU_VEGAS_DEALONE      = 16;
+  private static final int MENU_VEGAS_DEALTHREE    = 17;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -125,12 +127,14 @@ public class SolitaireCG extends Activity {
 
     SubMenu subMenu = menu.addSubMenu(0, MENU_SELECT_GAME, 0, R.string.menu_selectgame);
     subMenu.add(0, MENU_BAKERSGAME, 0, R.string.menu_bakersgame);
+    subMenu.add(0, MENU_BLACKWIDOW, 0, R.string.menu_blackwidow);
     subMenu.add(0, MENU_FORTYTHIEVES, 0, R.string.menu_fortythieves);
     subMenu.add(0, MENU_FREECELL, 0, R.string.menu_freecell);
     subMenu.add(0, MENU_GOLF, 0, R.string.menu_golf);
     subMenu.add(0, MENU_KLONDIKE_DEALONE, 0, R.string.menu_klondike_dealone);
     subMenu.add(0, MENU_KLONDIKE_DEALTHREE, 0, R.string.menu_klondike_dealthree);
     subMenu.add(0, MENU_SPIDER, 0, R.string.menu_spider);
+    subMenu.add(0, MENU_TARANTULA, 0, R.string.menu_tarantula);
     subMenu.add(0, MENU_VEGAS_DEALONE, 0, R.string.menu_vegas_dealone);
     subMenu.add(0, MENU_VEGAS_DEALTHREE, 0, R.string.menu_vegas_dealthree);
 
@@ -150,6 +154,11 @@ public class SolitaireCG extends Activity {
         editor.putBoolean("FreecellBuildBySuit", true);
         editor.commit();
         mSolitaireView.InitGame(Rules.FREECELL);
+        break;
+      case MENU_BLACKWIDOW:
+        editor.putInt("SpiderSuits", 1);
+        editor.commit();
+        mSolitaireView.InitGame(Rules.SPIDER);
         break;
       case MENU_FORTYTHIEVES:
         mSolitaireView.InitGame(Rules.FORTYTHIEVES);
@@ -175,6 +184,13 @@ public class SolitaireCG extends Activity {
 	mSolitaireView.InitGame(Rules.KLONDIKE);
         break;
       case MENU_SPIDER:
+        editor.putInt("SpiderSuits", 4);
+        editor.commit();
+        mSolitaireView.InitGame(Rules.SPIDER);
+        break;
+      case MENU_TARANTULA:
+        editor.putInt("SpiderSuits", 2);
+        editor.commit();
         mSolitaireView.InitGame(Rules.SPIDER);
         break;
       case MENU_VEGAS_DEALONE:
@@ -229,6 +245,11 @@ public class SolitaireCG extends Activity {
         editor.commit();
         mSolitaireView.InitGame(Rules.FREECELL);
         break;
+      case R.id.context_blackwidow:
+        editor.putInt("SpiderSuits", 1);
+        editor.commit();
+        mSolitaireView.InitGame(Rules.SPIDER);
+        break;
       case R.id.context_fortythieves:
         mSolitaireView.InitGame(Rules.FORTYTHIEVES);
         break;
@@ -253,6 +274,13 @@ public class SolitaireCG extends Activity {
         mSolitaireView.InitGame(Rules.KLONDIKE);
         break;
       case R.id.context_spider:
+        editor.putInt("SpiderSuits", 4);
+        editor.commit();
+        mSolitaireView.InitGame(Rules.SPIDER);
+        break;
+      case R.id.context_tarantula:
+        editor.putInt("SpiderSuits", 2);
+        editor.commit();
         mSolitaireView.InitGame(Rules.SPIDER);
         break;
       case R.id.context_vegas_dealone:

@@ -19,12 +19,14 @@
 <resources>
     <string name="app_name">SolitaireCG</string>
     <string name="menu_bakersgame">Baker\'s Game</string>
+    <string name="menu_blackwidow">Black Widow</string>
     <string name="menu_fortythieves">Forty Thieves</string>
     <string name="menu_freecell">Freecell</string>
     <string name="menu_golf">Golf</string>
     <string name="menu_klondike_dealone">Klondike (deal 1)</string>
     <string name="menu_klondike_dealthree">Klondike (deal 3)</string>
     <string name="menu_spider">Spider</string>
+    <string name="menu_tarantula">Tarantula</string>
     <string name="menu_vegas_dealone">Vegas (deal 1)</string>
     <string name="menu_vegas_dealthree">Vegas (deal 3)</string>
     <string name="menu_selectgame">Select Game</string>
@@ -37,10 +39,6 @@
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear Stats</string>
-    <string name="spider_options">Spider Options</string>
-    <string name="suits_4">Four Suits</string>
-    <string name="suits_2">Two Suits</string>
-    <string name="suits_1">One Suit</string>
     <string name="display_options">Display Options</string>
     <string name="normal_cards">Normal Card Art</string>
     <string name="big_cards">Large Card Art</string>

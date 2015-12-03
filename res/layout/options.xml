@@ -69,38 +69,6 @@
     <TextView
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:text="@string/spider_options"
-      android:focusable="true"
-      android:textSize="20sp"
-      android:gravity="center"
-    />
-
-    <RadioGroup
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:orientation="horizontal">
-
-      <RadioButton android:id="@+id/suits_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/suits_4" />
-
-      <RadioButton android:id="@+id/suits_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/suits_2" />
-
-      <RadioButton android:id="@+id/suits_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/suits_1" />
-
-    </RadioGroup>
-
-    <TextView
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
       android:text="@string/auto_move"
       android:focusable="true"
       android:textSize="20sp"
