@@ -46,14 +46,15 @@ public class SolitaireCG extends Activity {
   private static final int MENU_OPTIONS      = 4;
   private static final int MENU_STATS        = 5;
   private static final int MENU_HELP         = 6;
-  private static final int MENU_FORTYTHIEVES       = 7;
-  private static final int MENU_FREECELL           = 8;
-  private static final int MENU_GOLF               = 9;
-  private static final int MENU_KLONDIKE_DEALONE   = 10;
-  private static final int MENU_KLONDIKE_DEALTHREE = 11;
-  private static final int MENU_SPIDER             = 12;
-  private static final int MENU_VEGAS_DEALONE      = 13;
-  private static final int MENU_VEGAS_DEALTHREE    = 14;
+  private static final int MENU_BAKERSGAME         = 7;
+  private static final int MENU_FORTYTHIEVES       = 8;
+  private static final int MENU_FREECELL           = 9;
+  private static final int MENU_GOLF               = 10;
+  private static final int MENU_KLONDIKE_DEALONE   = 11;
+  private static final int MENU_KLONDIKE_DEALTHREE = 12;
+  private static final int MENU_SPIDER             = 13;
+  private static final int MENU_VEGAS_DEALONE      = 14;
+  private static final int MENU_VEGAS_DEALTHREE    = 15;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -123,6 +124,7 @@ public class SolitaireCG extends Activity {
     super.onCreateOptionsMenu(menu);
 
     SubMenu subMenu = menu.addSubMenu(0, MENU_SELECT_GAME, 0, R.string.menu_selectgame);
+    subMenu.add(0, MENU_BAKERSGAME, 0, R.string.menu_bakersgame);
     subMenu.add(0, MENU_FORTYTHIEVES, 0, R.string.menu_fortythieves);
     subMenu.add(0, MENU_FREECELL, 0, R.string.menu_freecell);
     subMenu.add(0, MENU_GOLF, 0, R.string.menu_golf);
@@ -144,10 +146,17 @@ public class SolitaireCG extends Activity {
   public boolean onOptionsItemSelected(MenuItem item) {
     SharedPreferences.Editor editor = GetSettings().edit();
     switch (item.getItemId()) {
+      case MENU_BAKERSGAME:
+        editor.putBoolean("FreecellBuildBySuit", true);
+        editor.commit();
+        mSolitaireView.InitGame(Rules.FREECELL);
+        break;
       case MENU_FORTYTHIEVES:
         mSolitaireView.InitGame(Rules.FORTYTHIEVES);
         break;
       case MENU_FREECELL:
+        editor.putBoolean("FreecellBuildBySuit", false); //BuildByAlternateColor
+        editor.commit();
         mSolitaireView.InitGame(Rules.FREECELL);
         break;
       case MENU_GOLF:
@@ -215,10 +224,17 @@ public class SolitaireCG extends Activity {
   public boolean onContextItemSelected(MenuItem item) {
     SharedPreferences.Editor editor = GetSettings().edit();
     switch (item.getItemId()) {
+      case R.id.context_bakersgame:
+        editor.putBoolean("FreecellBuildBySuit", true);
+        editor.commit();
+        mSolitaireView.InitGame(Rules.FREECELL);
+        break;
       case R.id.context_fortythieves:
         mSolitaireView.InitGame(Rules.FORTYTHIEVES);
         break;
       case R.id.context_freecell:
+        editor.putBoolean("FreecellBuildBySuit", false); //BuildByAlternateColor
+        editor.commit();
         mSolitaireView.InitGame(Rules.FREECELL);
         break;
       case R.id.context_golf:

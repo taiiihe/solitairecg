@@ -18,6 +18,7 @@
   -->
 <resources>
     <string name="app_name">SolitaireCG</string>
+    <string name="menu_bakersgame">Baker\'s Game</string>
     <string name="menu_fortythieves">Forty Thieves</string>
     <string name="menu_freecell">Freecell</string>
     <string name="menu_golf">Golf</string>
@@ -40,9 +41,6 @@
     <string name="suits_4">Four Suits</string>
     <string name="suits_2">Two Suits</string>
     <string name="suits_1">One Suit</string>
-    <string name="freecell_options">Freecell Options</string>
-    <string name="by_alternate_color">Build By Alternate Color</string>
-    <string name="by_suit">Build By Suit</string>
     <string name="display_options">Display Options</string>
     <string name="normal_cards">Normal Card Art</string>
     <string name="big_cards">Large Card Art</string>

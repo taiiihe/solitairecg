@@ -243,9 +243,9 @@ class RulesFreecell extends Rules {
   @Override
   public String GetPrettyGameTypeString() {
     if ( ! mBySuit ) {
-      return "Freecell Build By Alternate Color";
+      return "Freecell";
     } else {
-      return "Freecell Build By Suit";
+      return "Baker\'s Game";
     }
   }
 }
