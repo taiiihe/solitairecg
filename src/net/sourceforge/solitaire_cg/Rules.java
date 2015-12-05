@@ -101,7 +101,7 @@ public abstract class Rules {
   }
 
   public void RefreshOptions() {
-    mAutoMoveLevel = mView.GetSettings().getInt("AutoMoveLevel", Rules.AUTO_MOVE_ALWAYS);
+    mAutoMoveLevel = mView.GetSettings().getInt("AutoMoveLevel", Rules.AUTO_MOVE_FLING_ONLY);
     mWasFling = false;
   }
 

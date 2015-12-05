@@ -43,7 +43,7 @@ public class Options {
     final boolean displayTime = solitaire.GetSettings().getBoolean("DisplayTime", true);
     ((CheckBox)solitaire.findViewById(R.id.display_time)).setChecked(displayTime);
     // Automove 
-    final int autoMove = solitaire.GetSettings().getInt("AutoMoveLevel", Rules.AUTO_MOVE_ALWAYS);
+    final int autoMove = solitaire.GetSettings().getInt("AutoMoveLevel", Rules.AUTO_MOVE_FLING_ONLY);
     ((RadioButton)solitaire.findViewById(R.id.auto_move_always)).setChecked(autoMove == Rules.AUTO_MOVE_ALWAYS);
     ((RadioButton)solitaire.findViewById(R.id.auto_move_fling_only)).setChecked(autoMove == Rules.AUTO_MOVE_FLING_ONLY);
     ((RadioButton)solitaire.findViewById(R.id.auto_move_never)).setChecked(autoMove == Rules.AUTO_MOVE_NEVER);
