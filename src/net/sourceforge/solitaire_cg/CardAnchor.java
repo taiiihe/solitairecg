@@ -526,6 +526,17 @@ class SeqSink extends CardAnchor {
     }
     return false;
   }
+
+  @Override
+  public void Draw(DrawMaster drawMaster, Canvas canvas) {
+    if (mCardCount == 0) {
+      drawMaster.DrawEmptyAnchor(canvas, mX, mY, mDone);
+      drawMaster.DrawAnchorText(canvas, mX, mY, "A");
+    } else {
+      drawMaster.DrawCard(canvas, mCard[mCardCount-1]);
+    }
+  }
+
 }
 
 // Regular color alternating solitaire stack

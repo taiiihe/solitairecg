@@ -155,6 +155,14 @@ public class DrawMaster {
     }
   }
 
+  public void DrawAnchorText(Canvas canvas, float x, float y, String text) {
+    // Draw text, usually a single letter, in center of card anchor
+    mGrnTxtPaint.getTextBounds(text, 0, text.length(), textBounds);
+    int newX = (int) x + Card.WIDTH/2;
+    int newY = (int) y + (Card.HEIGHT + textBounds.height()) / 2;
+    canvas.drawText(text, newX, newY, mGrnTxtPaint);
+  }
+
   public void DrawBackground(Canvas canvas) {
     canvas.drawRect(0, 0, mScreenWidth, mScreenHeight, mBGPaint);
   }

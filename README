@@ -34,6 +34,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Add letter A to center of empty card foundations
   * Add visible card count to deck and remove other count indicators
   * Change auto move option default from always to fling only
   * Migrate Spider options to Spider, Tarantula and Black Widow menu items
