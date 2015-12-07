@@ -228,18 +228,4 @@ class RulesFortyThieves extends Rules {
     return "Forty Thieves";
   }
 
-  @Override
-  public boolean HasString() {
-    return true;
-  }
-
-  @Override
-  public String GetString() {
-    int cardsLeft = mCardAnchor[18].GetCount();
-    if (cardsLeft == 1) {
-      return "1 card left";
-    }
-    return cardsLeft + " cards left";
-  }
-
 }

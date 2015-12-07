@@ -226,18 +226,4 @@ class RulesGolf extends Rules {
     return "Golf";
   }
 
-  @Override
-  public boolean HasString() {
-    return true;
-  }
-
-  @Override
-  public String GetString() {
-    int cardsLeft = mCardAnchor[0].GetCount();
-    if (cardsLeft == 1) {
-      return "1 card left";
-    }
-    return cardsLeft + " cards left";
-  }
-
 }

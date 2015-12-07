@@ -476,6 +476,7 @@ class DealFrom extends CardAnchor {
       drawMaster.DrawEmptyAnchor(canvas, mX, mY, mDone);
     } else {
       drawMaster.DrawHiddenCard(canvas, mCard[mCardCount-1]);
+      drawMaster.DrawCardCount(canvas, mCard[mCardCount-1], this.GetCount());
     }
   }
 }

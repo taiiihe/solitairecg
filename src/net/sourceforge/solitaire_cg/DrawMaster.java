@@ -22,6 +22,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -50,6 +51,8 @@ public class DrawMaster {
   private int roundEdge;    // Round curve on each card corner
   private int cardOutline;  // Card outline border thickness in pixels
   private int offset;       // Whitespace between card border and font
+  private Paint mGrnTxtPaint;
+  private Paint mWhitePaint;
   private Paint mTimePaint;
   private Paint mMenuPaint;
   private int mLastSeconds;
@@ -58,6 +61,8 @@ public class DrawMaster {
 
   private Bitmap mBoardBitmap;
   private Canvas mBoardCanvas;
+
+  private final Rect textBounds = new Rect(); //don't new this up in a draw method
 
 
   public DrawMaster(Context context, int width, int height, int dpi) {
@@ -86,6 +91,14 @@ public class DrawMaster {
     cardOutline = 1 + (mDpi-40)/160;
     offset = mDpi/160;
 
+    mGrnTxtPaint = new Paint();
+    mGrnTxtPaint.setARGB(255, 0, 128, 0);
+    mGrnTxtPaint.setTextSize(18 * mDpi/160);
+    mGrnTxtPaint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD));
+    mGrnTxtPaint.setTextAlign(Paint.Align.CENTER);
+    mGrnTxtPaint.setAntiAlias(true);
+    mWhitePaint = new Paint();
+    mWhitePaint.setARGB(255, 255, 255, 255);
     mTimePaint = new Paint();
     mTimePaint.setTextSize(18 * mDpi/160);
     mTimePaint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD));
@@ -119,6 +132,18 @@ public class DrawMaster {
     float x = card.GetX();
     float y = card.GetY();
     canvas.drawBitmap(mCardHidden, x, y, mSuitPaint);
+  }
+
+  public void DrawCardCount(Canvas canvas, Card card, int count) {
+    // Draw card count inside a white circle in lower right corner of card
+    String twoDigits = "00";
+    mGrnTxtPaint.getTextBounds(twoDigits, 0, twoDigits.length(), textBounds);
+    float radius = textBounds.width()*5/8;
+    float x = card.GetX() + Card.WIDTH - radius - cardOutline*2;
+    float y = card.GetY() + Card.HEIGHT - radius + textBounds.height()/2 - cardOutline*2;
+    float cy = y + textBounds.exactCenterY();
+    canvas.drawCircle(x, cy, radius, mWhitePaint);
+    canvas.drawText(String.valueOf(count), x, y, mGrnTxtPaint);
   }
 
   public void DrawEmptyAnchor(Canvas canvas, float x, float y, boolean done) {

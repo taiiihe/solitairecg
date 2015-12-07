@@ -210,18 +210,4 @@ class RulesSpider extends Rules {
     }
   }
 
-  @Override
-  public boolean HasString() {
-    return true;
-  }
-
-  @Override
-  public String GetString() {
-    int dealCount = mCardAnchor[10].GetCount() / 10;
-    if (dealCount == 1) {
-      return "1 deal left";
-    }
-    return dealCount + " deals left";
-  }
-
 }
