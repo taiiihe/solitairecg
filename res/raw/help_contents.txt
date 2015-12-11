@@ -294,7 +294,7 @@ Arrange all cards in builds in suit from King down to Ace.
 <b>Variations</b><br>
 <i><a href="#blackwidow">Black Widow</a></i> - Use one suit only.  Less
 suits is easier to play.<br>
-<i><a href="#tarantula">Tarantula</a></i> - Use two suits.</br>
+<i><a href="#tarantula">Tarantula</a></i> - Use two suits.<br>
 <i>Spider</i> -  Use four suits.
 </p>
 
