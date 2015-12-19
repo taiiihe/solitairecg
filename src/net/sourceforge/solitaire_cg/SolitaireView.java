@@ -696,6 +696,9 @@ public class SolitaireView extends View {
             ChangeViewMode(MODE_CARD_SELECT);
           } else {
             ChangeViewMode(MODE_NORMAL);
+            // For Golf type game: Try TapCard because card hasn't
+            // moved and ExpandStack() is false
+            anchor.TapCard(x, y);
           }
         } else if (mSpeed.IsFast() && mMoveCard.GetCount() == 1) {
           if (!mRules.Fling(mMoveCard)) {
@@ -857,6 +860,7 @@ public class SolitaireView extends View {
       }
       Refresh();
     }
+    mRules.MarkBlockedCards();  //E.g. TriPeaks
     mRules.SetIgnoreEvents(oldIgnore);
   }
 

@@ -55,8 +55,9 @@ public class SolitaireCG extends Activity {
   private static final int MENU_KLONDIKE_DEALTHREE = 13;
   private static final int MENU_SPIDER             = 14;
   private static final int MENU_TARANTULA          = 15;
-  private static final int MENU_VEGAS_DEALONE      = 16;
-  private static final int MENU_VEGAS_DEALTHREE    = 17;
+  private static final int MENU_TRIPEAKS           = 16;
+  private static final int MENU_VEGAS_DEALONE      = 17;
+  private static final int MENU_VEGAS_DEALTHREE    = 18;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -135,6 +136,7 @@ public class SolitaireCG extends Activity {
     subMenu.add(0, MENU_KLONDIKE_DEALTHREE, 0, R.string.menu_klondike_dealthree);
     subMenu.add(0, MENU_SPIDER, 0, R.string.menu_spider);
     subMenu.add(0, MENU_TARANTULA, 0, R.string.menu_tarantula);
+    subMenu.add(0, MENU_TRIPEAKS, 0, R.string.menu_tripeaks);
     subMenu.add(0, MENU_VEGAS_DEALONE, 0, R.string.menu_vegas_dealone);
     subMenu.add(0, MENU_VEGAS_DEALTHREE, 0, R.string.menu_vegas_dealthree);
 
@@ -192,6 +194,9 @@ public class SolitaireCG extends Activity {
         editor.putInt("SpiderSuits", 2);
         editor.commit();
         mSolitaireView.InitGame(Rules.SPIDER);
+        break;
+      case MENU_TRIPEAKS:
+        mSolitaireView.InitGame(Rules.TRIPEAKS);
         break;
       case MENU_VEGAS_DEALONE:
         editor.putBoolean("KlondikeDealThree", false);
@@ -282,6 +287,9 @@ public class SolitaireCG extends Activity {
         editor.putInt("SpiderSuits", 2);
         editor.commit();
         mSolitaireView.InitGame(Rules.SPIDER);
+        break;
+      case R.id.context_tripeaks:
+        mSolitaireView.InitGame(Rules.TRIPEAKS);
         break;
       case R.id.context_vegas_dealone:
         editor.putBoolean("KlondikeDealThree", false);

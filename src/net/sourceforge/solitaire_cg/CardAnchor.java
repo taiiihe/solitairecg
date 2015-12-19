@@ -31,7 +31,8 @@ class CardAnchor {
   public static final int FREECELL_STACK = 6;
   public static final int FREECELL_HOLD = 7;
   public static final int GOLF_WASTE = 8;
-  public static final int GENERIC_ANCHOR = 9;
+  public static final int GOLF_STACK = 9;
+  public static final int GENERIC_ANCHOR = 10;
 
   private int mNumber;
   protected Rules mRules;
@@ -87,6 +88,9 @@ class CardAnchor {
         break;
       case GOLF_WASTE:
         ret = new GolfWaste();
+        break;
+      case GOLF_STACK:
+        ret = new GolfStack();
         break;
       case GENERIC_ANCHOR:
         ret = new GenericAnchor();
@@ -810,6 +814,42 @@ class GolfWaste extends CardAnchor {
       return true;
     }
     return false;
+  }
+}
+
+// Golf stack.
+// Supports drag card, fling card, and tap card to send card to home.
+// Does not support builds.
+class GolfStack extends CardAnchor {
+
+  @Override
+  public Card GrabCard(float x, float y) {
+    Card ret = null;
+    // Only pick up non-blocked (non-hidden) cards
+    if (GetHiddenCount() <= 0 && mCardCount > 0 && IsOverCard(x, y)) {
+      ret = PopCard();
+    }
+    return ret;
+  }
+
+  @Override
+  public boolean TapCard(float x, float y) {
+    if (GetHiddenCount() <= 0 && mCardCount > 0 && IsOverCard(x, y)) {
+      mRules.EventAlert(Rules.EVENT_STACK_TAP, this);
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public void Draw(DrawMaster drawMaster, Canvas canvas) {
+    for (int i = 0; i < mCardCount; i++) {
+      if (i < mHiddenCount) {
+        drawMaster.DrawHiddenCard(canvas, mCard[i]);
+      } else {
+        drawMaster.DrawCard(canvas, mCard[i]);
+      }
+    }
   }
 }
 

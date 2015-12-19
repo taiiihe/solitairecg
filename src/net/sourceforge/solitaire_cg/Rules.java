@@ -28,6 +28,7 @@ public abstract class Rules {
   public static final int GOLF         = 3;
   public static final int KLONDIKE     = 4;
   public static final int SPIDER       = 5;
+  public static final int TRIPEAKS     = 6;
 
   public static final int EVENT_INVALID = -1;
   public static final int EVENT_DEAL = 1;
@@ -35,6 +36,7 @@ public abstract class Rules {
   public static final int EVENT_FLING = 3;
   public static final int EVENT_SMART_MOVE = 4;
   public static final int EVENT_DEAL_NEXT = 5;
+  public static final int EVENT_STACK_TAP = 6;
 
   public static final int AUTO_MOVE_ALWAYS = 2;
   public static final int AUTO_MOVE_FLING_ONLY = 1;
@@ -80,6 +82,7 @@ public abstract class Rules {
   public void SetCarryOverScore(int score) {}
   public int GetScore() { return 0; }
   public void AddDealCount() {}
+  public void MarkBlockedCards() {}
 
   public int CountFreeSpaces() { return 0; }
   protected void SignalWin() { mWon = true; mView.DisplayWin(); }
@@ -123,6 +126,9 @@ public abstract class Rules {
         break;
       case SPIDER:
         ret = new RulesSpider();
+        break;
+      case TRIPEAKS:
+        ret = new RulesTriPeaks();
         break;
     }
 

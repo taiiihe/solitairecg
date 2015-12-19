@@ -14,6 +14,7 @@ several single player card games for your enjoyment.
  &nbsp; <a href="#klondike-deal3">Klondike (deal 3)</a><br>
  &nbsp; <a href="#spider">Spider</a><br>
  &nbsp; <a href="#tarantula">Tarantula</a><br>
+ &nbsp; <a href="#tripeaks">TriPeaks</a><br>
  &nbsp; <a href="#vegas-deal1">Vegas (deal 1)</a><br>
  &nbsp; <a href="#vegas-deal3">Vegas (deal 3)</a><br>
 <a href="#readme">README</a><br>
@@ -302,6 +303,30 @@ suits is easier to play.<br>
 <p>
 Play is the same as <a href="#spider">Spider</a> except there are only
 two suits.  See also <a href="#blackwidow">Black Widow</a>.
+</p>
+
+<h2 id="tripeaks">TriPeaks</h2>
+<p>
+Count up and down and try to remove all three peaks.
+</p>
+<p>
+<b>Layout</b><br>
+Stock in upper right with waste to the left.  On the rows below, are
+three pyramids which comprise the tableaus.
+</p>
+<p>
+<b>Play</b><br>
+Waste builds up or down regardless of suit.  A king may not be built upon.
+</p>
+<p>
+Tableaus do not allow building.  Top cards can only be moved to the waste.
+</p>
+<p>
+Tap the stock to turn up one card onto the waste.
+</p>
+<p>
+<b>Goal</b><br>
+Empty all tableaus.
 </p>
 
 <h2 id="vegas-deal1">Vegas (deal 1)</h2>
