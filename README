@@ -34,6 +34,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Add single tap card to Golf game to send card home
   * Add TriPeaks solitaire game and help rules
 
 ### Release v2.2 on Dec 11, 2015

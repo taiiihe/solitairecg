@@ -822,6 +822,68 @@ class GolfWaste extends CardAnchor {
 // Does not support builds.
 class GolfStack extends CardAnchor {
 
+  protected int mSpacing;
+  protected int mMaxHeight;
+
+  public GolfStack() {
+    mSpacing = GetMaxSpacing();
+    mMaxHeight = Card.HEIGHT;
+  }
+
+  @Override
+  public void SetMaxHeight(int maxHeight) {
+    mMaxHeight = maxHeight;
+    CheckSizing();
+    SetPosition(mX, mY);
+  }
+
+  @Override
+  protected void SetCardPosition(int idx) {
+    if (idx < mHiddenCount) {
+      mCard[idx].SetPosition(mX, mY + Card.HIDDEN_SPACING * idx);
+    } else {
+      int startY = mHiddenCount * Card.HIDDEN_SPACING;
+      int y = (int)mY + startY + (idx - mHiddenCount) * mSpacing;
+      mCard[idx].SetPosition(mX, y);
+    }
+  }
+
+  @Override
+  public Card PopCard() {
+    Card ret = super.PopCard();
+    CheckSizing();
+    return ret;
+  }
+
+  private void CheckSizing() {
+    if (mCardCount < 2 || mCardCount - mHiddenCount < 2) {
+      mSpacing = GetMaxSpacing();
+      return;
+    }
+    int max = mMaxHeight;
+    int hidden = mHiddenCount;
+    int showing = mCardCount - hidden;
+    int spaceLeft = max - (hidden * Card.HIDDEN_SPACING) - Card.HEIGHT;
+    int spacing = spaceLeft / (showing - 1);
+
+    if (spacing < Card.SMALL_SPACING && hidden > 1) {
+      spaceLeft = max - Card.HIDDEN_SPACING - Card.HEIGHT;
+      spacing = spaceLeft / (showing - 1);
+    } else {
+      if (spacing > GetMaxSpacing()) {
+        spacing = GetMaxSpacing();
+      }
+    }
+    if (spacing != mSpacing) {
+      mSpacing = spacing;
+      SetPosition(mX, mY);
+    }
+  }
+  // This can't be a constant as Card.HEIGHT isn't constant.
+  protected int GetMaxSpacing() {
+    return Card.HEIGHT/3;
+  }
+
   @Override
   public Card GrabCard(float x, float y) {
     Card ret = null;

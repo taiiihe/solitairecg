@@ -35,6 +35,8 @@ class RulesGolf extends Rules {
 
     // Middle anchor stacks
     for (int i = 0; i < 7; i++) {
+      mCardAnchor[i+2] = CardAnchor.CreateAnchor(CardAnchor.GOLF_STACK, i+2, this);
+      /* CWG
       mCardAnchor[i+2] = CardAnchor.CreateAnchor(CardAnchor.GENERIC_ANCHOR, i+2, this);
       mCardAnchor[i+2].SetStartSeq(GenericAnchor.START_NONE);
       mCardAnchor[i+2].SetSuit(GenericAnchor.SUIT_ANY);
@@ -42,7 +44,7 @@ class RulesGolf extends Rules {
       mCardAnchor[i+2].SetPickup(GenericAnchor.PACK_ONE);
       mCardAnchor[i+2].SetDropoff(GenericAnchor.PACK_NONE);
       mCardAnchor[i+2].SetDisplay(GenericAnchor.DISPLAY_ALL);
-
+      */
     }
 
     if (map != null) {
@@ -121,6 +123,8 @@ class RulesGolf extends Rules {
         }
         mMoveHistory.push(new Move(0, 1, 1, true, false));
       }
+    } else if (event == EVENT_STACK_TAP) {
+      TryToSink(anchor);
     } else if (event == EVENT_STACK_ADD) {
       if ((mCardAnchor[0].GetCount() + mCardAnchor[1].GetCount()) == 52) {
         SignalWin();
