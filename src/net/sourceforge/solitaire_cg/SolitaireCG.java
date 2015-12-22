@@ -316,6 +316,10 @@ public class SolitaireCG extends Activity {
       case R.id.context_help:
         DisplayHelp();
         break;
+      case R.id.context_exit:
+        mSolitaireView.SaveGame();
+        finish();
+        break;
       default:
         return super.onContextItemSelected(item);
     }

@@ -54,4 +54,6 @@
           android:title="@string/menu_stats" />
     <item android:id="@+id/context_help"
           android:title="@string/menu_help" />
+    <item android:id="@+id/context_exit"
+          android:title="@string/menu_exit" />
 </menu>
