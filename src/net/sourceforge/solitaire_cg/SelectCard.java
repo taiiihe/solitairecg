@@ -30,10 +30,8 @@ class SelectCard {
   private CardAnchor mCardAnchor;
   private float mLeftEdge;
   private float mRightEdge;
-  private int mHeight;
 
   public SelectCard() {
-    mHeight = 1;
     mCard = new Card[MAX_CARDS];
     Clear();
   }
@@ -50,7 +48,6 @@ class SelectCard {
     }
   }
 
-  public void SetHeight(int height) { mHeight = height; }
   public boolean IsValid() { return mValid; }
 
   public CardAnchor GetAnchor() { return mCardAnchor; }

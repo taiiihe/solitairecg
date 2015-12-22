@@ -19,7 +19,6 @@ package net.sourceforge.solitaire_cg;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -90,7 +89,6 @@ public class SolitaireView extends View {
   private long mStartTime;
   private boolean mTimePaused;
 
-  private int mCurrentGameType;
   private boolean mGameStarted;
   private boolean mPaused;
   private boolean mDisplayTime;
@@ -127,7 +125,6 @@ public class SolitaireView extends View {
     mSpeed = new Speed();
     mReplay = new Replay(this, mAnimateCard);
 
-    Resources res = context.getResources();
     mSplashText = context.getResources().getText(R.string.splash_text);
     mWinText = context.getResources().getText(R.string.win_text);
     mContext = context;
@@ -139,7 +136,6 @@ public class SolitaireView extends View {
   public void InitGame(int gameType) {
     int oldScore = 0;
     String oldGameType = "None";
-    mCurrentGameType = gameType;
 
     // We really really want focus :)
     setFocusable(true);
@@ -463,7 +459,6 @@ public class SolitaireView extends View {
   protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     mDrawMaster.SetScreenSize(w, h);
     mRules.Resize(w, h);
-    mSelectCard.SetHeight(h);
   }
 
   public void DisplaySplash() {
@@ -852,11 +847,6 @@ public class SolitaireView extends View {
       }
       if (move.GetAddDealCount()) {
         mRules.AddDealCount();
-      }
-      if (mUndoStorage[0].GetValue() == 1) {
-        for (int i = 0; i < mCardAnchor[from].GetCount(); i++) {
-          Card card = mCardAnchor[from].GetCards()[i];
-        }
       }
       Refresh();
     }

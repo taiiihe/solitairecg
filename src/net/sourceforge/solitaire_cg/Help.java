@@ -16,8 +16,6 @@
 
 package net.sourceforge.solitaire_cg;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
@@ -44,7 +42,7 @@ public class Help {
     // Alternatively:
     //   webView.loadUrl("file:///android_res/raw/help_contents.txt");
     String helpText = "<html><body>"
-      + "<h1>SolitaireCG " + solitaire.VERSION_NAME + " Help</h1>"
+      + "<h1>SolitaireCG " + SolitaireCG.VERSION_NAME + " Help</h1>"
       + Utils.readRawTextFile(solitaire, R.raw.help_contents).replace("\n"," ")
         // Append README file
       + "<hr>"

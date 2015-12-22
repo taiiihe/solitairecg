@@ -504,7 +504,6 @@ class SeqSink extends CardAnchor {
     float x = card.GetX() + Card.WIDTH/2;
     float y = card.GetY() + Card.HEIGHT/2;
     Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
-    float my = mCardCount > 0 ? topCard.GetY() : mY;
 
     if (IsOverCard(x, y, close)) {
       if (moveCard.GetCount() == 1) {
@@ -553,7 +552,6 @@ class SuitSeqStack extends SeqStack {
     float x = card.GetX() + Card.WIDTH/2;
     float y = card.GetY() + Card.HEIGHT/2;
     Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
-    float my = mCardCount > 0 ? topCard.GetY() : mY;
 
     if (IsOverCard(x, y, close)) {
       if (topCard == null) {
@@ -600,7 +598,6 @@ class SpiderStack extends SeqStack {
     float x = card.GetX() + Card.WIDTH/2;
     float y = card.GetY() + Card.HEIGHT/2;
     Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
-    float my = mCardCount > 0 ? topCard.GetY() : mY;
 
     if (IsOverCard(x, y, close)) {
       if (topCard == null || card.GetValue() == topCard.GetValue() - 1) {
@@ -679,7 +676,6 @@ class FreecellStack extends SeqStack {
     float x = card.GetX() + Card.WIDTH/2;
     float y = card.GetY() + Card.HEIGHT/2;
     Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
-    float my = mCardCount > 0 ? topCard.GetY() : mY;
 
     if (IsOverCard(x, y, close)) {
       if (topCard == null) {
@@ -789,7 +785,6 @@ class GolfWaste extends CardAnchor {
     float x = card.GetX() + Card.WIDTH/2;
     float y = card.GetY() + Card.HEIGHT/2;
     Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
-    float my = mCardCount > 0 ? topCard.GetY() : mY;
 
     if (IsOverCard(x, y, close)) {
       if (moveCard.GetCount() == 1) {

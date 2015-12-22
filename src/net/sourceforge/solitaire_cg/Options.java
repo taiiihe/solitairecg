@@ -28,7 +28,6 @@ import android.widget.RadioButton;
 public class Options {
 
   public Options(final SolitaireCG solitaire, final DrawMaster drawMaster) {
-    final int type = solitaire.GetSettings().getInt("LastType", Rules.KLONDIKE);
 
     solitaire.setContentView(R.layout.options);
     View view = (View) solitaire.findViewById(R.id.options_view);

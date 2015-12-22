@@ -57,8 +57,7 @@ public class DrawMaster {
   private Paint mMenuPaint;
   private int mLastSeconds;
   private String mTimeString;
-  private Paint mScorePaint;
-
+  
   private Bitmap mBoardBitmap;
   private Canvas mBoardCanvas;
 
@@ -221,7 +220,6 @@ public class DrawMaster {
     w = drawable.getIntrinsicWidth();
     h = drawable.getIntrinsicHeight();
     int suitWidth = w/4;
-    int suitHeight = h;
     for (int i = 0; i < 4; i++) {
       suit[i] = Bitmap.createBitmap(w/4, h, Bitmap.Config.ARGB_4444);
       canvas = new Canvas(suit[i]);
@@ -246,7 +244,6 @@ public class DrawMaster {
     drawable = r.getDrawable(R.drawable.bigblackfont);
     w = drawable.getIntrinsicWidth();
     h = drawable.getIntrinsicHeight();
-    int fontWidth = w/13; // Same as for red below
     for (int i = 0; i < 13; i++) {
       blackFont[i] = Bitmap.createBitmap(w/13, h, Bitmap.Config.ARGB_4444);
       canvas = new Canvas(blackFont[i]);
