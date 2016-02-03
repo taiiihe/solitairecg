@@ -42,7 +42,7 @@ public class Help {
     // Alternatively:
     //   webView.loadUrl("file:///android_res/raw/help_contents.txt");
     String helpText = "<html><body>"
-      + "<h1>SolitaireCG " + SolitaireCG.VERSION_NAME + " Help</h1>"
+      + "<h1>" + String.format(solitaire.getString(R.string.help_window_title), SolitaireCG.VERSION_NAME) + "</h1>"
       + Utils.readRawTextFile(solitaire, R.raw.help_contents).replace("\n"," ")
         // Append README file
       + "<hr>"

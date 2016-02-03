@@ -268,7 +268,7 @@ class RulesTriPeaks extends Rules {
   }
   @Override
   public String GetPrettyGameTypeString() {
-    return "TriPeaks";
+    return mView.GetContext().getResources().getString(R.string.game_name_tripeaks);
   }
 
 }

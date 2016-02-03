@@ -243,9 +243,9 @@ class RulesFreecell extends Rules {
   @Override
   public String GetPrettyGameTypeString() {
     if ( ! mBySuit ) {
-      return "Freecell";
+      return mView.GetContext().getResources().getString(R.string.game_name_freecell);
     } else {
-      return "Baker\'s Game";
+      return mView.GetContext().getResources().getString(R.string.game_name_bakers_game);
     }
   }
 }

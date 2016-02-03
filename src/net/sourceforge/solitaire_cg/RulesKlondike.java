@@ -301,15 +301,15 @@ class RulesKlondike extends Rules {
   public String GetPrettyGameTypeString() {
     if (mDealsLeft == -1) {
       if (mDealThree) {
-        return "Klondike Dealing Three Cards";
+        return mView.GetContext().getResources().getString(R.string.game_name_klondike_three_cards);
       } else {
-        return "Klondike Dealing One Card";
+        return mView.GetContext().getResources().getString(R.string.game_name_klondike_one_card);
       }
     } else {
       if (mDealThree) {
-        return "Vegas Dealing Three Cards";
+        return mView.GetContext().getResources().getString(R.string.game_name_vegas_three_cards);
       } else {
-        return "Vegas Dealing One Card";
+        return mView.GetContext().getResources().getString(R.string.game_name_vegas_one_card);
       }
     }
   }

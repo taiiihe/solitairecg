@@ -227,7 +227,7 @@ class RulesGolf extends Rules {
   }
   @Override
   public String GetPrettyGameTypeString() {
-    return "Golf";
+    return mView.GetContext().getResources().getString(R.string.game_name_golf);
   }
 
 }

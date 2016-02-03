@@ -202,11 +202,11 @@ class RulesSpider extends Rules {
   public String GetPrettyGameTypeString() {
     int suits = mView.GetSettings().getInt("SpiderSuits", 4);
     if (suits == 1) {
-      return "Black Widow";
+      return mView.GetContext().getResources().getString(R.string.game_name_black_widow);
     } else if (suits == 2) {
-      return "Tarantula";
+      return mView.GetContext().getResources().getString(R.string.game_name_tarantula);
     } else {
-      return "Spider";
+      return mView.GetContext().getResources().getString(R.string.game_name_spider);
     }
   }
 

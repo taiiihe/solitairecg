@@ -49,20 +49,20 @@ public class Stats {
     }
 
     TextView tv = (TextView)solitaire.findViewById(R.id.text_title);
-    tv.setText(rules.GetPrettyGameTypeString() + " Statistics\n\n");
+    tv.setText(String.format(solitaire.getString(R.string.stats_for_game), rules.GetPrettyGameTypeString()) + "\n\n");
     tv = (TextView)solitaire.findViewById(R.id.text_wins);
-    tv.setText("Wins: " + wins + " Attempts: " + attempts);
+    tv.setText(String.format(solitaire.getString(R.string.stats_wins_and_attempts), wins, attempts));
     tv = (TextView)solitaire.findViewById(R.id.text_percentage);
-    tv.setText("Winning Percentage: " + String.format("%.2f", ratio) + "%");
+    tv.setText(String.format(solitaire.getString(R.string.stats_winning_percentage), String.format("%.2f", ratio)));
     if (bestTime != -1) {
       int seconds = (bestTime / 1000) % 60;
       int minutes = bestTime / 60000;
       tv = (TextView)solitaire.findViewById(R.id.text_best_time);
-      tv.setText("Fastest Time: " + String.format("%d:%02d", minutes, seconds));
+      tv.setText(String.format(solitaire.getString(R.string.stats_fastest_time), String.format("%d:%02d", minutes, seconds)));
     }
     if (rules.HasScore()) {
       tv = (TextView)solitaire.findViewById(R.id.text_high_score);
-      tv.setText("High Score: " + highScore);
+      tv.setText(String.format(solitaire.getString(R.string.stats_high_score), highScore));
     }
 
 

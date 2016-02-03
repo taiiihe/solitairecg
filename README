@@ -34,6 +34,8 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Enable translation of text strings
+
 ### Release v2.3 on Dec 31, 2015
   * Add Exit entry to alternate menu
   * Update eclipse files and remove unused code and imports

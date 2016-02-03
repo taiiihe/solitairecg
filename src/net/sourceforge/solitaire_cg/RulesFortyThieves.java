@@ -225,7 +225,7 @@ class RulesFortyThieves extends Rules {
   }
   @Override
   public String GetPrettyGameTypeString() {
-    return "Forty Thieves";
+    return mView.GetContext().getResources().getString(R.string.game_name_forty_thieves);
   }
 
 }

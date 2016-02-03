@@ -59,4 +59,33 @@
 TIP:  Long press ^ at bottom center of screen for alternate menu.
 </string>
     <string name="win_text">You Win!\n\nUse the menu to start a new game.</string>
+
+    <!-- Shown on the help window; argument is the version number of the SolitaireCG application -->
+    <string name="help_window_title">SolitaireCG %s Help</string>
+
+    <!-- Messages shown on the stats window -->
+
+    <!-- The argument is the pretty game name, such as "Klondike (Dealing Three)" or "Golf" -->
+    <string name="stats_for_game">%s Statistics</string>
+
+    <string name="stats_wins_and_attempts">Wins: %1$d Attempts: %2$d attempts</string>
+    <string name="stats_winning_percentage">Winning Percentage: %s%%</string>
+    <string name="stats_fastest_time">Fastest Time: %s</string>
+
+    <!-- The argument is the user's high score as an integer -->
+    <string name="stats_high_score">High Score: %s</string>
+
+    <!-- Each game's prettified, human-readable, formatted name -->
+    <string name="game_name_forty_thieves">Forty Thieves</string>
+    <string name="game_name_freecell">Freecell</string>
+    <string name="game_name_bakers_game">Baker\'s Game</string>
+    <string name="game_name_golf">Golf</string>
+    <string name="game_name_klondike_three_cards">Klondike Dealing Three Cards</string>
+    <string name="game_name_klondike_one_card">Klondike Dealing One Card</string>
+    <string name="game_name_vegas_three_cards">Vegas Dealing Three Cards</string>
+    <string name="game_name_vegas_one_card">Vegas Dealing One Card</string>
+    <string name="game_name_black_widow">Black Widow</string>
+    <string name="game_name_tarantula">Tarantula</string>
+    <string name="game_name_spider">Spider</string>
+    <string name="game_name_tripeaks">TriPeaks</string>
 </resources>
