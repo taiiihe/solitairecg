@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2016 Jack Phoenix <jack@countervandalism.net>
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<resources>
+    <string name="app_name">SolitaireCG</string>
+    <string name="menu_bakersgame">Bakerin peli</string>
+    <string name="menu_blackwidow">Musta leski</string>
+    <string name="menu_fortythieves">40 varasta</string>
+    <string name="menu_freecell">Vapaakenttä</string>
+    <string name="menu_golf">Golf</string>
+    <string name="menu_klondike_dealone">Klondike (jaa 1)</string>
+    <string name="menu_klondike_dealthree">Klondike (jaa 3)</string>
+    <string name="menu_spider">Hämähäkki</string>
+    <string name="menu_tarantula">Tarantella</string>
+    <string name="menu_tripeaks">TriPeaks</string>
+    <string name="menu_vegas_dealone">Vegas (jaa 1)</string>
+    <string name="menu_vegas_dealthree">Vegas (jaa 3)</string>
+    <string name="menu_selectgame">Valitse peli</string>
+    <string name="menu_new">Uusi</string>
+    <string name="menu_restart">Aloita alusta</string>
+    <string name="menu_options">Asetukset</string>
+    <string name="menu_stats">Tilastot</string>
+    <string name="menu_help">Ohjeet</string>
+    <string name="menu_exit">Poistu</string>
+    <string name="accept">Hyväksy</string>
+    <string name="cancel">Peruuta</string>
+    <string name="clear">Tyhjennä tilastot</string>
+    <string name="display_options">Näyttöasetukset</string>
+    <string name="normal_cards">Normaalit kortit</string>
+    <string name="big_cards">Isot kortit</string>
+    <string name="auto_move">Automaattinen siirto</string>
+    <string name="always">Aina</string>
+    <string name="fling_only">Vain heilautettaessa</string>
+    <string name="never">Ei koskaan</string>
+    <string name="display_time">Näytä aika</string>
+    <string name="readme_header">Lähdekoodin README-tiedosto</string>
+    <string name="copying_header">Lähdekoodin COPYING-tiedosto</string>
+    <string name="toast_restart_invalid">Peli loppui. Aloittaminen alusta ei ole mahdollista.</string>
+    <string name="toast_use_start_menu">Peli loppui. Käytä valikkoa aloittaaksesi uuden pelin.</string>
+    <string name="toast_no_undo_left">Kumoaminen ei ole mahdollista.</string>
+    <string name="splash_text">
+\n\n\n\n\n\n\n\n
+VINKKI:  Paina pitkään ^-merkkiä ruudun keskiosan alalaidassa tuodaksesi esiin vaihtoehtoisen valikon.
+</string>
+    <string name="win_text">Voitit!\n\nKäytä valikkoa aloittaaksesi uuden pelin.</string>
+    <string name="help_window_title">SolitaireCG:n version %s ohjeet</string>
+    <string name="stats_for_game">Tilastot - %s</string>
+    <string name="stats_wins_and_attempts">Voittoja: %1$d Yrityksiä: %2$d yritystä</string>
+    <string name="stats_winning_percentage">Voittoprosentti: %s%%</string>
+    <string name="stats_fastest_time">Nopein aika: %s</string>
+    <string name="stats_high_score">Ennätyspisteet: %s</string>
+    <string name="game_name_forty_thieves">40 varasta</string>
+    <string name="game_name_freecell">Vapaakenttä</string>
+    <string name="game_name_bakers_game">Bakerin peli</string>
+    <string name="game_name_golf">Golf</string>
+    <string name="game_name_klondike_three_cards">Klondike (kolme korttia)</string>
+    <string name="game_name_klondike_one_card">Klondike (yksi kortti)</string>
+    <string name="game_name_vegas_three_cards">Vegas (kolme korttia)</string>
+    <string name="game_name_vegas_one_card">Vegas (yksi kortti)</string>
+    <string name="game_name_black_widow">Musta leski</string>
+    <string name="game_name_tarantula">Tarantella</string>
+    <string name="game_name_spider">Hämähäkki</string>
+    <string name="game_name_tripeaks">TriPeaks</string>
+</resources>
