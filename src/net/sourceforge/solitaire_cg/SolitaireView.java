@@ -533,7 +533,7 @@ public class SolitaireView extends View {
       DrawBoard();
     }
     mDrawMaster.DrawLastBoard(canvas);
-    mDrawMaster.DrawAltMenuString(canvas, "^");
+    mDrawMaster.DrawAltMenuString(canvas, mRules.GetType(), "^");
     if (mDisplayTime) {
       mDrawMaster.DrawTime(canvas, mElapsed);
     }

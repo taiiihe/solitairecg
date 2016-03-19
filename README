@@ -34,6 +34,7 @@ Solitaire:    http://code.google.com/p/solitaire-for-android/
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Ensure alternate menu caret placed between card anchor columns
   * Add Finnish translation
   * Enable translation of text strings
 

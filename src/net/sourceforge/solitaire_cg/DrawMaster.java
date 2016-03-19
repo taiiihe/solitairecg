@@ -676,11 +676,19 @@ public class DrawMaster {
     canvas.drawText(mTimeString, mScreenWidth-10, mScreenHeight-10, mTimePaint);
   }
 
-  public void DrawAltMenuString(Canvas canvas, String text) {
+  public void DrawAltMenuString(Canvas canvas, int gameType, String text) {
+    int menuX;  // Text location placement between cards
+    if ( gameType == Rules.GOLF || gameType == Rules.KLONDIKE ) {
+      // Seven card anchor columns so place text to left of middle of screen
+      menuX = canvas.getWidth()/2 - (Card.WIDTH/2) - ((canvas.getWidth() - (Card.WIDTH * 7)) / 8 / 2);
+    } else {
+      // Even number of card anchor columns so place text in middle of screen
+      menuX = canvas.getWidth()/2;
+    }
     mMenuPaint.setARGB(255, 20, 20, 20);
-    canvas.drawText(text, canvas.getWidth()/2, mScreenHeight-9, mMenuPaint);
+    canvas.drawText(text, menuX, mScreenHeight-9, mMenuPaint);
     mMenuPaint.setARGB(255, 0, 0, 0);
-    canvas.drawText(text, canvas.getWidth()/2-1, mScreenHeight-10, mMenuPaint);
+    canvas.drawText(text, menuX, mScreenHeight-10, mMenuPaint);
   }
 
   public void DrawRulesString(Canvas canvas, String score) {
