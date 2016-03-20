@@ -26,14 +26,15 @@ few hardware buttons.  Original author is still Ken Magic.
 SolitaireCG is available under Apache License 2.0, see COPYING.
 See the source code for copyright owners.
 
-More information at respective web sites:
+To report an issue, download older APK files, and learn more about
+SolitaireCG see the project web site:
 
-SolitaireCG:  http://solitairecg.sourceforge.net/
-Solitaire:    http://code.google.com/p/solitaire-for-android/
+    http://solitairecg.sourceforge.net/
 
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Update README
   * Ensure alternate menu caret placed between card anchor columns
   * Add Finnish translation
   * Enable translation of text strings
