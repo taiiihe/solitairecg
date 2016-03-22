@@ -633,8 +633,8 @@ public class SolitaireView extends View {
     //   and near bottom center of screen
     //   and in both game and win mode.
     if ( !mHasMoved &&
-         ( (mDownPoint.x > (mMetrics.widthPixels*3/7)) &&
-           (mDownPoint.x < (mMetrics.widthPixels*4/7))
+         ( (mDownPoint.x > (mMetrics.widthPixels*4/11)) &&
+           (mDownPoint.x < (mMetrics.widthPixels*6/11))
          ) &&
          (mDownPoint.y > (mMetrics.heightPixels*5/7)) &&
          ( mViewMode==MODE_NORMAL ||
