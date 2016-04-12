@@ -67,6 +67,7 @@ public class SolitaireView extends View {
   private Rules mRules;
   private TextView mTextView;
   private AnimateCard mAnimateCard;
+  private int mDpi;
 
   private MoveCard mMoveCard;
   private SelectCard mSelectCard;
@@ -105,13 +106,13 @@ public class SolitaireView extends View {
     mMetrics = new DisplayMetrics();
     WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
     wm.getDefaultDisplay().getMetrics(mMetrics);
-    int dpi = mMetrics.densityDpi;
+    mDpi = mMetrics.densityDpi;
     // Some devices report incorrect DPI so fall back to default
-    if (dpi < 60)
-      dpi = 160;
+    if (mDpi < 60)
+      mDpi = 160;
 
     mDrawMaster = new DrawMaster(context, mMetrics.widthPixels,
-                                 mMetrics.heightPixels, dpi);
+                                 mMetrics.heightPixels, mDpi);
     mMoveCard = new MoveCard();
     mSelectCard = new SelectCard();
     mViewMode = MODE_NORMAL;
@@ -754,7 +755,7 @@ public class SolitaireView extends View {
     mSpeed.AddSpeed(dx, dy);
     switch (mViewMode) {
       case MODE_NORMAL:
-        if (Math.abs(mDownPoint.x - x) > 15 || Math.abs(mDownPoint.y - y) > 15) {
+        if (Math.abs(mDownPoint.x - x) > (15 * mDpi/160) || Math.abs(mDownPoint.y - y) > (15 * mDpi/160)) {
           for (int i = 0; i < mCardAnchor.length; i++) {
             if (mCardAnchor[i].CanMoveStack(mDownPoint.x, mDownPoint.y)) {
               mMoveCard.InitFromAnchor(mCardAnchor[i], x-Card.WIDTH/2, y-Card.HEIGHT/2);
@@ -768,7 +769,7 @@ public class SolitaireView extends View {
         mMoveCard.MovePosition(dx, dy);
         return true;
       case MODE_CARD_SELECT:
-        if (mSelectCard.IsOnCard() && Math.abs(mDownPoint.x - x) > 30) {
+        if (mSelectCard.IsOnCard() && Math.abs(mDownPoint.x - x) > (30 * mDpi/160)) {
           mMoveCard.InitFromSelectCard(mSelectCard, x, y);
           ChangeViewMode(MODE_MOVE_CARD);
         } else {
@@ -784,8 +785,8 @@ public class SolitaireView extends View {
   }
 
   private void CheckMoved(float x, float y) {
-    if (x >= mDownPoint.x - 30 && x <= mDownPoint.x + 30 &&
-        y >= mDownPoint.y - 30 && y <= mDownPoint.y + 30) {
+    if (x >= mDownPoint.x - (30 * mDpi/160) && x <= mDownPoint.x + (30 * mDpi/160) &&
+        y >= mDownPoint.y - (30 * mDpi/160) && y <= mDownPoint.y + (30 * mDpi/160)) {
       mHasMoved = false;
     } else {
       mHasMoved = true;
