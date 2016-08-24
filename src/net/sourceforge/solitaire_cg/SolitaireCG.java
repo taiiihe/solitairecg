@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015
+  Modified by Curtis Gedak 2015, 2016
 */
 package net.sourceforge.solitaire_cg;
 
@@ -44,18 +44,19 @@ public class SolitaireCG extends Activity {
   private static final int MENU_OPTIONS      = 4;
   private static final int MENU_STATS        = 5;
   private static final int MENU_HELP         = 6;
-  private static final int MENU_BAKERSGAME         = 7;
-  private static final int MENU_BLACKWIDOW         = 8;
-  private static final int MENU_FORTYTHIEVES       = 9;
-  private static final int MENU_FREECELL           = 10;
-  private static final int MENU_GOLF               = 11;
-  private static final int MENU_KLONDIKE_DEALONE   = 12;
-  private static final int MENU_KLONDIKE_DEALTHREE = 13;
-  private static final int MENU_SPIDER             = 14;
-  private static final int MENU_TARANTULA          = 15;
-  private static final int MENU_TRIPEAKS           = 16;
-  private static final int MENU_VEGAS_DEALONE      = 17;
-  private static final int MENU_VEGAS_DEALTHREE    = 18;
+  private static final int MENU_EXIT         = 7;
+  private static final int MENU_BAKERSGAME         = 8;
+  private static final int MENU_BLACKWIDOW         = 9;
+  private static final int MENU_FORTYTHIEVES       = 10;
+  private static final int MENU_FREECELL           = 11;
+  private static final int MENU_GOLF               = 12;
+  private static final int MENU_KLONDIKE_DEALONE   = 13;
+  private static final int MENU_KLONDIKE_DEALTHREE = 14;
+  private static final int MENU_SPIDER             = 15;
+  private static final int MENU_TARANTULA          = 16;
+  private static final int MENU_TRIPEAKS           = 17;
+  private static final int MENU_VEGAS_DEALONE      = 18;
+  private static final int MENU_VEGAS_DEALTHREE    = 19;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -143,6 +144,7 @@ public class SolitaireCG extends Activity {
     menu.add(0, MENU_OPTIONS, 0, R.string.menu_options);
     menu.add(0, MENU_STATS, 0, R.string.menu_stats);
     menu.add(0, MENU_HELP, 0, R.string.menu_help);
+    menu.add(0, MENU_EXIT, 0, R.string.menu_exit);
     return true;
   }
 
@@ -222,6 +224,10 @@ public class SolitaireCG extends Activity {
         break;
       case MENU_HELP:
         DisplayHelp();
+        break;
+      case MENU_EXIT:
+        mSolitaireView.SaveGame();
+        finish();
         break;
     }
 
