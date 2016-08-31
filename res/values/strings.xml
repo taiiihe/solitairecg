@@ -23,6 +23,7 @@
     <string name="menu_fortythieves">Forty Thieves</string>
     <string name="menu_freecell">Freecell</string>
     <string name="menu_golf">Golf</string>
+    <string name="menu_golf_wrapcards">Golf (wrap cards)</string>
     <string name="menu_klondike_dealone">Klondike (deal 1)</string>
     <string name="menu_klondike_dealthree">Klondike (deal 3)</string>
     <string name="menu_spider">Spider</string>
@@ -80,6 +81,7 @@ TIP:  Long press ^ at bottom center of screen for alternate menu.
     <string name="game_name_freecell">Freecell</string>
     <string name="game_name_bakers_game">Baker\'s Game</string>
     <string name="game_name_golf">Golf</string>
+    <string name="game_name_golf_wrapcards">Golf Wrap Cards</string>
     <string name="game_name_klondike_three_cards">Klondike Dealing Three Cards</string>
     <string name="game_name_klondike_one_card">Klondike Dealing One Card</string>
     <string name="game_name_vegas_three_cards">Vegas Dealing Three Cards</string>

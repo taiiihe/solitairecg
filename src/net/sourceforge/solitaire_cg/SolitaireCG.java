@@ -57,6 +57,7 @@ public class SolitaireCG extends Activity {
   private static final int MENU_TRIPEAKS           = 17;
   private static final int MENU_VEGAS_DEALONE      = 18;
   private static final int MENU_VEGAS_DEALTHREE    = 19;
+  private static final int MENU_GOLF_WRAPCARDS     = 20;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -131,6 +132,7 @@ public class SolitaireCG extends Activity {
     subMenu.add(0, MENU_FORTYTHIEVES, 0, R.string.menu_fortythieves);
     subMenu.add(0, MENU_FREECELL, 0, R.string.menu_freecell);
     subMenu.add(0, MENU_GOLF, 0, R.string.menu_golf);
+    subMenu.add(0, MENU_GOLF_WRAPCARDS, 0, R.string.menu_golf_wrapcards);
     subMenu.add(0, MENU_KLONDIKE_DEALONE, 0, R.string.menu_klondike_dealone);
     subMenu.add(0, MENU_KLONDIKE_DEALTHREE, 0, R.string.menu_klondike_dealthree);
     subMenu.add(0, MENU_SPIDER, 0, R.string.menu_spider);
@@ -171,6 +173,13 @@ public class SolitaireCG extends Activity {
         mSolitaireView.InitGame(Rules.FREECELL);
         break;
       case MENU_GOLF:
+        editor.putBoolean("GolfWrapCards", false); //No build on King
+        editor.commit();
+        mSolitaireView.InitGame(Rules.GOLF);
+        break;
+      case MENU_GOLF_WRAPCARDS:
+        editor.putBoolean("GolfWrapCards", true); //WrapCards (A,Q on K, etc.)
+        editor.commit();
         mSolitaireView.InitGame(Rules.GOLF);
         break;
       case MENU_KLONDIKE_DEALONE:
@@ -268,6 +277,13 @@ public class SolitaireCG extends Activity {
         mSolitaireView.InitGame(Rules.FREECELL);
         break;
       case R.id.context_golf:
+        editor.putBoolean("GolfWrapCards", false);  //No build on King
+        editor.commit();
+        mSolitaireView.InitGame(Rules.GOLF);
+        break;
+      case R.id.context_golf_wrapcards:
+        editor.putBoolean("GolfWrapCards", true); //WrapCards (A,Q on K, etc.)
+        editor.commit();
         mSolitaireView.InitGame(Rules.GOLF);
         break;
       case R.id.context_klondike_dealone:

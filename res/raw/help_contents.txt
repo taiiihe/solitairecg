@@ -10,6 +10,7 @@ several single player card games for your enjoyment.
  &nbsp; <a href="#fortythieves">Forty Thieves</a><br>
  &nbsp; <a href="#freecell">Freecell</a><br>
  &nbsp; <a href="#golf">Golf</a><br>
+ &nbsp; <a href="#golf-wrapcards">Golf (wrap cards)</a><br>
  &nbsp; <a href="#klondike-deal1">Klondike (deal 1)</a><br>
  &nbsp; <a href="#klondike-deal3">Klondike (deal 3)</a><br>
  &nbsp; <a href="#spider">Spider</a><br>
@@ -192,9 +193,9 @@ suit.
 
 <h2 id="golf">Golf</h2>
 <p>
-Count up and down and try to end with fewer than 4 cards showing.  The
+Count up and down and try to end with 4 or fewer cards showing.  The
 analogy with golf is the number of cards left in the tableaus after
-finishing the hand are strokes, and a game is golf hole.
+finishing the hand are golf strokes, and each game is a golf hole.
 </p>
 <p>
 <b>Layout</b><br>
@@ -214,6 +215,14 @@ Tap the stock to turn up one card onto the waste.
 <p>
 <b>Goal</b><br>
 Empty all tableaus.
+</p>
+
+<h2 id="golf-wrapcards">Golf (wrap cards)</h2>
+<p>
+Play is similar to <a href="#golf">Golf<a/> but easier.  The key
+difference is that a King may be built upon.  Play is allowed to wrap
+from King to Ace and vice versa which is known as
+"turning-the-corner".
 </p>
 
 <h2 id="klondike-deal1">Klondike (deal 1)</h2>

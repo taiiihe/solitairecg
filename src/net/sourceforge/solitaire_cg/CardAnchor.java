@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015
+  Modified by Curtis Gedak 2015, 2016
 */
 package net.sourceforge.solitaire_cg;
 
@@ -31,8 +31,9 @@ class CardAnchor {
   public static final int FREECELL_STACK = 6;
   public static final int FREECELL_HOLD = 7;
   public static final int GOLF_WASTE = 8;
-  public static final int GOLF_STACK = 9;
-  public static final int GENERIC_ANCHOR = 10;
+  public static final int GOLF_WRAPCARDS_WASTE = 9;
+  public static final int GOLF_STACK = 10;
+  public static final int GENERIC_ANCHOR = 11;
 
   private int mNumber;
   protected Rules mRules;
@@ -88,6 +89,9 @@ class CardAnchor {
         break;
       case GOLF_WASTE:
         ret = new GolfWaste();
+        break;
+      case GOLF_WRAPCARDS_WASTE:
+        ret = new GolfWrapCardsWaste();
         break;
       case GOLF_STACK:
         ret = new GolfStack();
@@ -784,15 +788,10 @@ class GolfWaste extends CardAnchor {
     Card card = moveCard.GetTopCard();
     float x = card.GetX() + Card.WIDTH/2;
     float y = card.GetY() + Card.HEIGHT/2;
-    Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
 
     if (IsOverCard(x, y, close)) {
       if (moveCard.GetCount() == 1) {
-        if (topCard != null && topCard.GetValue() != Card.KING &&
-            ((card.GetValue() == topCard.GetValue() + 1) ||
-             (card.GetValue() == topCard.GetValue() - 1))) {
-          return true;
-        }
+	return CanDropCard(card);
       }
     }
 
@@ -801,11 +800,79 @@ class GolfWaste extends CardAnchor {
 
   @Override
   public boolean DropSingleCard(Card card) {
+    return CanDropCard(card);
+  }
+
+  public boolean CanDropCard(Card card) {
     Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
+
     if (topCard != null && topCard.GetValue() != Card.KING &&
         ((card.GetValue() == topCard.GetValue() + 1) ||
          (card.GetValue() == topCard.GetValue() - 1))) {
-      //AddCard(card);
+      return true;
+    }
+    return false;
+  }
+}
+
+// Golf (wrap cards) waste pile.
+// Builds any suit in increasing or decreasing value.
+// Builds permitted on King, and turn-the-corner (e.g., Ace on King)
+class GolfWrapCardsWaste extends CardAnchor {
+
+  @Override
+  public Card GrabCard(float x, float y) { return null; }
+
+  @Override
+  public void AddCard(Card card) {
+    super.AddCard(card);
+    mRules.EventAlert(Rules.EVENT_STACK_ADD, this);
+  }
+
+  @Override
+  public boolean CanDropCard(MoveCard moveCard, int close) {
+    /* Called for every stack on drop of MoveCard
+     * Finds the stack that matches the coordinates,
+     * but passes logic over to CanBuildCard()
+     */
+    Card card = moveCard.GetTopCard();
+    float x = card.GetX() + Card.WIDTH/2;
+    float y = card.GetY() + Card.HEIGHT/2;
+
+    if (IsOverCard(x, y, close)) {
+      if (moveCard.GetCount() == 1) {
+	return CanBuildCard(card);
+      }
+    }
+
+    return false;
+  }
+
+  @Override
+  public boolean DropSingleCard(Card card) {
+    return CanBuildCard(card);
+  }
+
+  public boolean CanBuildCard(Card card) {
+    Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
+
+    // On Two through Queen can play one higher or one lower
+    if (topCard != null && topCard.GetValue() != Card.KING &&
+                           topCard.GetValue() != Card.ACE &&
+        ((card.GetValue() == topCard.GetValue() + 1) ||
+         (card.GetValue() == topCard.GetValue() - 1))) {
+      return true;
+    }
+   // On King can play Queen or Ace (turn-the-corner)
+   if (topCard != null && topCard.GetValue() == Card.KING &&
+        ((card.GetValue() == Card.ACE              ) ||
+        (card.GetValue() == topCard.GetValue() - 1))) {
+      return true;
+    }
+    // On Ace can play Two or King (turn-the-corner)
+    if (topCard != null && topCard.GetValue() == Card.ACE &&
+        ((card.GetValue() == topCard.GetValue() + 1) ||
+         (card.GetValue() == Card.KING             ))) {
       return true;
     }
     return false;

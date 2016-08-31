@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright 2015 Curtis Gedak
+  Copyright 2015, 2016 Curtis Gedak
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -28,6 +28,8 @@
                   android:title="@string/menu_freecell" />
             <item android:id="@+id/context_golf"
                   android:title="@string/menu_golf" />
+            <item android:id="@+id/context_golf_wrapcards"
+                  android:title="@string/menu_golf_wrapcards" />
             <item android:id="@+id/context_klondike_dealone"
                   android:title="@string/menu_klondike_dealone" />
             <item android:id="@+id/context_klondike_dealthree"

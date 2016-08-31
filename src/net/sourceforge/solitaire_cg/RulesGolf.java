@@ -1,5 +1,5 @@
 /*
-  Copyright 2015 Curtis Gedak
+  Copyright 2015, 2016 Curtis Gedak
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -20,9 +20,12 @@ import android.os.Bundle;
 
 class RulesGolf extends Rules {
 
+  private boolean mWrapCards;
+
   @Override
   public void Init(Bundle map) {
     mIgnoreEvents = true;
+    mWrapCards = mView.GetSettings().getBoolean("GolfWrapCards", false);
 
     // Nine total anchors for golf - Stock plus Waste plus 7 tableaus
     mCardCount = 52;
@@ -31,20 +34,15 @@ class RulesGolf extends Rules {
 
     // Top dealt from anchor and waste/sink anchor
     mCardAnchor[0] = CardAnchor.CreateAnchor(CardAnchor.DEAL_FROM, 0, this);
-    mCardAnchor[1] = CardAnchor.CreateAnchor(CardAnchor.GOLF_WASTE, 1, this);
+    if (!mWrapCards) {
+      mCardAnchor[1] = CardAnchor.CreateAnchor(CardAnchor.GOLF_WASTE, 1, this);
+    } else {
+      mCardAnchor[1] = CardAnchor.CreateAnchor(CardAnchor.GOLF_WRAPCARDS_WASTE, 1, this);
+    }
 
     // Middle anchor stacks
     for (int i = 0; i < 7; i++) {
       mCardAnchor[i+2] = CardAnchor.CreateAnchor(CardAnchor.GOLF_STACK, i+2, this);
-      /* CWG
-      mCardAnchor[i+2] = CardAnchor.CreateAnchor(CardAnchor.GENERIC_ANCHOR, i+2, this);
-      mCardAnchor[i+2].SetStartSeq(GenericAnchor.START_NONE);
-      mCardAnchor[i+2].SetSuit(GenericAnchor.SUIT_ANY);
-      mCardAnchor[i+2].SetWrap(false);
-      mCardAnchor[i+2].SetPickup(GenericAnchor.PACK_ONE);
-      mCardAnchor[i+2].SetDropoff(GenericAnchor.PACK_NONE);
-      mCardAnchor[i+2].SetDisplay(GenericAnchor.DISPLAY_ALL);
-      */
     }
 
     if (map != null) {
@@ -223,11 +221,20 @@ class RulesGolf extends Rules {
 
   @Override
   public String GetGameTypeString() {
-    return "Golf";
+    if (!mWrapCards) {
+      return "Golf";
+    } else {
+      return "GolfWrapCards";
+    }
   }
+
   @Override
   public String GetPrettyGameTypeString() {
-    return mView.GetContext().getResources().getString(R.string.game_name_golf);
+    if (!mWrapCards) {
+      return mView.GetContext().getResources().getString(R.string.game_name_golf);
+    } else {
+      return mView.GetContext().getResources().getString(R.string.game_name_golf_wrapcards);
+    }
   }
 
 }
