@@ -14,7 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015
+  Modified by Curtis Gedak 2015, 2016
   -->
 <resources>
     <string name="app_name">SolitaireCG</string>
@@ -68,7 +68,7 @@ TIP:  Long press ^ at bottom center of screen for alternate menu.
     <!-- The argument is the pretty game name, such as "Klondike (Dealing Three)" or "Golf" -->
     <string name="stats_for_game">%s Statistics</string>
 
-    <string name="stats_wins_and_attempts">Wins: %1$d Attempts: %2$d attempts</string>
+    <string name="stats_wins_and_attempts">Wins: %1$d Attempts: %2$d</string>
     <string name="stats_winning_percentage">Winning Percentage: %s%%</string>
     <string name="stats_fastest_time">Fastest Time: %s</string>
 
