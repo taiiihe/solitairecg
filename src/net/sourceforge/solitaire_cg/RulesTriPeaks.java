@@ -1,5 +1,5 @@
 /*
-  Copyright 2015 Curtis Gedak
+  Copyright 2015, 2016 Curtis Gedak
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -20,9 +20,12 @@ import android.os.Bundle;
 
 class RulesTriPeaks extends Rules {
 
+  private boolean mWrapCards;
+
   @Override
   public void Init(Bundle map) {
     mIgnoreEvents = true;
+    mWrapCards = mView.GetSettings().getBoolean("GolfWrapCards", false);
 
     // Thirty anchors for TriPeaks - Stock plus Waste plus 28 RowStack
     mCardCount = 52;
@@ -36,7 +39,11 @@ class RulesTriPeaks extends Rules {
 
     // Top dealt from deck anchor to waste/sink anchor
     mCardAnchor[28] = CardAnchor.CreateAnchor(CardAnchor.DEAL_FROM, 28, this);
-    mCardAnchor[29] = CardAnchor.CreateAnchor(CardAnchor.GOLF_WASTE, 29, this);
+    if (!mWrapCards) {
+      mCardAnchor[29] = CardAnchor.CreateAnchor(CardAnchor.GOLF_WASTE, 29, this);
+    } else {
+      mCardAnchor[29] = CardAnchor.CreateAnchor(CardAnchor.GOLF_WRAPCARDS_WASTE, 29, this);
+    }
 
     if (map != null) {
       // Do some assertions, default to a new game if we find an invalid state
@@ -264,11 +271,20 @@ class RulesTriPeaks extends Rules {
 
   @Override
   public String GetGameTypeString() {
-    return "TriPeaks";
+    if (!mWrapCards) {
+      return "TriPeaks";
+    } else {
+      return "TriPeaksWrapCards";
+    }
   }
+
   @Override
   public String GetPrettyGameTypeString() {
-    return mView.GetContext().getResources().getString(R.string.game_name_tripeaks);
+    if (!mWrapCards) {
+      return mView.GetContext().getResources().getString(R.string.game_name_tripeaks);
+    } else {
+      return mView.GetContext().getResources().getString(R.string.game_name_tripeaks_wrapcards);
+    }
   }
 
 }

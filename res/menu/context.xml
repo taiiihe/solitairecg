@@ -40,6 +40,8 @@
                   android:title="@string/menu_tarantula" />
             <item android:id="@+id/context_tripeaks"
                   android:title="@string/menu_tripeaks" />
+            <item android:id="@+id/context_tripeaks_wrapcards"
+                  android:title="@string/menu_tripeaks_wrapcards" />
             <item android:id="@+id/context_vegas_dealone"
                   android:title="@string/menu_vegas_dealone" />
             <item android:id="@+id/context_vegas_dealthree"

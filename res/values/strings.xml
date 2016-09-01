@@ -29,6 +29,7 @@
     <string name="menu_spider">Spider</string>
     <string name="menu_tarantula">Tarantula</string>
     <string name="menu_tripeaks">TriPeaks</string>
+    <string name="menu_tripeaks_wrapcards">TriPeaks (wrap cards)</string>
     <string name="menu_vegas_dealone">Vegas (deal 1)</string>
     <string name="menu_vegas_dealthree">Vegas (deal 3)</string>
     <string name="menu_selectgame">Select Game</string>
@@ -90,4 +91,5 @@ TIP:  Long press ^ at bottom center of screen for alternate menu.
     <string name="game_name_tarantula">Tarantula</string>
     <string name="game_name_spider">Spider</string>
     <string name="game_name_tripeaks">TriPeaks</string>
+    <string name="game_name_tripeaks_wrapcards">TriPeaks Wrap Cards</string>
 </resources>

@@ -16,6 +16,7 @@ several single player card games for your enjoyment.
  &nbsp; <a href="#spider">Spider</a><br>
  &nbsp; <a href="#tarantula">Tarantula</a><br>
  &nbsp; <a href="#tripeaks">TriPeaks</a><br>
+ &nbsp; <a href="#tripeaks-wrapcards">TriPeaks (wrap cards)</a><br>
  &nbsp; <a href="#vegas-deal1">Vegas (deal 1)</a><br>
  &nbsp; <a href="#vegas-deal3">Vegas (deal 3)</a><br>
 <a href="#readme">README</a><br>
@@ -336,6 +337,14 @@ Tap the stock to turn up one card onto the waste.
 <p>
 <b>Goal</b><br>
 Empty all tableaus.
+</p>
+
+<h2 id="tripeaks-wrapcards">TriPeaks (wrap cards)</h2>
+<p>
+Play is similar to <a href="#tripeaks">TriPeaks<a/> but easier.  The
+key difference is that a King may be built upon.  Play is allowed to
+wrap from King to Ace and vice versa which is known as
+"turning-the-corner".
 </p>
 
 <h2 id="vegas-deal1">Vegas (deal 1)</h2>

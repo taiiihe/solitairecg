@@ -58,6 +58,7 @@ public class SolitaireCG extends Activity {
   private static final int MENU_VEGAS_DEALONE      = 18;
   private static final int MENU_VEGAS_DEALTHREE    = 19;
   private static final int MENU_GOLF_WRAPCARDS     = 20;
+  private static final int MENU_TRIPEAKS_WRAPCARDS = 21;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -138,6 +139,7 @@ public class SolitaireCG extends Activity {
     subMenu.add(0, MENU_SPIDER, 0, R.string.menu_spider);
     subMenu.add(0, MENU_TARANTULA, 0, R.string.menu_tarantula);
     subMenu.add(0, MENU_TRIPEAKS, 0, R.string.menu_tripeaks);
+    subMenu.add(0, MENU_TRIPEAKS_WRAPCARDS, 0, R.string.menu_tripeaks_wrapcards);
     subMenu.add(0, MENU_VEGAS_DEALONE, 0, R.string.menu_vegas_dealone);
     subMenu.add(0, MENU_VEGAS_DEALTHREE, 0, R.string.menu_vegas_dealthree);
 
@@ -205,6 +207,13 @@ public class SolitaireCG extends Activity {
         mSolitaireView.InitGame(Rules.SPIDER);
         break;
       case MENU_TRIPEAKS:
+        editor.putBoolean("GolfWrapCards", false); //No build on King
+        editor.commit();
+        mSolitaireView.InitGame(Rules.TRIPEAKS);
+        break;
+      case MENU_TRIPEAKS_WRAPCARDS:
+        editor.putBoolean("GolfWrapCards", true); //WrapCards (A,Q on K, etc.)
+        editor.commit();
         mSolitaireView.InitGame(Rules.TRIPEAKS);
         break;
       case MENU_VEGAS_DEALONE:
@@ -309,6 +318,13 @@ public class SolitaireCG extends Activity {
         mSolitaireView.InitGame(Rules.SPIDER);
         break;
       case R.id.context_tripeaks:
+        editor.putBoolean("GolfWrapCards", false);  //No build on King
+        editor.commit();
+        mSolitaireView.InitGame(Rules.TRIPEAKS);
+        break;
+      case R.id.context_tripeaks_wrapcards:
+        editor.putBoolean("GolfWrapCards", true); //WrapCards (A,Q on K, etc.)
+        editor.commit();
         mSolitaireView.InitGame(Rules.TRIPEAKS);
         break;
       case R.id.context_vegas_dealone:
