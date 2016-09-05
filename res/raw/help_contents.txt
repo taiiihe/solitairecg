@@ -220,7 +220,7 @@ Empty all tableaus.
 
 <h2 id="golf-wrapcards">Golf (wrap cards)</h2>
 <p>
-Play is similar to <a href="#golf">Golf<a/> but easier.  The key
+Play is similar to <a href="#golf">Golf</a> but easier.  The key
 difference is that a King may be built upon.  Play is allowed to wrap
 from King to Ace and vice versa which is known as
 "turning-the-corner".
@@ -341,7 +341,7 @@ Empty all tableaus.
 
 <h2 id="tripeaks-wrapcards">TriPeaks (wrap cards)</h2>
 <p>
-Play is similar to <a href="#tripeaks">TriPeaks<a/> but easier.  The
+Play is similar to <a href="#tripeaks">TriPeaks</a> but easier.  The
 key difference is that a King may be built upon.  Play is allowed to
 wrap from King to Ace and vice versa which is known as
 "turning-the-corner".
