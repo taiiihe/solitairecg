@@ -13,6 +13,8 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
+
+  Modified by Curtis Gedak 2016
   -->
 <resources>
     <string name="app_name">SolitaireCG</string>
@@ -21,11 +23,13 @@
     <string name="menu_fortythieves">40 varasta</string>
     <string name="menu_freecell">Vapaakenttä</string>
     <string name="menu_golf">Golf</string>
+    <string name="menu_golf_wrapcards">Golf (wrap korttia)</string>
     <string name="menu_klondike_dealone">Klondike (jaa 1)</string>
     <string name="menu_klondike_dealthree">Klondike (jaa 3)</string>
     <string name="menu_spider">Hämähäkki</string>
     <string name="menu_tarantula">Tarantella</string>
     <string name="menu_tripeaks">TriPeaks</string>
+    <string name="menu_tripeaks_wrapcards">TriPeaks (wrap korttia)</string>
     <string name="menu_vegas_dealone">Vegas (jaa 1)</string>
     <string name="menu_vegas_dealthree">Vegas (jaa 3)</string>
     <string name="menu_selectgame">Valitse peli</string>
@@ -58,7 +62,7 @@ VINKKI:  Paina pitkään ^-merkkiä ruudun keskiosan alalaidassa tuodaksesi esii
     <string name="win_text">Voitit!\n\nKäytä valikkoa aloittaaksesi uuden pelin.</string>
     <string name="help_window_title">SolitaireCG:n version %s ohjeet</string>
     <string name="stats_for_game">Tilastot - %s</string>
-    <string name="stats_wins_and_attempts">Voittoja: %1$d Yrityksiä: %2$d yritystä</string>
+    <string name="stats_wins_and_attempts">Voittoja: %1$d Yrityksiä: %2$d</string>
     <string name="stats_winning_percentage">Voittoprosentti: %s%%</string>
     <string name="stats_fastest_time">Nopein aika: %s</string>
     <string name="stats_high_score">Ennätyspisteet: %s</string>
@@ -66,6 +70,7 @@ VINKKI:  Paina pitkään ^-merkkiä ruudun keskiosan alalaidassa tuodaksesi esii
     <string name="game_name_freecell">Vapaakenttä</string>
     <string name="game_name_bakers_game">Bakerin peli</string>
     <string name="game_name_golf">Golf</string>
+    <string name="game_name_golf_wrapcards">Golf Wrap Kortit</string>
     <string name="game_name_klondike_three_cards">Klondike (kolme korttia)</string>
     <string name="game_name_klondike_one_card">Klondike (yksi kortti)</string>
     <string name="game_name_vegas_three_cards">Vegas (kolme korttia)</string>
@@ -74,4 +79,5 @@ VINKKI:  Paina pitkään ^-merkkiä ruudun keskiosan alalaidassa tuodaksesi esii
     <string name="game_name_tarantula">Tarantella</string>
     <string name="game_name_spider">Hämähäkki</string>
     <string name="game_name_tripeaks">TriPeaks</string>
+    <string name="game_name_tripeaks_wrapcards">TriPeaks Wrap Kortit</string>
 </resources>
