@@ -27,8 +27,11 @@ public class Preferences extends PreferenceActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    // Force landscape to match game orientation
-    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    // Force landscape for Android API < 14 (Ice Cream Sandwich)
+    //   Earlier versions do not change screen size on orientation change
+    if (Integer.valueOf(android.os.Build.VERSION.SDK) < 14) {
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    }
 
     addPreferencesFromResource(R.xml.preferences);
   }

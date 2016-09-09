@@ -78,8 +78,13 @@ public class SolitaireCG extends Activity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    // Force landscape and no title for extra room
-    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    // Force landscape for Android API < 14 (Ice Cream Sandwich)
+    //   Earlier versions do not change screen size on orientation change
+    if (Integer.valueOf(android.os.Build.VERSION.SDK) < 14) {
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    }
+
+    // Force no title for extra room
     requestWindowFeature(Window.FEATURE_NO_TITLE);
 
     // If the user has never accepted the EULA show it again.
