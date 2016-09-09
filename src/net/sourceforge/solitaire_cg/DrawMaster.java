@@ -93,7 +93,7 @@ public class DrawMaster {
 
     mGrnTxtPaint = new Paint();
     mGrnTxtPaint.setARGB(255, 0, 128, 0);
-    mGrnTxtPaint.setTextSize(18 * mDpi/160);
+    mGrnTxtPaint.setTextSize(16 * mDpi/160);
     mGrnTxtPaint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD));
     mGrnTxtPaint.setTextAlign(Paint.Align.CENTER);
     mGrnTxtPaint.setAntiAlias(true);

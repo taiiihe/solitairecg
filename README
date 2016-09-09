@@ -34,6 +34,7 @@ SolitaireCG see the project web site:
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Shrink anchor and card count indicators to fit small screens
   * Add support for portrait orientation for Android 4.0+ (ICS - API 14+)
 
 ### Release v2.9 on Dec 1, 2016
