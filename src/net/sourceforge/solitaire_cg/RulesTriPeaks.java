@@ -113,7 +113,7 @@ class RulesTriPeaks extends Rules {
   public void Resize(int width, int height) {
     int rem = (width - (Card.WIDTH * 10)) / 11;
     int maxHeight = height - (20 + Card.HEIGHT);
-    int vSpacing = Math.max( maxHeight / 5 - 20, Card.HEIGHT * 3 / 5);
+    int vSpacing = Math.min( maxHeight / 5 - 20, Card.HEIGHT * 3 / 5);
     int x = -1;
     int y = -1;
     // Position three peaks cards
