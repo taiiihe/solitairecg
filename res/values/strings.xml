@@ -19,7 +19,7 @@
 <resources>
     <string name="app_name">SolitaireCG</string>
     <string name="menu_bakersgame">Baker\'s Game</string>
-    <string name="menu_blackwidow">Black Widow</string>
+    <string name="menu_blackwidow">Black Widow - 1 suit spider</string>
     <string name="menu_fortythieves">Forty Thieves</string>
     <string name="menu_freecell">Freecell</string>
     <string name="menu_golf">Golf</string>
@@ -27,7 +27,7 @@
     <string name="menu_klondike_dealone">Klondike (deal 1)</string>
     <string name="menu_klondike_dealthree">Klondike (deal 3)</string>
     <string name="menu_spider">Spider</string>
-    <string name="menu_tarantula">Tarantula</string>
+    <string name="menu_tarantula">Tarantula - 2 suit spider</string>
     <string name="menu_tripeaks">TriPeaks</string>
     <string name="menu_tripeaks_wrapcards">TriPeaks (wrap cards)</string>
     <string name="menu_vegas_dealone">Vegas (deal 1)</string>
