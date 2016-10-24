@@ -54,10 +54,9 @@ SolitaireCG features the following game play navigation:
 Game play may be customized with the following options:
 </p>
 <ul style="list-style: none;">
-  <li><b>Display Options</b><br>
-    <i>Normal Card Art</i> - use standard card graphics.<br>
-    <i>Large Card Art</i> - use increased size font and suit
-    graphics.<br><br>
+  <li><b>Large Card Art</b><br>
+    Enable or disable use of simple card art for improved
+    visability.<br><br>
   </li>
   <li><b>Display Time</b><br>
     Enable or disable display of time elapsed.<br><br>

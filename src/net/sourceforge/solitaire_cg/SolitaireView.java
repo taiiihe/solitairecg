@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015
+  Modified by Curtis Gedak 2015, 2016
 */
 package net.sourceforge.solitaire_cg;
 
@@ -591,7 +591,7 @@ public class SolitaireView extends View {
     // Text mode only handles clickys
     if (mViewMode == MODE_TEXT) {
       if (event.getAction() == MotionEvent.ACTION_UP && mTextViewDown) {
-        SharedPreferences.Editor editor = mContext.getSharedPreferences("SolitairePreferences", 0).edit();
+        SharedPreferences.Editor editor = GetSettings().edit();
         editor.putBoolean("PlayedBefore", true);
         editor.commit();
         mTextViewDown = false;

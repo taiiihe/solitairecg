@@ -40,32 +40,44 @@
     <string name="menu_help">Help</string>
     <string name="menu_exit">Exit</string>
     <string name="solitaire_layout_text_text"></string>
-    <string name="accept">Accept</string>
-    <string name="cancel">Cancel</string>
-    <string name="clear">Clear Stats</string>
-    <string name="display_options">Display Options</string>
-    <string name="normal_cards">Normal Card Art</string>
+
+    <!-- Shown on the options preference screen -->
+    <string name="options_title">Options</string>
     <string name="big_cards">Large Card Art</string>
+    <string name="big_cards_desc">Show simple card art for improved visibility</string>
+    <string name="display_time">Display Time</string>
+    <string name="display_time_desc">Show elapsed time since game started</string>
     <string name="auto_move">Auto Move</string>
+    <string name="auto_move_desc">Automatically move possible cards to foundations</string>
     <string name="always">Always</string>
     <string name="fling_only">Fling Only</string>
     <string name="never">Never</string>
-    <string name="display_time">Display Time</string>
-    <string name="readme_header">README file from source code</string>
-    <string name="copying_header">COPYING file from source code</string>
+
+    <!-- Shown in the game if needed -->
     <string name="toast_restart_invalid">Game over. Restart not available.</string>
     <string name="toast_use_start_menu">Game over. Use menu to start new game.</string>
     <string name="toast_no_undo_left">No undo left.</string>
+
+    <!-- Shown on the splash screen at first startup -->
     <string name="splash_text">
 \n\n\n\n\n\n\n\n
 TIP:  Long press ^ at bottom center of screen for alternate menu.
-</string>
+    </string>
+
+    <!-- Shown when a game is won -->
     <string name="win_text">You Win!\n\nUse the menu to start a new game.</string>
 
-    <!-- Shown on the help window; argument is the version number of the SolitaireCG application -->
+    <!-- Messages shown on the help window -->
+
+    <!-- The argument is the version number of the SolitaireCG application -->
     <string name="help_window_title">SolitaireCG %s Help</string>
+    <string name="readme_header">README file from source code</string>
+    <string name="copying_header">COPYING file from source code</string>
 
     <!-- Messages shown on the stats window -->
+
+    <string name="accept">Accept</string>
+    <string name="clear">Clear Stats</string>
 
     <!-- The argument is the pretty game name, such as "Klondike (Dealing Three)" or "Golf" -->
     <string name="stats_for_game">%s Statistics</string>

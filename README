@@ -34,6 +34,7 @@ SolitaireCG see the project web site:
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Migrate options screen to proper Android preferences activity screen
   * Remove duplicated game names from strings.xml
   * Improve recognition of Spider game variants Black Widow and Tarantula
   * Restore ability to undo moves after application exit
