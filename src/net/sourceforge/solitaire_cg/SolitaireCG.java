@@ -65,12 +65,15 @@ public class SolitaireCG extends Activity {
   private SolitaireView mSolitaireView;
   private SharedPreferences mSettings;
 
+  private boolean mDoSave;
+
   // Shared preferences are where the various user settings are stored.
   public SharedPreferences GetSettings() { return mSettings; }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    mDoSave = true;
 
     // Force landscape and no title for extra room
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -194,7 +197,7 @@ public class SolitaireCG extends Activity {
         editor.putBoolean("KlondikeDealThree", true);
         editor.putBoolean("KlondikeStyleNormal", true);
         editor.commit();
-	mSolitaireView.InitGame(Rules.KLONDIKE);
+        mSolitaireView.InitGame(Rules.KLONDIKE);
         break;
       case MENU_SPIDER:
         editor.putInt("SpiderSuits", 4);
@@ -226,7 +229,7 @@ public class SolitaireCG extends Activity {
         editor.putBoolean("KlondikeDealThree", true);
         editor.putBoolean("KlondikeStyleNormal", false);
         editor.commit();
-	mSolitaireView.InitGame(Rules.KLONDIKE);
+        mSolitaireView.InitGame(Rules.KLONDIKE);
         break;
       case MENU_NEW:
         mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.KLONDIKE));
@@ -245,6 +248,7 @@ public class SolitaireCG extends Activity {
         break;
       case MENU_EXIT:
         mSolitaireView.SaveGame();
+        mDoSave = false;
         finish();
         break;
     }
@@ -356,6 +360,7 @@ public class SolitaireCG extends Activity {
         break;
       case R.id.context_exit:
         mSolitaireView.SaveGame();
+        mDoSave = false;
         finish();
         break;
       default:
@@ -374,7 +379,9 @@ public class SolitaireCG extends Activity {
   @Override
   protected void onStop() {
     super.onStop();
-    mSolitaireView.SaveGame();
+    if (mDoSave) {
+      mSolitaireView.SaveGame();
+    }
   }
 
   @Override
