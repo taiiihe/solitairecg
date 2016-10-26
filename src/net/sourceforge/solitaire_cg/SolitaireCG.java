@@ -456,8 +456,6 @@ public class SolitaireCG extends Activity {
     // Note that WIN is restored in SolitaireView.onSizeChanged()
     if (GetRestoreState() == "STATS") {
       DisplayStats();
-    } else if (GetRestoreState() == "HELP") {
-      DisplayHelp();
     }
   }
 
@@ -473,9 +471,9 @@ public class SolitaireCG extends Activity {
   }
 
   public void DisplayHelp() {
-    SetRestoreState("HELP");
     mSolitaireView.SetTimePassing(false);
-    new Help(this, mSolitaireView.GetDrawMaster());
+    Intent helpActivity = new Intent(this, Help.class);
+    startActivity(helpActivity);
   }
 
   public void DisplayStats() {

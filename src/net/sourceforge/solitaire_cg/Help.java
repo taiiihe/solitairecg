@@ -16,77 +16,125 @@
 
 package net.sourceforge.solitaire_cg;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.content.pm.ActivityInfo;
 import android.view.KeyEvent;
-import android.view.View;
+import android.view.Window;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
-public class Help {
+public class Help extends Activity {
 
-  public Help(final SolitaireCG solitaire, final DrawMaster drawMaster) {
+  // View extracted from help.xml
+  private WebView mWebView;
 
-    solitaire.setContentView(R.layout.help);
-    WebView webView = (WebView) solitaire.findViewById(R.id.help_web_view);
-    webView.setFocusable(true);
-    webView.setFocusableInTouchMode(true);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-    webView.setWebViewClient(new WebViewClient(){
-      @Override
-      public boolean shouldOverrideUrlLoading(WebView wv, String url) {
-        wv.loadUrl(url);
-        return true;
-      }
-    });
+    // Force landscape for Android API < 14 (Ice Cream Sandwich)
+    if (Integer.valueOf(android.os.Build.VERSION.SDK) < 14) {
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    }
 
+    // Force no title for extra room
+    requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+    setContentView(R.layout.help);
+    mWebView = (WebView) findViewById(R.id.help_webview);
+
+    // Always load help contents on configuration changes, for example
+    // on rotation.
+    // WebView.saveState/.restoreState no longer stores the display
+    // data for the WebView.
+    // https://developer.android.com/reference/android/webkit/WebView.html#saveState%28android.os.Bundle%29
+    LoadHelpContents();
+  }
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
+      mWebView.goBack();
+      return true;
+    }
+    return super.onKeyDown(keyCode, event);
+  }
+
+  public void LoadHelpContents () {
     // Load help contents
     // Alternatively:
-    //   webView.loadUrl("file:///android_res/raw/help_contents.txt");
+    //   mWebView.loadUrl("file:///android_res/raw/help_contents.txt");
     String helpText = "<html><body>"
-      + "<h1>" + String.format(solitaire.getString(R.string.help_window_title), SolitaireCG.VERSION_NAME) + "</h1>"
-      + Utils.readRawTextFile(solitaire, R.raw.help_contents).replace("\n"," ")
+      + "<h1>" + String.format(this.getString(R.string.help_window_title), SolitaireCG.VERSION_NAME) + "</h1>"
+      + Utils.readRawTextFile(this, R.raw.help_contents).replace("\n"," ")
         // Append README file
       + "<hr>"
       + "<h2 id='readme'>"
-      + solitaire.getString(R.string.readme_header)
+      + this.getString(R.string.readme_header)
       + "</h2></a>"
       + "<pre style='font-size:smaller;'>"
-      + Utils.readRawTextFile(solitaire, R.raw.readme).replace("\n","<br>")
+      + Utils.readRawTextFile(this, R.raw.readme).replace("\n","<br>")
       + "</pre>"
         // Append COPYING file
       + "<hr>"
       + "<h2 id='copying'>"
-      + solitaire.getString(R.string.copying_header)
+      + this.getString(R.string.copying_header)
       + "</h2></a>"
       + "<pre style='font-size:smaller;'>"
       //Work around android API loadData issue 4401 problem with % character
-      + Utils.readRawTextFile(solitaire, R.raw.copying).replace("\n","<br>").replace("%","&#37;")
+      + Utils.readRawTextFile(this, R.raw.copying).replace("\n","<br>").replace("%","&#37;")
       + "</pre>"
       + "</body></html>";
-    webView.loadData(helpText, "text/html; charset=utf-8", "utf-8");
-
-    webView.setOnKeyListener(new WebView.OnKeyListener() {
-      @Override
-      public boolean onKey(View v, int keyCode, KeyEvent event) {
-        WebView wv = (WebView) v;
-        switch (keyCode) {
-          case KeyEvent.KEYCODE_BACK:
-            if (event.getAction() == KeyEvent.ACTION_DOWN) {
-              if (wv.canGoBack()) {
-                wv.goBack();
-              } else {
-                solitaire.CancelOptions();
-              }
-              return true;
-            }
-	    break;
-          case KeyEvent.KEYCODE_MENU:
-	    // Disable menu in help screen
-            return true;
-        }
-        return false;
-      }
-    });
-
-    webView.requestFocus();
+    mWebView.loadData(helpText, "text/html; charset=utf-8", "utf-8");
   }
+
+  // The following three methods attempt to maintain the user's
+  // scroll position in the WebView when the screen is rotated.
+  //
+  // Note that the user's scroll position can be lost if the screen
+  // is rapidly rotated to and fro.
+
+  // Calculate percent of scroll progress in the actual web page content
+  private int calculatePosition(WebView content) {
+    float positionTopView = content.getTop();
+    float contentHeight = content.getContentHeight();
+    float currentScrollPosition = content.getScrollY();
+    float percentWebview = (currentScrollPosition - positionTopView) / contentHeight;
+    // Maintain percent with 2 decimal precision in an integer (x10000)
+    int  positionY = Math.round(percentWebview * 10000);
+    return positionY;
+  }
+
+  // Save webview scroll position
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putIntArray( "Scroll_Position"
+                        , new int[]{ 0, calculatePosition(mWebView) }
+                        );
+  }
+
+  // Restore webview scroll position
+  @Override
+  protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+    final WebView finalView = mWebView;
+    final int[] position = savedInstanceState.getIntArray("Scroll_Position");
+    if (position != null)
+       mWebView.postDelayed(new Runnable() {
+        @Override
+        public void run() {
+          float webviewsize = mWebView.getContentHeight() - mWebView.getTop();
+          if (webviewsize == 0) {
+            // Repeat delay to the scrollTo until page is finished loading
+            finalView.postDelayed(this, 10);
+            return;
+          }
+          float positionInWV = webviewsize * position[1] / 10000;
+          int positionY = Math.round(mWebView.getTop() + positionInWV);
+          mWebView.scrollTo(position[0], positionY);
+        }
+      // Delay the scrollTo until page is finished loading
+      }, 10);
+   }
 }

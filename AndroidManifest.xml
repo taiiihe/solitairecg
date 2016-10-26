@@ -32,5 +32,7 @@
         <activity android:name=".Preferences"
                   android:label="@string/options_title" >
         </activity>
+        <activity android:name=".Help" >
+        </activity>
     </application>
-</manifest> 
+</manifest>
