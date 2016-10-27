@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015
+  Modified by Curtis Gedak 2015, 2016
 */
 package net.sourceforge.solitaire_cg;
 
@@ -243,9 +243,9 @@ class RulesFreecell extends Rules {
   @Override
   public String GetPrettyGameTypeString() {
     if ( ! mBySuit ) {
-      return mView.GetContext().getResources().getString(R.string.game_name_freecell);
+      return mView.GetContext().getResources().getString(R.string.menu_freecell);
     } else {
-      return mView.GetContext().getResources().getString(R.string.game_name_bakers_game);
+      return mView.GetContext().getResources().getString(R.string.menu_bakersgame);
     }
   }
 }

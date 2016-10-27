@@ -76,20 +76,4 @@ TIP:  Long press ^ at bottom center of screen for alternate menu.
 
     <!-- The argument is the user's high score as an integer -->
     <string name="stats_high_score">High Score: %s</string>
-
-    <!-- Each game's prettified, human-readable, formatted name -->
-    <string name="game_name_forty_thieves">Forty Thieves</string>
-    <string name="game_name_freecell">Freecell</string>
-    <string name="game_name_bakers_game">Baker\'s Game</string>
-    <string name="game_name_golf">Golf</string>
-    <string name="game_name_golf_wrapcards">Golf Wrap Cards</string>
-    <string name="game_name_klondike_three_cards">Klondike Dealing Three Cards</string>
-    <string name="game_name_klondike_one_card">Klondike Dealing One Card</string>
-    <string name="game_name_vegas_three_cards">Vegas Dealing Three Cards</string>
-    <string name="game_name_vegas_one_card">Vegas Dealing One Card</string>
-    <string name="game_name_black_widow">Black Widow</string>
-    <string name="game_name_tarantula">Tarantula</string>
-    <string name="game_name_spider">Spider</string>
-    <string name="game_name_tripeaks">TriPeaks</string>
-    <string name="game_name_tripeaks_wrapcards">TriPeaks Wrap Cards</string>
 </resources>

@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015
+  Modified by Curtis Gedak 2015, 2016
 */
 package net.sourceforge.solitaire_cg;
 
@@ -225,7 +225,7 @@ class RulesFortyThieves extends Rules {
   }
   @Override
   public String GetPrettyGameTypeString() {
-    return mView.GetContext().getResources().getString(R.string.game_name_forty_thieves);
+    return mView.GetContext().getResources().getString(R.string.menu_fortythieves);
   }
 
 }

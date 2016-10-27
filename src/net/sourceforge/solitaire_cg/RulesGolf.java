@@ -231,9 +231,9 @@ class RulesGolf extends Rules {
   @Override
   public String GetPrettyGameTypeString() {
     if (!mWrapCards) {
-      return mView.GetContext().getResources().getString(R.string.game_name_golf);
+      return mView.GetContext().getResources().getString(R.string.menu_golf);
     } else {
-      return mView.GetContext().getResources().getString(R.string.game_name_golf_wrapcards);
+      return mView.GetContext().getResources().getString(R.string.menu_golf_wrapcards);
     }
   }
 

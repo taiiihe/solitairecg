@@ -281,9 +281,9 @@ class RulesTriPeaks extends Rules {
   @Override
   public String GetPrettyGameTypeString() {
     if (!mWrapCards) {
-      return mView.GetContext().getResources().getString(R.string.game_name_tripeaks);
+      return mView.GetContext().getResources().getString(R.string.menu_tripeaks);
     } else {
-      return mView.GetContext().getResources().getString(R.string.game_name_tripeaks_wrapcards);
+      return mView.GetContext().getResources().getString(R.string.menu_tripeaks_wrapcards);
     }
   }
 

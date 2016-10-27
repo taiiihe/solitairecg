@@ -66,18 +66,4 @@ VINKKI:  Paina pitkään ^-merkkiä ruudun keskiosan alalaidassa tuodaksesi esii
     <string name="stats_winning_percentage">Voittoprosentti: %s%%</string>
     <string name="stats_fastest_time">Nopein aika: %s</string>
     <string name="stats_high_score">Ennätyspisteet: %s</string>
-    <string name="game_name_forty_thieves">40 varasta</string>
-    <string name="game_name_freecell">Vapaakenttä</string>
-    <string name="game_name_bakers_game">Bakerin peli</string>
-    <string name="game_name_golf">Golf</string>
-    <string name="game_name_golf_wrapcards">Golf Wrap Kortit</string>
-    <string name="game_name_klondike_three_cards">Klondike (kolme korttia)</string>
-    <string name="game_name_klondike_one_card">Klondike (yksi kortti)</string>
-    <string name="game_name_vegas_three_cards">Vegas (kolme korttia)</string>
-    <string name="game_name_vegas_one_card">Vegas (yksi kortti)</string>
-    <string name="game_name_black_widow">Musta leski</string>
-    <string name="game_name_tarantula">Tarantella</string>
-    <string name="game_name_spider">Hämähäkki</string>
-    <string name="game_name_tripeaks">TriPeaks</string>
-    <string name="game_name_tripeaks_wrapcards">TriPeaks Wrap Kortit</string>
 </resources>

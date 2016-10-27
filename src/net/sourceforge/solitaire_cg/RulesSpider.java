@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015
+  Modified by Curtis Gedak 2015, 2016
 */
 package net.sourceforge.solitaire_cg;
 
@@ -202,11 +202,11 @@ class RulesSpider extends Rules {
   public String GetPrettyGameTypeString() {
     int suits = mView.GetSettings().getInt("SpiderSuits", 4);
     if (suits == 1) {
-      return mView.GetContext().getResources().getString(R.string.game_name_black_widow);
+      return mView.GetContext().getResources().getString(R.string.menu_blackwidow);
     } else if (suits == 2) {
-      return mView.GetContext().getResources().getString(R.string.game_name_tarantula);
+      return mView.GetContext().getResources().getString(R.string.menu_tarantula);
     } else {
-      return mView.GetContext().getResources().getString(R.string.game_name_spider);
+      return mView.GetContext().getResources().getString(R.string.menu_spider);
     }
   }
 

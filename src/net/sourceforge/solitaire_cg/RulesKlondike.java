@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015
+  Modified by Curtis Gedak 2015, 2016
 */
 package net.sourceforge.solitaire_cg;
 
@@ -301,15 +301,15 @@ class RulesKlondike extends Rules {
   public String GetPrettyGameTypeString() {
     if (mDealsLeft == -1) {
       if (mDealThree) {
-        return mView.GetContext().getResources().getString(R.string.game_name_klondike_three_cards);
+        return mView.GetContext().getResources().getString(R.string.menu_klondike_dealthree);
       } else {
-        return mView.GetContext().getResources().getString(R.string.game_name_klondike_one_card);
+        return mView.GetContext().getResources().getString(R.string.menu_klondike_dealone);
       }
     } else {
       if (mDealThree) {
-        return mView.GetContext().getResources().getString(R.string.game_name_vegas_three_cards);
+        return mView.GetContext().getResources().getString(R.string.menu_vegas_dealthree);
       } else {
-        return mView.GetContext().getResources().getString(R.string.game_name_vegas_one_card);
+        return mView.GetContext().getResources().getString(R.string.menu_vegas_dealone);
       }
     }
   }
