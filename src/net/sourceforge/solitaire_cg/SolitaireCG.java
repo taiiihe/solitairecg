@@ -261,9 +261,19 @@ public class SolitaireCG extends Activity {
   @Override
   public void onCreateContextMenu(ContextMenu menu, View v,
                                   ContextMenuInfo menuInfo) {
-    super.onCreateContextMenu(menu, v, menuInfo);
-    MenuInflater inflater = getMenuInflater();
-    inflater.inflate(R.menu.context, menu);
+    // Force optionsMenu() for API >= 23
+    // Workaround context menu not centered on screen issue which causes
+    // missing or inaccessible menu items with:
+    //   - Samsung devices with Android 6.0.1 (API 23)
+    //   - Android 7.0 (API 24)
+    // See https://sourceforge.net/p/solitairecg/tickets/7/
+    if (Integer.valueOf(android.os.Build.VERSION.SDK) >= 23) {
+      openOptionsMenu();
+    } else {
+      super.onCreateContextMenu(menu, v, menuInfo);
+      MenuInflater inflater = getMenuInflater();
+      inflater.inflate(R.menu.context, menu);
+    }
   }
 
   // Alternate Menu

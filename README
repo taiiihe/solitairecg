@@ -34,6 +34,8 @@ SolitaireCG see the project web site:
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Force options menu for context menu for Android 6.0+ (API 23+)
+
 ### Release v2.7 on Oct 31, 2016
   * Add German (de) translation
   * Ensure cards overlap in TriPeaks games
