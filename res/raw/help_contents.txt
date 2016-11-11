@@ -350,12 +350,21 @@ wrap from King to Ace and vice versa which is known as
 <p>
 Play is similar to <a href="#klondike-deal3">Klondike (deal 3)</a>.
 The key differences are that cards are dealt from the stock one at a
-time, and only one pass through the stock is permitted.
+time, and only one pass through the stock is permitted.<br>
+<br>
+Virtual currency is used to track score.  A new game costs the player
+$52, or $1 per card in the deck.  The player is paid $5 for each card
+placed on a foundation built from ace up.  The score is cumulative
+over consecutively played games.  The score is reset when a different
+type of game is selected, for example <i>Golf</i>.
 </p>
 
 <h2 id="vegas-deal3">Vegas (deal 3)</h2>
 <p>
 Play is similar to <a href="#klondike-deal3">Klondike (deal 3)</a>.
 The key difference is that only three passes through the stock are
-permitted.
+permitted.<br>
+<br>
+Virtual currency is used to track score similar to
+<a href="#vegas-deal1">Vegas (deal 1)</h2>.
 </p>
