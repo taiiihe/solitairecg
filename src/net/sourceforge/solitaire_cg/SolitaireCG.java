@@ -133,9 +133,9 @@ public class SolitaireCG extends Activity {
     super.onCreateOptionsMenu(menu);
 
     SubMenu subMenu = menu.addSubMenu(0, MENU_SELECT_GAME, 0, R.string.menu_selectgame);
-    subMenu.add(0, MENU_BAKERSGAME, 0, R.string.menu_bakersgame);
     subMenu.add(0, MENU_FORTYTHIEVES, 0, R.string.menu_fortythieves);
     subMenu.add(0, MENU_FREECELL, 0, R.string.menu_freecell);
+    subMenu.add(0, MENU_BAKERSGAME, 0, R.string.menu_bakersgame);
     subMenu.add(0, MENU_GOLF, 0, R.string.menu_golf);
     subMenu.add(0, MENU_GOLF_WRAPCARDS, 0, R.string.menu_golf_wrapcards);
     subMenu.add(0, MENU_KLONDIKE_DEALONE, 0, R.string.menu_klondike_dealone);
