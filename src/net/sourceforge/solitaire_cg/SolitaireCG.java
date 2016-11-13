@@ -67,15 +67,12 @@ public class SolitaireCG extends Activity {
   private SolitaireView mSolitaireView;
   private SharedPreferences mSettings;
 
-  private boolean mDoSave;
-
   // Shared preferences are where the various user settings are stored.
   public SharedPreferences GetSettings() { return mSettings; }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    mDoSave = true;
 
     // Force landscape and no title for extra room
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -249,8 +246,6 @@ public class SolitaireCG extends Activity {
         DisplayHelp();
         break;
       case MENU_EXIT:
-        mSolitaireView.SaveGame();
-        mDoSave = false;
         finish();
         break;
     }
@@ -371,8 +366,6 @@ public class SolitaireCG extends Activity {
         DisplayHelp();
         break;
       case R.id.context_exit:
-        mSolitaireView.SaveGame();
-        mDoSave = false;
         finish();
         break;
       default:
@@ -391,9 +384,7 @@ public class SolitaireCG extends Activity {
   @Override
   protected void onStop() {
     super.onStop();
-    if (mDoSave) {
-      mSolitaireView.SaveGame();
-    }
+    mSolitaireView.SaveGame();
   }
 
   @Override
