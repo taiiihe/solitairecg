@@ -34,6 +34,7 @@ SolitaireCG see the project web site:
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+### Release v2.8.1 on Nov 14, 2016
   * Undo force options menu for context menu for Android 6.0+ (API 23+)
   * Fix small html tag error in help rules
 
