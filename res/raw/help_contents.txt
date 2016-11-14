@@ -366,5 +366,5 @@ The key difference is that only three passes through the stock are
 permitted.<br>
 <br>
 Virtual currency is used to track score similar to
-<a href="#vegas-deal1">Vegas (deal 1)</h2>.
+<a href="#vegas-deal1">Vegas (deal 1)</a>.
 </p>
