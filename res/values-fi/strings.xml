@@ -39,7 +39,8 @@
     <string name="menu_stats">Tilastot</string>
     <string name="menu_help">Ohjeet</string>
     <string name="menu_exit">Poistu</string>
-
+    <string name="menu_blank"></string>
+    <string name="solitaire_layout_text_text"></string>
 
     <!-- Shown on the options preference screen -->
     <string name="options_title">Asetukset</string>
@@ -54,6 +55,7 @@
     <string name="never">Ei koskaan</string>
 
     <!-- Shown in the game if needed -->
+    <string name="toast_blank_menu">Tämä valikko on jätetty tarkoituksella tyhjäksi.</string>
     <string name="toast_restart_invalid">Peli loppui. Aloittaminen alusta ei ole mahdollista.</string>
     <string name="toast_use_start_menu">Peli loppui. Käytä valikkoa aloittaaksesi uuden pelin.</string>
     <string name="toast_no_undo_left">Kumoaminen ei ole mahdollista.</string>

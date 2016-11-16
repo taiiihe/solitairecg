@@ -37,6 +37,7 @@
     <string name="menu_stats">Statystyki</string>
     <string name="menu_help">Pomoc</string>
     <string name="menu_exit">Wyjście</string>
+    <string name="menu_blank"></string>
     <string name="solitaire_layout_text_text"></string>
 
     <!-- Shown on the options preference screen -->
@@ -52,6 +53,7 @@
     <string name="never">Nigdy</string>
 
     <!-- Shown in the game if needed -->
+    <string name="toast_blank_menu">Ten element menu pozostał celowo pusty.</string>
     <string name="toast_restart_invalid">Gra skończona. Restart niemożliwy.</string>
     <string name="toast_use_start_menu">Gra skończona. Użyj menu aby rozpocząć nową.</string>
     <string name="toast_no_undo_left">Cofnięcie niemożliwe.</string>

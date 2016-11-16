@@ -34,6 +34,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 // Base activity class.
 public class SolitaireCG extends Activity {
@@ -61,6 +62,9 @@ public class SolitaireCG extends Activity {
   private static final int MENU_VEGAS_DEALTHREE    = 19;
   private static final int MENU_GOLF_WRAPCARDS     = 20;
   private static final int MENU_TRIPEAKS_WRAPCARDS = 21;
+  // Workaround for inaccessible menu items on some devices
+  // and Android versions - add extra blank menu items
+  private static final int MENU_BLANK = 999;
 
   // View extracted from main.xml.
   private View mMainView;
@@ -253,110 +257,145 @@ public class SolitaireCG extends Activity {
     return false;
   }
 
-  @Override
-  public void onCreateContextMenu(ContextMenu menu, View v,
-                                  ContextMenuInfo menuInfo) {
-    super.onCreateContextMenu(menu, v, menuInfo);
-    MenuInflater inflater = getMenuInflater();
-    inflater.inflate(R.menu.context, menu);
-  }
-
   // Alternate Menu
   // Invoked with long press and needed on some devices where Android
   // options menu is not accessible or available.
   @Override
+  public void onCreateContextMenu(ContextMenu menu, View v,
+                                  ContextMenuInfo menuInfo) {
+    super.onCreateContextMenu(menu, v, menuInfo);
+
+    SubMenu subMenu = menu.addSubMenu(0, MENU_SELECT_GAME, 0, R.string.menu_selectgame);
+    subMenu.add(0, MENU_FORTYTHIEVES, 0, R.string.menu_fortythieves);
+    subMenu.add(0, MENU_FREECELL, 0, R.string.menu_freecell);
+    subMenu.add(0, MENU_BAKERSGAME, 0, R.string.menu_bakersgame);
+    subMenu.add(0, MENU_GOLF, 0, R.string.menu_golf);
+    subMenu.add(0, MENU_GOLF_WRAPCARDS, 0, R.string.menu_golf_wrapcards);
+    subMenu.add(0, MENU_KLONDIKE_DEALONE, 0, R.string.menu_klondike_dealone);
+    subMenu.add(0, MENU_KLONDIKE_DEALTHREE, 0, R.string.menu_klondike_dealthree);
+    subMenu.add(0, MENU_SPIDER, 0, R.string.menu_spider);
+    subMenu.add(0, MENU_TARANTULA, 0, R.string.menu_tarantula);
+    subMenu.add(0, MENU_BLACKWIDOW, 0, R.string.menu_blackwidow);
+    subMenu.add(0, MENU_TRIPEAKS, 0, R.string.menu_tripeaks);
+    subMenu.add(0, MENU_TRIPEAKS_WRAPCARDS, 0, R.string.menu_tripeaks_wrapcards);
+    subMenu.add(0, MENU_VEGAS_DEALONE, 0, R.string.menu_vegas_dealone);
+    subMenu.add(0, MENU_VEGAS_DEALTHREE, 0, R.string.menu_vegas_dealthree);
+    // Add blank menu items to workaround context menu not centered
+    // problem which causes menu items to be inaccessible.
+    // https://sourceforge.net/p/solitairecg/tickets/7/
+    for (int i = 0; i < 2; i++) {
+      subMenu.add(0, MENU_BLANK, 0, R.string.menu_blank);
+    }
+    menu.add(0, MENU_NEW, 0, R.string.menu_new);
+    menu.add(0, MENU_RESTART, 0, R.string.menu_restart);
+    menu.add(0, MENU_OPTIONS, 0, R.string.menu_options);
+    menu.add(0, MENU_STATS, 0, R.string.menu_stats);
+    menu.add(0, MENU_HELP, 0, R.string.menu_help);
+    menu.add(0, MENU_EXIT, 0, R.string.menu_exit);
+    // Add blank menu items to workaround context menu not centered
+    // problem which causes menu items to be inaccessible.
+    // https://sourceforge.net/p/solitairecg/tickets/7/
+    for (int i = 0; i < 2; i++) {
+      menu.add(0, MENU_BLANK, 0, R.string.menu_blank);
+    }
+  }
+
+  @Override
   public boolean onContextItemSelected(MenuItem item) {
     SharedPreferences.Editor editor = GetSettings().edit();
     switch (item.getItemId()) {
-      case R.id.context_bakersgame:
+      case MENU_BAKERSGAME:
         editor.putBoolean("FreecellBuildBySuit", true);
         editor.commit();
         mSolitaireView.InitGame(Rules.FREECELL);
         break;
-      case R.id.context_blackwidow:
+      case MENU_BLACKWIDOW:
         editor.putInt("SpiderSuits", 1);
         editor.commit();
         mSolitaireView.InitGame(Rules.SPIDER);
         break;
-      case R.id.context_fortythieves:
+      case MENU_FORTYTHIEVES:
         mSolitaireView.InitGame(Rules.FORTYTHIEVES);
         break;
-      case R.id.context_freecell:
+      case MENU_FREECELL:
         editor.putBoolean("FreecellBuildBySuit", false); //BuildByAlternateColor
         editor.commit();
         mSolitaireView.InitGame(Rules.FREECELL);
         break;
-      case R.id.context_golf:
-        editor.putBoolean("GolfWrapCards", false);  //No build on King
+      case MENU_GOLF:
+        editor.putBoolean("GolfWrapCards", false); //No build on King
         editor.commit();
         mSolitaireView.InitGame(Rules.GOLF);
         break;
-      case R.id.context_golf_wrapcards:
+      case MENU_GOLF_WRAPCARDS:
         editor.putBoolean("GolfWrapCards", true); //WrapCards (A,Q on K, etc.)
         editor.commit();
         mSolitaireView.InitGame(Rules.GOLF);
         break;
-      case R.id.context_klondike_dealone:
+      case MENU_KLONDIKE_DEALONE:
         editor.putBoolean("KlondikeDealThree", false);
         editor.putBoolean("KlondikeStyleNormal", true);
         editor.commit();
         mSolitaireView.InitGame(Rules.KLONDIKE);
         break;
-      case R.id.context_klondike_dealthree:
+      case MENU_KLONDIKE_DEALTHREE:
         editor.putBoolean("KlondikeDealThree", true);
         editor.putBoolean("KlondikeStyleNormal", true);
         editor.commit();
         mSolitaireView.InitGame(Rules.KLONDIKE);
         break;
-      case R.id.context_spider:
+      case MENU_SPIDER:
         editor.putInt("SpiderSuits", 4);
         editor.commit();
         mSolitaireView.InitGame(Rules.SPIDER);
         break;
-      case R.id.context_tarantula:
+      case MENU_TARANTULA:
         editor.putInt("SpiderSuits", 2);
         editor.commit();
         mSolitaireView.InitGame(Rules.SPIDER);
         break;
-      case R.id.context_tripeaks:
-        editor.putBoolean("GolfWrapCards", false);  //No build on King
+      case MENU_TRIPEAKS:
+        editor.putBoolean("GolfWrapCards", false); //No build on King
         editor.commit();
         mSolitaireView.InitGame(Rules.TRIPEAKS);
         break;
-      case R.id.context_tripeaks_wrapcards:
+      case MENU_TRIPEAKS_WRAPCARDS:
         editor.putBoolean("GolfWrapCards", true); //WrapCards (A,Q on K, etc.)
         editor.commit();
         mSolitaireView.InitGame(Rules.TRIPEAKS);
         break;
-      case R.id.context_vegas_dealone:
+      case MENU_VEGAS_DEALONE:
         editor.putBoolean("KlondikeDealThree", false);
         editor.putBoolean("KlondikeStyleNormal", false);
         editor.commit();
         mSolitaireView.InitGame(Rules.KLONDIKE);
         break;
-      case R.id.context_vegas_dealthree:
+      case MENU_VEGAS_DEALTHREE:
         editor.putBoolean("KlondikeDealThree", true);
         editor.putBoolean("KlondikeStyleNormal", false);
         editor.commit();
         mSolitaireView.InitGame(Rules.KLONDIKE);
         break;
-      case R.id.context_new:
+      case MENU_NEW:
         mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.KLONDIKE));
         break;
-      case R.id.context_restart:
+      case MENU_RESTART:
         mSolitaireView.RestartGame();
         break;
-      case R.id.context_options:
+      case MENU_OPTIONS:
         DisplayOptions();
         break;
-      case R.id.context_stats:
+      case MENU_STATS:
         DisplayStats();
         break;
-      case R.id.context_help:
+      case MENU_HELP:
         DisplayHelp();
         break;
-      case R.id.context_exit:
+      case MENU_EXIT:
         finish();
+        break;
+      case MENU_BLANK:
+        Toast.makeText(this, R.string.toast_blank_menu, Toast.LENGTH_SHORT).show();
         break;
       default:
         return super.onContextItemSelected(item);
