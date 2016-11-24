@@ -74,9 +74,21 @@ public class SolitaireCG extends Activity {
   // Shared preferences are where the various user settings are stored.
   public SharedPreferences GetSettings() { return mSettings; }
 
+  // Methods to assist with tracking and maintaining state on device rotation
+  private String mRestoreState;
+  public void   ClearRestoreState() { mRestoreState = ""; }
+  public String GetRestoreState() { return mRestoreState; }
+  public void   SetRestoreState(String state) { mRestoreState = state; }
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    // Recall last state before configuration/orientation change
+    ConfigWrapper config = (ConfigWrapper)getLastNonConfigurationInstance();
+    if (config != null) {
+      SetRestoreState(config.screen);
+    }
 
     // Force landscape for Android API < 14 (Ice Cream Sandwich)
     //   Earlier versions do not change screen size on orientation change
@@ -165,6 +177,7 @@ public class SolitaireCG extends Activity {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
+    ClearRestoreState();
     SharedPreferences.Editor editor = GetSettings().edit();
     switch (item.getItemId()) {
       case MENU_BAKERSGAME:
@@ -307,6 +320,7 @@ public class SolitaireCG extends Activity {
 
   @Override
   public boolean onContextItemSelected(MenuItem item) {
+    ClearRestoreState();
     SharedPreferences.Editor editor = GetSettings().edit();
     switch (item.getItemId()) {
       case MENU_BAKERSGAME:
@@ -421,11 +435,30 @@ public class SolitaireCG extends Activity {
     mSolitaireView.SaveGame();
   }
 
+  // Capture state prior to configuration/orientation change
+  @Override
+  public Object onRetainNonConfigurationInstance() {
+    final ConfigWrapper config = new ConfigWrapper();
+    if ( GetRestoreState() == "" && mSolitaireView.IsWinMode() == true) {
+      SetRestoreState("WIN");
+    }
+    config.screen = GetRestoreState();
+    return config;
+  }
+
   @Override
   protected void onResume() {
     super.onResume();
     mSettings = PreferenceManager.getDefaultSharedPreferences(this);
     mSolitaireView.onResume();
+
+    // Restore previous state after configuration/orientation change
+    // Note that WIN is restored in SolitaireView.onSizeChanged()
+    if (GetRestoreState() == "STATS") {
+      DisplayStats();
+    } else if (GetRestoreState() == "HELP") {
+      DisplayHelp();
+    }
   }
 
   @Override
@@ -440,28 +473,27 @@ public class SolitaireCG extends Activity {
   }
 
   public void DisplayHelp() {
+    SetRestoreState("HELP");
     mSolitaireView.SetTimePassing(false);
     new Help(this, mSolitaireView.GetDrawMaster());
   }
 
   public void DisplayStats() {
+    SetRestoreState("STATS");
     mSolitaireView.SetTimePassing(false);
     new Stats(this, mSolitaireView);
   }
 
   public void CancelOptions() {
+    ClearRestoreState();
     setContentView(mMainView);
     mSolitaireView.requestFocus();
     mSolitaireView.SetTimePassing(true);
   }
 
-  public void NewOptions() {
-    setContentView(mMainView);
-    mSolitaireView.InitGame(mSettings.getInt("LastType", Rules.KLONDIKE));
-  }
-
   // This is called for option changes that require a refresh, but not a new game
   public void RefreshOptions() {
+    ClearRestoreState();
     setContentView(mMainView);
     mSolitaireView.RefreshOptions();
   }

@@ -85,7 +85,7 @@ public abstract class Rules {
   public void MarkBlockedCards() {}
 
   public int CountFreeSpaces() { return 0; }
-  protected void SignalWin() { mWon = true; mView.DisplayWin(); }
+  protected void SignalWin() { mWon = true; mView.MarkWin(); mView.DisplayWin(); }
 
   abstract public void Init(Bundle map);
   public void EventAlert(int event) { if (!mIgnoreEvents) { mEventPoster.PostEvent(event); mView.Refresh(); } }

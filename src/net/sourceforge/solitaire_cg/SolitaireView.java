@@ -189,6 +189,14 @@ public class SolitaireView extends View {
   public void ClearGameStarted() { mGameStarted = false; }
   public void SetDisplayTime(boolean displayTime) { mDisplayTime = displayTime; }
 
+  public Boolean IsWinMode() {
+    if (mViewMode == MODE_WIN || mViewMode == MODE_WIN_STOP) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public void SetTimePassing(boolean timePassing) {
     if (timePassing == true && (mViewMode == MODE_WIN || mViewMode == MODE_WIN_STOP)) {
       return;
@@ -461,6 +469,12 @@ public class SolitaireView extends View {
   protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     mDrawMaster.SetScreenSize(w, h);
     mRules.Resize(w, h);
+
+    // Restore previous state after configuration/orientation change
+    String state = ((SolitaireCG)mContext).GetRestoreState();
+    if (state == "WIN") {
+      DisplayWin();
+    }
   }
 
   public void DisplaySplash() {
@@ -474,7 +488,6 @@ public class SolitaireView extends View {
   }
 
   public void DisplayWin() {
-    MarkWin();
     mTextView.setTextSize(24);
     mTextView.setGravity(Gravity.CENTER_HORIZONTAL);
     DisplayText(mWinText);
@@ -864,7 +877,7 @@ public class SolitaireView extends View {
     editor.commit();
   }      
 
-  private void MarkWin() {
+  public void MarkWin() {
     String gameWinString = mRules.GetGameTypeString() + "Wins";
     String gameTimeString = mRules.GetGameTypeString() + "Time";
     int wins = GetSettings().getInt(gameWinString, 0);
