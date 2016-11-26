@@ -1,5 +1,5 @@
 /*
-  Copyright 2015 Curtis Gedak
+  Copyright 2015, 2016 Curtis Gedak
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -78,6 +78,10 @@ public class Help {
               }
               return true;
             }
+	    break;
+          case KeyEvent.KEYCODE_MENU:
+	    // Disable menu in help screen
+            return true;
         }
         return false;
       }

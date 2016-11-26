@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015
+  Modified by Curtis Gedak 2015, 2016
 */
 package net.sourceforge.solitaire_cg;
 
@@ -90,6 +90,9 @@ public class Stats {
         switch (keyCode) {
           case KeyEvent.KEYCODE_BACK:
             solitaire.CancelOptions();
+            return true;
+          case KeyEvent.KEYCODE_MENU:
+	    // Disable menu in stats screen
             return true;
         }
         return false;
