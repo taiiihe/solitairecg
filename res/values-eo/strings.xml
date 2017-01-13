@@ -55,7 +55,7 @@
     <!-- Shown in the game if needed -->
     <string name="toast_blank_menu">Tiu ĉi menuero estas intence malplena.</string>
     <string name="toast_restart_invalid">Ludo finita. Reprovo nedisponeblas.</string>
-    <string name="toast_use_start_menu">Ludo finita. Uzu menuon por eki novan ludon.</string>
+    <string name="toast_use_start_menu">Ludo finita. Uzu menuon por ekigi novan ludon.</string>
     <string name="toast_no_undo_left">Nenia lasta movo.</string>
 
     <!-- Shown on the splash screen at first startup -->
