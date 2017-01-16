@@ -34,6 +34,7 @@ SolitaireCG see the project web site:
 Change Log (in reverse chronological order)
 -------------------------------------------
 
+  * Prevent vertically scrolling all cards off screen
   * Update Esperanto (eo) translation
   * Migrate help view to Android activity screen
   * Retain active screen on device rotation

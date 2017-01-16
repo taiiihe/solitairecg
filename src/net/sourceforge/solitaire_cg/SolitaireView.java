@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015, 2016
+  Modified by Curtis Gedak 2015, 2016, 2017
 */
 package net.sourceforge.solitaire_cg;
 
@@ -786,7 +786,7 @@ public class SolitaireView extends View {
           mMoveCard.InitFromSelectCard(mSelectCard, x, y);
           ChangeViewMode(MODE_MOVE_CARD);
         } else {
-          mSelectCard.Scroll(dy);
+          mSelectCard.Scroll(dy, 0, mDrawMaster.GetHeight());
           if (!mSelectCard.IsOnCard()) {
             mSelectCard.Tap(x, y);
           }

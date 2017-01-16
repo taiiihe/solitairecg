@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015
+  Modified by Curtis Gedak 2015, 2017
 */
 package net.sourceforge.solitaire_cg;
 
@@ -144,8 +144,25 @@ class SelectCard {
     return ret;
   }
 
-  public void Scroll(float dy) {
+  public void Scroll(float dy, int minY, int maxY ) {
     float x, y;
+    // Limit vertical scrolling to ensure at least one card visible on screen
+    if ( /* Ensure at least one card */
+         mCardCount > 0 &&
+         ( /* Scrolling up so ensure last card visible */
+           ( (dy > 0.0) &&
+             ((mCard[mCardCount-1].GetY() - dy) < minY)
+           ) ||
+           /* Scrolling down so ensure first card visible */
+           ( (dy < 0.0) &&
+             ((mCard[0].GetY() - dy ) > (maxY - Card.HEIGHT))
+           )
+         )
+       )
+    {
+      /* Do not scroll any further */
+      return;
+    }
     for (int i = 0; i < mCardCount; i++) {
       x = mCard[i].GetX();
       y = mCard[i].GetY() - dy;
