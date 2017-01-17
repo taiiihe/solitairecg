@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015, 2016
+  Modified by Curtis Gedak 2015, 2016, 2017
 */
 package net.sourceforge.solitaire_cg;
 
@@ -27,13 +27,12 @@ class CardAnchor {
   public static final int SUIT_SEQ_STACK = 2;
   public static final int DEAL_FROM = 3;
   public static final int DEAL_TO = 4;
-  public static final int SPIDER_STACK = 5;
-  public static final int FREECELL_STACK = 6;
-  public static final int FREECELL_HOLD = 7;
-  public static final int GOLF_WASTE = 8;
-  public static final int GOLF_WRAPCARDS_WASTE = 9;
-  public static final int GOLF_STACK = 10;
-  public static final int GENERIC_ANCHOR = 11;
+  public static final int FREECELL_STACK = 5;
+  public static final int FREECELL_HOLD = 6;
+  public static final int GOLF_WASTE = 7;
+  public static final int GOLF_WRAPCARDS_WASTE = 8;
+  public static final int GOLF_STACK = 9;
+  public static final int GENERIC_ANCHOR = 10;
 
   private int mNumber;
   protected Rules mRules;
@@ -77,9 +76,6 @@ class CardAnchor {
         break;
       case DEAL_TO:
         ret = new DealTo();
-        break;
-      case SPIDER_STACK:
-        ret = new SpiderStack();
         break;
       case FREECELL_STACK:
         ret = new FreecellStack();
@@ -584,90 +580,6 @@ class SuitSeqStack extends SeqStack {
   
   @Override
   public boolean CanMoveStack(float x, float y) { return super.ExpandStack(x, y); }
-}
-
-// Spider solitaire style stack
-class SpiderStack extends SeqStack {
-
-  @Override
-  public void AddCard(Card card) {
-    super.AddCard(card);
-    mRules.EventAlert(Rules.EVENT_STACK_ADD, this);
-  }
-
-  @Override
-  public boolean CanDropCard(MoveCard moveCard, int close) {
-
-    Card card = moveCard.GetTopCard();
-    float x = card.GetX() + Card.WIDTH/2;
-    float y = card.GetY() + Card.HEIGHT/2;
-    Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
-
-    if (IsOverCard(x, y, close)) {
-      if (topCard == null || card.GetValue() == topCard.GetValue() - 1) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  @Override
-  public int GetMovableCount() {
-    if (mCardCount < 2)
-      return mCardCount;
-
-    int retCount = 1;
-    int suit = mCard[mCardCount-1].GetSuit();
-    int val = mCard[mCardCount-1].GetValue();
-
-    for (int i = mCardCount-2; i >= mHiddenCount; i--, retCount++, val++) {
-      if (mCard[i].GetSuit() != suit || mCard[i].GetValue() != val + 1) {
-        break;
-      }
-    }
-
-    return retCount;
-  }
-
-  @Override
-  public Card[] GetCardStack() {
-    int retCount = GetMovableCount();
-
-    Card[] ret = new Card[retCount];
-
-    for (int i = retCount-1; i >= 0; i--) {
-      ret[i] = PopCard();
-    }
-
-    return ret;
-  }
-
-  @Override
-  public boolean ExpandStack(float x, float y) {
-    if (super.ExpandStack(x, y)) {
-      Card bottom = mCard[mCardCount-1];
-      Card second = mCard[mCardCount-2];
-      if (bottom.GetSuit() == second.GetSuit() &&
-          bottom.GetValue() == second.GetValue() - 1) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  @Override
-  public boolean CanMoveStack(float x, float y) {
-    if (super.ExpandStack(x, y)) {
-      float maxY = mCard[mCardCount-GetMovableCount()].GetY();
-
-      if (y >= maxY - Card.HEIGHT/2) {
-        return true;
-      }
-    }
-    return false;
-  }
-
 }
 
 // Freecell stack

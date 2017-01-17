@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015, 2016
+  Modified by Curtis Gedak 2015, 2016, 2017
 */
 package net.sourceforge.solitaire_cg;
 
@@ -32,7 +32,6 @@ class RulesSpider extends Rules {
 
     // Anchor stacks
     for (int i = 0; i < 10; i++) {
-      mCardAnchor[i] = CardAnchor.CreateAnchor(CardAnchor.SPIDER_STACK, i, this);
       mCardAnchor[i] = CardAnchor.CreateAnchor(CardAnchor.GENERIC_ANCHOR, i, this);
       mCardAnchor[i].SetBuildSeq(GenericAnchor.SEQ_DSC);
       mCardAnchor[i].SetBuildSuit(GenericAnchor.SEQ_ANY);
