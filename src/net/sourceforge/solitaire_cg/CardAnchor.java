@@ -24,15 +24,14 @@ class CardAnchor {
 
   public static final int MAX_CARDS = 104;
   public static final int SEQ_SINK = 1;
-  public static final int SUIT_SEQ_STACK = 2;
-  public static final int DEAL_FROM = 3;
-  public static final int DEAL_TO = 4;
-  public static final int FREECELL_STACK = 5;
-  public static final int FREECELL_HOLD = 6;
-  public static final int GOLF_WASTE = 7;
-  public static final int GOLF_WRAPCARDS_WASTE = 8;
-  public static final int GOLF_STACK = 9;
-  public static final int GENERIC_ANCHOR = 10;
+  public static final int DEAL_FROM = 2;
+  public static final int DEAL_TO = 3;
+  public static final int FREECELL_STACK = 4;
+  public static final int FREECELL_HOLD = 5;
+  public static final int GOLF_WASTE = 6;
+  public static final int GOLF_WRAPCARDS_WASTE = 7;
+  public static final int GOLF_STACK = 8;
+  public static final int GENERIC_ANCHOR = 9;
 
   private int mNumber;
   protected Rules mRules;
@@ -67,9 +66,6 @@ class CardAnchor {
     switch (type) {
       case SEQ_SINK:
         ret = new SeqSink();
-        break;
-      case SUIT_SEQ_STACK:
-        ret = new SuitSeqStack();
         break;
       case DEAL_FROM:
         ret = new DealFrom();
@@ -540,46 +536,6 @@ class SeqSink extends CardAnchor {
     }
   }
 
-}
-
-// Regular color alternating solitaire stack
-class SuitSeqStack extends SeqStack {
-
-  @Override
-  public boolean CanDropCard(MoveCard moveCard, int close) {
-
-    Card card = moveCard.GetTopCard();
-    float x = card.GetX() + Card.WIDTH/2;
-    float y = card.GetY() + Card.HEIGHT/2;
-    Card topCard = mCardCount > 0 ? mCard[mCardCount - 1] : null;
-
-    if (IsOverCard(x, y, close)) {
-      if (topCard == null) {
-        if (card.GetValue() == Card.KING) {
-          return true;
-        }        
-      } else if ((card.GetSuit()&1) != (topCard.GetSuit()&1) &&
-                 card.GetValue() == topCard.GetValue() - 1) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  @Override
-  public Card[] GetCardStack() {
-    int visibleCount = GetVisibleCount();
-    Card[] ret = new Card[visibleCount];
-
-    for (int i = visibleCount-1; i >= 0; i--) {
-      ret[i] = PopCard();
-    }
-    return ret;
-  }
-  
-  @Override
-  public boolean CanMoveStack(float x, float y) { return super.ExpandStack(x, y); }
 }
 
 // Freecell stack
