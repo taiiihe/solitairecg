@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015, 2016
+  Modified by Curtis Gedak 2015, 2016, 2017
 */
 package net.sourceforge.solitaire_cg;
 
@@ -439,9 +439,6 @@ public class SolitaireCG extends Activity {
   @Override
   public Object onRetainNonConfigurationInstance() {
     final ConfigWrapper config = new ConfigWrapper();
-    if ( GetRestoreState() == "" && mSolitaireView.IsWinMode() == true) {
-      SetRestoreState("WIN");
-    }
     config.screen = GetRestoreState();
     return config;
   }
@@ -453,7 +450,6 @@ public class SolitaireCG extends Activity {
     mSolitaireView.onResume();
 
     // Restore previous state after configuration/orientation change
-    // Note that WIN is restored in SolitaireView.onSizeChanged()
     if (GetRestoreState() == "STATS") {
       DisplayStats();
     }
