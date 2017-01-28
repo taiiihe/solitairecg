@@ -85,6 +85,7 @@ public abstract class Rules {
   public void MarkBlockedCards() {}
 
   public int CountFreeSpaces() { return 0; }
+  public int CountFreeSpacesMin() { return 0; }  // Used in Freecell
   protected void SignalWin() { mWon = true; mView.MarkWin(); mView.DisplayWin(); }
 
   abstract public void Init(Bundle map);

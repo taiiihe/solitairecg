@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015, 2016
+  Modified by Curtis Gedak 2015, 2016, 2017
 */
 package net.sourceforge.solitaire_cg;
 
@@ -23,6 +23,7 @@ import android.os.Bundle;
 class RulesFreecell extends Rules {
 
   private boolean mBySuit;
+  private static int powerMoveMin = 0;
 
   public void Init(Bundle map) {
     mIgnoreEvents = true;
@@ -215,20 +216,79 @@ class RulesFreecell extends Rules {
     }
   }
 
-  @Override
-  public int CountFreeSpaces() {
-    int free = 0;
+  private int CountFreeCells() {
+    int freeCells = 0;
     for (int i = 0; i < 4; i++) {
       if (mCardAnchor[i].GetCount() == 0) {
-        free++;
+        freeCells++;
       }
     }
+    return freeCells;
+  }
+
+  private int CountFreeTableaus() {
+    int freeTableaus = 0;
     for (int i = 0; i < 8; i++) {
       if (mCardAnchor[i+8].GetCount() == 0) {
-        free++;
+        freeTableaus++;
       }
     }
-    return free;
+    return freeTableaus;
+  }
+
+  private int CountPowerMoves(int freeCells, int freeTableaus) {
+    // A freecell powermove is simply a shortcut move that lets you
+    //   move a valid sequence of cards in a single move.  The same
+    //   move can be made by moving cards one at at time to achieve
+    //   the same result.
+    //
+    //   The number of cards that can be moved in a powermove in
+    //   freecell is calculated as follows:
+    //
+    //   (1 + number of empty freecells) * 2 ^ (number of empty tableaus)
+    //
+    //   This assumes the sequence is moved to a non-empty tableau.
+    //   If the move is into an empty tableau then this empty tableau
+    //   does not count as an empty tableau for the formula above.
+
+    // Calculate maximum sequence for powermove.
+    //
+    //   The maximum sequence occurs with a move onto a non-empty tableau.
+    //
+    int powerMoveMax = (1 + freeCells) * (int)Math.pow(2, freeTableaus);
+
+    // Calculate minimum sequence for powermove at same time.
+    //
+    //   The minimum sequence occurs with a move into an empty
+    //   tableau.
+    //
+    //   Calculating now is important due to the game popping the
+    //   cards into a temporary move stack while dragging.  If the
+    //   card anchor is emptied, then calculating the powermove
+    //   immediately prior to dropping the move stack will erroneously
+    //   include an extra empty tableau.
+    //
+    powerMoveMin = (1 + freeCells) * (int)Math.pow(2, Math.max(freeTableaus - 1, 0));
+
+    return powerMoveMax;
+  }
+
+  @Override
+  public int CountFreeSpaces() {
+    // Assume the destination tableau is not an empty tableau.
+    //   The minus one at the end is to remain consistent with how
+    //   CountFreeSpaces() works with other shared game methods
+    return CountPowerMoves(CountFreeCells(), CountFreeTableaus()) - 1;
+  }
+
+  @Override
+  public int CountFreeSpacesMin() {
+    // Called when the destination tableau is an empty tableau
+    //   and hence the tableau being moved into does not count
+    //   as an empty tableau.
+    //   The minus one at the end is to remain consistent with how
+    //   CountFreeSpaces() works with other shared game methods
+    return powerMoveMin - 1;
   }
 
   @Override

@@ -551,11 +551,12 @@ class FreecellStack extends SeqStack {
 
     if (IsOverCard(x, y, close)) {
       if (topCard == null) {
-        if (mRules.CountFreeSpaces() >= moveCard.GetCount()) {
+        if (mRules.CountFreeSpacesMin() + 1 >= moveCard.GetCount()) {
           return true;
         }
       } else if ((card.GetSuit()&1) != (topCard.GetSuit()&1) &&
-                 card.GetValue() == topCard.GetValue() - 1) {
+                 card.GetValue() == topCard.GetValue() - 1 &&
+                 mRules.CountFreeSpaces() + 1 >= moveCard.GetCount()) {
         return true;
       }
     }
@@ -975,7 +976,7 @@ class GenericAnchor extends CardAnchor {
       // Check stack size
       if (mDROPOFF == GenericAnchor.PACK_LIMIT_BY_FREE){
         // Can only move as many cards as there are free spaces
-        if (mRules.CountFreeSpaces() < moveCard.GetCount()){
+        if (mRules.CountFreeSpacesMin() + 1 < moveCard.GetCount()){
 	  return false;
         }
       }
@@ -987,6 +988,14 @@ class GenericAnchor extends CardAnchor {
         case GenericAnchor.START_ANY:
         default:
           return true;
+      }
+    } else {
+      // Check stack size
+      if (mDROPOFF == GenericAnchor.PACK_LIMIT_BY_FREE){
+        // Can only move as many cards as there are free spaces
+        if (mRules.CountFreeSpaces() + 1 < moveCard.GetCount()){
+	  return false;
+        }
       }
     }
     int value = card.GetValue();
