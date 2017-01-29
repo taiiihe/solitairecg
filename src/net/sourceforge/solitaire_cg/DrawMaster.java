@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015, 2016
+  Modified by Curtis Gedak 2015, 2016, 2017
 */
 package net.sourceforge.solitaire_cg;
 
@@ -369,7 +369,7 @@ public class DrawMaster {
     //                     x1,y1,x0,y1   // Bottom edge
     //                     x0,y1,x0,y0   // Left edge
     int sideBorder = 3*roundEdge/2;
-    int topBorder = roundEdge+bigSuitHeight+1;
+    int topBorder = 4*roundEdge/3+bigSuitHeight;
     int bottomBorder = height-roundEdge+2;
     int heightBorder = bottomBorder-topBorder+1;
     float[] faceBox = {
@@ -505,18 +505,18 @@ public class DrawMaster {
         if ((suitIdx & 1) == 1) {
           // Draw upper-left red card number
           canvas.drawBitmap(redFont[valueIdx],
-            cardOutline+offset, roundEdge-1,
+            roundEdge-1, roundEdge-1,
             mSuitPaint);
         } else {
           // Draw upper-left black card number
           canvas.drawBitmap(blackFont[valueIdx],
-            cardOutline+offset, roundEdge-1,
+            roundEdge-1, roundEdge-1,
             mSuitPaint);
         }
 
         // Draw big suit in upper-right
         canvas.drawBitmap(bigSuit[suitIdx],
-          width-bigSuitWidth-cardOutline-offset+1, roundEdge-1, mSuitPaint);
+          width-bigSuitWidth-roundEdge+1, roundEdge-1, mSuitPaint);
 
         // Add suit to face cards (see faceBox boundaries above)
         if (valueIdx >= 10) {
@@ -530,10 +530,10 @@ public class DrawMaster {
 
         // Add multiple suits positioned geometrically on card
         int[] suitX = {sideBorder, (width-suitWidth+1)/2, width-sideBorder-suitWidth+1};
-        int[] suitY = {topBorder,
+        int[] suitY = {topBorder+1*heightBorder/5-suitHeight/2,
                        topBorder+2*heightBorder/5-suitHeight/2,
                        topBorder+3*heightBorder/5-suitHeight/2,
-                       bottomBorder-suitHeight};
+                       topBorder+4*heightBorder/5-suitHeight/2};
         int suitMidY = topBorder+faceHeight-suitHeight/2;
         switch (valueIdx+1) {
           case 1:

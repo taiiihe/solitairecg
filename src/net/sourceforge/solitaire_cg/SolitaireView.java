@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.Gravity;
+import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -63,6 +64,7 @@ public class SolitaireView extends View {
 
   private CardAnchor[] mCardAnchor;
   private DisplayMetrics mMetrics;
+  private boolean mIsLandscape;
   private DrawMaster mDrawMaster;
   private Rules mRules;
   private TextView mTextView;
@@ -110,6 +112,15 @@ public class SolitaireView extends View {
     // Some devices report incorrect DPI so fall back to default
     if (mDpi < 60)
       mDpi = 160;
+
+    // Get screen orientation
+    int screenOrientation = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getOrientation();
+    mIsLandscape = true;
+    if (   screenOrientation == Surface.ROTATION_0
+        || screenOrientation == Surface.ROTATION_180
+       ) {
+      mIsLandscape = false;
+    }
 
     mDrawMaster = new DrawMaster(context, mMetrics.widthPixels,
                                  mMetrics.heightPixels, mDpi);
@@ -165,7 +176,8 @@ public class SolitaireView extends View {
     if (oldGameType == mRules.GetGameTypeString()) {
       mRules.SetCarryOverScore(oldScore);
     }
-    Card.SetSize(gameType, mDrawMaster.GetWidth(), mDrawMaster.GetDpi());
+    Card.SetSize(gameType, mDrawMaster.GetWidth(), mDrawMaster.GetDpi(),
+                 mIsLandscape);
     mDrawMaster.DrawCards(GetSettings().getBoolean("DisplayBigCards", false));
     mCardAnchor = mRules.GetAnchorArray();
     if (mDrawMaster.GetWidth() > 1) {
@@ -402,7 +414,8 @@ public class SolitaireView extends View {
 
       mGameStarted = !mMoveHistory.isEmpty();
       mRules = Rules.CreateRules(type, map, this, mMoveHistory, mAnimateCard);
-      Card.SetSize(type, mDrawMaster.GetWidth(), mDrawMaster.GetDpi());
+      Card.SetSize(type, mDrawMaster.GetWidth(), mDrawMaster.GetDpi(),
+                   mIsLandscape);
       SetDisplayTime(GetSettings().getBoolean("DisplayTime", true));
       mCardAnchor = mRules.GetAnchorArray();
       if (mDrawMaster.GetWidth() > 1) {
@@ -436,17 +449,10 @@ public class SolitaireView extends View {
   }
 
   public void onStart() {
-    // Get display properties
-    DisplayMetrics metrics = new DisplayMetrics();
-    WindowManager wm = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
-    wm.getDefaultDisplay().getMetrics(metrics);
-    int dpi = metrics.densityDpi;
-    // Some devices report incorrect DPI so fall back to default
-    if (dpi < 60)
-      dpi = 160;
     // Restore card size
     Card.SetSize(GetSettings().getInt("LastType", Rules.KLONDIKE),
-                 metrics.widthPixels, dpi);
+                 mDrawMaster.GetWidth(), mDrawMaster.GetDpi(),
+                 mIsLandscape);
   }
 
   public void Refresh() {

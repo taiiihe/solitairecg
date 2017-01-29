@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  Modified by Curtis Gedak 2015
+  Modified by Curtis Gedak 2015, 2017
 */
 package net.sourceforge.solitaire_cg;
 
@@ -42,7 +42,7 @@ class Card {
   private float mX;
   private float mY;
 
-  public static void SetSize(int type, int screenWidth, int dpi) {
+  public static void SetSize(int type, int screenWidth, int dpi, boolean isLandscape) {
     int mdpi_card_width = 45;
     if (type == Rules.GOLF || type == Rules.KLONDIKE) {
       // 7 anchor columns
@@ -55,18 +55,23 @@ class Card {
       mdpi_card_width = 45;
     }
 
+    // Increase relative size of cards in portrait orientation
+    if (isLandscape == false) {
+      mdpi_card_width += 1;  // 1 pixels relative to mdpi (1.0x density)
+    }
+
     // Calculate card WIDTH
     if (screenWidth >= 480) {
       // Simulate Android scaling of original solitaire-for-android card
       //   width by using the average of high and low value of calculations
       //   due to loss of precision when using integer math.
-      WIDTH = (   (screenWidth/480*mdpi_card_width) /* low precision */
-                + (screenWidth*mdpi_card_width/480) /* high precision */
+      WIDTH = (   (screenWidth/480*mdpi_card_width) // low value
+                + (screenWidth*mdpi_card_width/480) // high value
               ) / 2;
     } else {
       //   Multiply and divide by 4 to deal with 0.75x ldpi graphics
-      WIDTH = (   (4*screenWidth/480*mdpi_card_width/4) /* low precision */
-                + (4*screenWidth*mdpi_card_width/480/4) /* high precision */
+      WIDTH = (   (4*screenWidth/480*mdpi_card_width/4) // low value
+                + (4*screenWidth*mdpi_card_width/480/4) // high value
               ) / 2;
     }
 
