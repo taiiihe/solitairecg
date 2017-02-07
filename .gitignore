@@ -4,6 +4,9 @@
 # Editor backup files (e.g. from emacs)
 *~
 
+# Eclipse files
+.settings
+
 # generated files
 bin/
 gen/
