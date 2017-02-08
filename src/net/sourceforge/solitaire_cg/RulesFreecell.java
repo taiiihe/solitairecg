@@ -276,8 +276,7 @@ class RulesFreecell extends Rules {
   @Override
   public int CountFreeSpaces() {
     // Assume the destination tableau is not an empty tableau.
-    //   The minus one at the end is to remain consistent with how
-    //   CountFreeSpaces() works with other shared game methods
+    //   FreeSpaces = PowerMoves - 1
     return CountPowerMoves(CountFreeCells(), CountFreeTableaus()) - 1;
   }
 
@@ -286,8 +285,7 @@ class RulesFreecell extends Rules {
     // Called when the destination tableau is an empty tableau
     //   and hence the tableau being moved into does not count
     //   as an empty tableau.
-    //   The minus one at the end is to remain consistent with how
-    //   CountFreeSpaces() works with other shared game methods
+    //   FreeSpaces = PowerMoves - 1
     return powerMoveMin - 1;
   }
 

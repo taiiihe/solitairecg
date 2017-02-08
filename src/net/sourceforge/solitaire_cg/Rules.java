@@ -84,8 +84,10 @@ public abstract class Rules {
   public void AddDealCount() {}
   public void MarkBlockedCards() {}
 
+  // Free Spaces are used in games like Forty Thieves and Freecell
   public int CountFreeSpaces() { return 0; }
-  public int CountFreeSpacesMin() { return 0; }  // Used in Freecell
+  public int CountFreeSpacesMin() { return CountFreeSpaces(); }
+
   protected void SignalWin() { mWon = true; mView.MarkWin(); mView.DisplayWin(); }
 
   abstract public void Init(Bundle map);
