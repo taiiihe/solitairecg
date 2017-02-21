@@ -1,5 +1,5 @@
 /*
-  Copyright 2016 Curtis Gedak
+  Copyright 2016, 2017 Curtis Gedak
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -18,9 +18,11 @@ package net.sourceforge.solitaire_cg;
 
 import net.sourceforge.solitaire_cg.R;
 
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 
 public class Preferences extends PreferenceActivity {
   @Override
@@ -29,7 +31,9 @@ public class Preferences extends PreferenceActivity {
 
     // Force landscape for Android API < 14 (Ice Cream Sandwich)
     //   Earlier versions do not change screen size on orientation change
-    if (Integer.valueOf(android.os.Build.VERSION.SDK) < 14) {
+    if (   Integer.valueOf(android.os.Build.VERSION.SDK) < 14
+        || PreferenceManager.getDefaultSharedPreferences(this).getBoolean("LockLandscape", false)
+       ) {
       setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 

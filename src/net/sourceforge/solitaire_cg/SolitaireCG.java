@@ -90,17 +90,21 @@ public class SolitaireCG extends Activity {
       SetRestoreState(config.screen);
     }
 
+    // Get shared preferences
+    mSettings = PreferenceManager.getDefaultSharedPreferences(this);
+
     // Force landscape for Android API < 14 (Ice Cream Sandwich)
     //   Earlier versions do not change screen size on orientation change
-    if (Integer.valueOf(android.os.Build.VERSION.SDK) < 14) {
+    if (   Integer.valueOf(android.os.Build.VERSION.SDK) < 14
+        || mSettings.getBoolean("LockLandscape", false)
+       ) {
       setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
     // Force no title for extra room
     requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-    // If the user has never accepted the EULA show it again.
-    mSettings = PreferenceManager.getDefaultSharedPreferences(this);
+    // Set the main view screen
     setContentView(R.layout.main);
     mMainView = findViewById(R.id.main_view);
     mSolitaireView = (SolitaireView) findViewById(R.id.solitaire);
@@ -447,6 +451,18 @@ public class SolitaireCG extends Activity {
   protected void onResume() {
     super.onResume();
     mSettings = PreferenceManager.getDefaultSharedPreferences(this);
+
+    // Force landscape for Android API < 14 (Ice Cream Sandwich)
+    //   Earlier versions do not change screen size on orientation change
+    if (   Integer.valueOf(android.os.Build.VERSION.SDK) < 14
+        || mSettings.getBoolean("LockLandscape", false)
+       ) {
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    } else {
+      // Needed to clear orientation when lock landscape option not set
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+
     mSolitaireView.onResume();
 
     // Restore previous state after configuration/orientation change

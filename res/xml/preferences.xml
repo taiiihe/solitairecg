@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright 2016 Curtis Gedak
+  Copyright 2016, 2017 Curtis Gedak
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -32,4 +32,9 @@
         android:key="AutoMoveLevel"
         android:entries="@array/auto_move"
         android:entryValues="@array/auto_move_value" />
+    <CheckBoxPreference
+        android:title="@string/lock_landscape"
+        android:summary="@string/lock_landscape_desc"
+        android:defaultValue="false"
+        android:key="LockLandscape" />
 </PreferenceScreen>
