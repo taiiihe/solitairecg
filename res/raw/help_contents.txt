@@ -68,6 +68,9 @@ Game play may be customized with the following options:
     <i>Never</i> - will not automatically move cards.  All cards must
     be moved manually.<br><br>
   </li>
+  <li><b>Lock Landscape</b><br>
+    Enable or disable lock to keep game in landscape orientation.<br><br>
+  </li>
 </ul>
 <p>
 Current game statistics are available, such as wins and losses.

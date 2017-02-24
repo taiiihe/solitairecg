@@ -53,6 +53,8 @@
     <string name="always">Aina</string>
     <string name="fling_only">Vain heilautettaessa</string>
     <string name="never">Ei koskaan</string>
+    <string name="lock_landscape">Lock Maisema</string>
+    <string name="lock_landscape_desc">Lock peli vaakasuunnassa</string>
 
     <!-- Shown in the game if needed -->
     <string name="toast_blank_menu">Tämä valikko on jätetty tarkoituksella tyhjäksi.</string>
