@@ -51,6 +51,8 @@
     <string name="always">Immer</string>
     <string name="fling_only">Nur \'fling\'</string>
     <string name="never">Nie</string>
+    <string name="lock_landscape">Breitformat-Sperre</string>
+    <string name="lock_landscape_desc">Auf Breitformat-Orientierung fest einstellen</string>
 
     <!-- Shown in the game if needed -->
     <string name="toast_blank_menu">Menüpunkt absichtlich leer.</string>
