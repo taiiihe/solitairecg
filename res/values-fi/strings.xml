@@ -18,18 +18,18 @@
   -->
 <resources>
     <string name="app_name">SolitaireCG</string>
-    <string name="menu_bakersgame">Bakerin peli</string>
-    <string name="menu_blackwidow">Musta leski</string>
+    <string name="menu_bakersgame">Vapaakenttä (maan mukaan: Bakerin peli)</string>
+    <string name="menu_blackwidow">Hämähäkki (1 maa: musta leski)</string>
     <string name="menu_fortythieves">40 varasta</string>
-    <string name="menu_freecell">Vapaakenttä</string>
-    <string name="menu_golf">Golf</string>
-    <string name="menu_golf_wrapcards">Golf (wrap korttia)</string>
+    <string name="menu_freecell">Vapaakenttä (vaihtoehtoisen värin mukaan)</string>
+    <string name="menu_golf">Golf (ei kuninkaan päälle rakentamista)</string>
+    <string name="menu_golf_wrapcards">Golf (sido kortit)</string>
     <string name="menu_klondike_dealone">Klondike (jaa 1)</string>
     <string name="menu_klondike_dealthree">Klondike (jaa 3)</string>
-    <string name="menu_spider">Hämähäkki</string>
-    <string name="menu_tarantula">Tarantella</string>
-    <string name="menu_tripeaks">TriPeaks</string>
-    <string name="menu_tripeaks_wrapcards">TriPeaks (wrap korttia)</string>
+    <string name="menu_spider">Hämähäkki (4 maata)</string>
+    <string name="menu_tarantula">Hämähäkki (2 maata: tarantella)</string>
+    <string name="menu_tripeaks">TriPeaks (ei kuninkaan päälle rakentamista)</string>
+    <string name="menu_tripeaks_wrapcards">TriPeaks (sido kortit)</string>
     <string name="menu_vegas_dealone">Vegas (jaa 1)</string>
     <string name="menu_vegas_dealthree">Vegas (jaa 3)</string>
     <string name="menu_selectgame">Valitse peli</string>
@@ -45,16 +45,16 @@
     <!-- Shown on the options preference screen -->
     <string name="options_title">Asetukset</string>
     <string name="big_cards">Isot kortit</string>
-    <string name="big_cards_desc">Näytä yksinkertainen kortti taidetta parantavat näkyvyyttä</string>
+    <string name="big_cards_desc">Näytä yksinkertainen korttitaide näkyvyyden parantamiseksi</string>
     <string name="display_time">Näytä aika</string>
-    <string name="display_time_desc">Näytä kulunut aika peli alkoi</string>
+    <string name="display_time_desc">Näytä pelin alkamisesta kulunut aika</string>
     <string name="auto_move">Automaattinen siirto</string>
-    <string name="auto_move_desc">Automaattisesti siirtyä mahdollista kortteja säätiöt</string>
+    <string name="auto_move_desc">Automaattisesti siirrä mahdolliset kortit pinoihin</string>
     <string name="always">Aina</string>
     <string name="fling_only">Vain heilautettaessa</string>
     <string name="never">Ei koskaan</string>
-    <string name="lock_landscape">Lock Maisema</string>
-    <string name="lock_landscape_desc">Lock peli vaakasuunnassa</string>
+    <string name="lock_landscape">Lukitse vaakatasoon</string>
+    <string name="lock_landscape_desc">Lukitse peli vaakasuunnassa</string>
 
     <!-- Shown in the game if needed -->
     <string name="toast_blank_menu">Tämä valikko on jätetty tarkoituksella tyhjäksi.</string>
